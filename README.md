@@ -34,21 +34,6 @@ This project is developed in collaboration with the [Centre for Advanced Researc
 
 David Stansby ([d.stansby@ucl.ac.uk](mailto:d.stansby@ucl.ac.uk))
 
-<!-- TODO: how do we have an array of collaborators ? -->
-
-### Research Software Engineering Contact
-
-Centre for Advanced Research Computing, University College London
-([arc.collaborations@ucl.ac.uk](mailto:arc.collaborations@ucl.ac.uk))
-
-## Built With
-
-<!-- TODO: can cookiecutter make a list of frameworks? -->
-
-[Framework 1](https://something.com)
-[Framework 2](https://something.com)
-[Framework 3](https://something.com)
-
 ## Getting Started
 
 ### Prerequisites
@@ -101,14 +86,3 @@ pytest tests
 ```
 
 again from the root of the repository.
-
-## Roadmap
-
-- [x] Initial Research
-- [ ] Minimum viable product <-- You are Here
-- [ ] Alpha Release
-- [ ] Feature-Complete Release
-
-## Acknowledgements
-
-This work was funded by a grant from the nofunder.
