@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: "Stansby"
+    given-names: "David"
+    email: "d.stansby@ucl.ac.uk"
+repository-code: "https://github.com/HumanOrganAtlas/hoa-tools"
+title: "HOA Tools: Tools for working with the Human Organ Atlas"
+license: "BSD-3"
