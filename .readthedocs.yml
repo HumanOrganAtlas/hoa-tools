@@ -9,7 +9,7 @@ mkdocs:
   configuration: mkdocs.yml
 
 python:
-    install:
+  install:
     - method: pip
       path: .
       extra_requirements:
