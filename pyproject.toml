@@ -34,6 +34,9 @@ optional-dependencies = {dev = [
     "ruff",
     "tox",
     "twine",
+], docs = [
+    "mkdocs",
+    "mkdocs-material",
 ], test = [
     "pytest",
     "pytest-cov",
