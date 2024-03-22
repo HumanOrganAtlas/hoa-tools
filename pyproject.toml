@@ -27,16 +27,16 @@ dynamic = [
 keywords = [
 ]
 name = "hoa-tools"
-optional-dependencies = {docs = [
-    "mkdocs",
-    "mkdocs-material"
-], dev = [
+optional-dependencies = {dev = [
     "build",
     "mypy",
     "pre-commit",
     "ruff",
     "tox",
     "twine",
+], docs = [
+    "mkdocs",
+    "mkdocs-material",
 ], test = [
     "pytest",
     "pytest-cov",
