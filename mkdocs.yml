@@ -1,0 +1,10 @@
+site_name: hoa-tools
+site_description: "Documentation for hoa-tools"
+site_author: "David Stansby"
+copyright: "Copyright 2024 University College London"
+repo_url: "https://github.com/HumanOrganAtlas/hoa-tools"
+repo_name: "HumanOrganAtlas/hoa-tools"
+
+
+theme:
+  name: "material"
