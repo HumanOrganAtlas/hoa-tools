@@ -26,8 +26,6 @@
 
 Tools for working with the Human Organ Atlas
 
-This project is developed in collaboration with the [Centre for Advanced Research Computing](https://ucl.ac.uk/arc), University College London.
-
 ## About
 
 ### Project Team
