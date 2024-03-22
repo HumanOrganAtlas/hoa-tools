@@ -2,7 +2,7 @@
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![Tests status][tests-badge]][tests-link]
-[![Linting status][linting-badge]][linting-link]
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/HumanOrganAtlas/hoa-tools/main.svg)](https://results.pre-commit.ci/latest/github/HumanOrganAtlas/hoa-tools/main)
 [![License][license-badge]](./LICENSE.md)
 
 <!--
@@ -14,8 +14,6 @@
 <!-- prettier-ignore-start -->
 [tests-badge]:              https://github.com/HumanOrganAtlas/hoa-tools/actions/workflows/tests.yml/badge.svg
 [tests-link]:               https://github.com/HumanOrganAtlas/hoa-tools/actions/workflows/tests.yml
-[linting-badge]:            https://github.com/HumanOrganAtlas/hoa-tools/actions/workflows/linting.yml/badge.svg
-[linting-link]:             https://github.com/HumanOrganAtlas/hoa-tools/actions/workflows/linting.yml
 [conda-badge]:              https://img.shields.io/conda/vn/conda-forge/hoa-tools
 [conda-link]:               https://github.com/conda-forge/hoa-tools-feedstock
 [pypi-link]:                https://pypi.org/project/hoa-tools/
