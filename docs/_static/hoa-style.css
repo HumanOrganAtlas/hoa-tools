@@ -20,4 +20,5 @@ h1 {
 html[data-theme="dark"] {
   --pst-color-background: black;
   --pst-color-on-background: #1a1a1a;
+  --pst-color-primary: rgb(130, 184, 228);
 }
