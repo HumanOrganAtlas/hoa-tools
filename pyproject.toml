@@ -19,6 +19,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
+    "pandas",
 ]
 description = "Tools for working with the Human Organ Atlas"
 dynamic = [
@@ -37,6 +38,8 @@ optional-dependencies = {dev = [
 ], docs = [
     "pydata-sphinx-theme",
     "sphinx",
+    'numpydoc',
+    'sphinx-automodapi',
 ], test = [
     "pytest",
     "pytest-cov",
@@ -66,7 +69,7 @@ addopts = """
     --verbose
 """
 testpaths = [
-    "tests",
+    "src/*",
 ]
 
 [tool.setuptools_scm]
