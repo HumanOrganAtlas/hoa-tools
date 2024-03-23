@@ -1,8 +1,9 @@
 # HOA Tools
 
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![Tests status][tests-badge]][tests-link]
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/HumanOrganAtlas/hoa-tools/main.svg)](https://results.pre-commit.ci/latest/github/HumanOrganAtlas/hoa-tools/main)
+[![Documentation Status](https://readthedocs.org/projects/hoa-tools/badge/?version=latest)](https://hoa-tools.readthedocs.io/en/latest/?badge=latest)
+
 [![License][license-badge]](./LICENSE.md)
 
 <!--
