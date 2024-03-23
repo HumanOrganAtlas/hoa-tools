@@ -1,5 +1,5 @@
-Working with the dataset inventory
-==================================
+Dataset Inventory
+=================
 
 The `hoa_tools.inventory` module contains tools for loading and working with
 the inventory of datasets available in the Human Organ Atlas.
