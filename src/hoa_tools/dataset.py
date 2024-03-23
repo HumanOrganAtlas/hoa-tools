@@ -2,13 +2,14 @@
 Tools for working with individual datasets.
 """
 
-from pydantic import BaseModel
+from pydantic.dataclasses import dataclass
 
 import hoa_tools.inventory
 import hoa_tools.types
 
 
-class Dataset(BaseModel):
+@dataclass
+class Dataset:
     """
     An individual Human Organ Atlas dataset.
     """

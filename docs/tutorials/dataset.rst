@@ -28,4 +28,4 @@ dataset::
     >>>
     >>> whole_spleen = hoa_tools.dataset.get_dataset('LADAF-2020-27_spleen_complete-organ_25.08um_bm05')
     >>> print(whole_spleen)
-    donor='LADAF-2020-27' organ='spleen' organ_context='' roi='complete-organ' resolution=25.08 beamline='bm05' nx=2919 ny=2151 nz=1900
+    Dataset(donor='LADAF-2020-27', organ='spleen', organ_context='', roi='complete-organ', resolution=25.08, beamline='bm05', nx=2919, ny=2151, nz=1900)
