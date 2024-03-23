@@ -24,7 +24,7 @@ class Dataset:
     roi: str
     """Region of Interest. Takes an arbitrary (and often not descriptive) value
     that is unique between scans of the same organ. Takes the special value
-    'full-organ' if the dataset is a scan of the full organ."""
+    'complete-organ' if the dataset is a scan of the full organ."""
     resolution: unyt.array.unyt_quantity
     """Size of a single voxel in the dataset. All datasets have isotropic voxels."""
     beamline: hoa_tools.types.Beamline
@@ -35,6 +35,29 @@ class Dataset:
     """Number of voxels along the y-axis."""
     nz: int
     """Number of voxels along the z-axis."""
+
+    def get_children(self) -> list["Dataset"]:
+        """
+        Get child dataset(s).
+
+        Child datasets are high-resolution zooms of a full-organ dataset.
+
+        Notes
+        -----
+        For full-organ datasets, this returns an empty list.
+
+        """
+        inventory = hoa_tools.inventory.load_inventory()
+        # Filter on successive attributes
+        inventory = inventory.loc[inventory["donor"] == self.donor]
+        inventory = inventory.loc[inventory["organ"] == self.organ]
+        inventory = inventory.loc[
+            inventory["beamline"] == int(self.beamline.strip("bm"))
+        ]
+        # Only want non-full-organ datasets
+        inventory = inventory.loc[inventory["roi"] != "complete-organ"]
+
+        return [get_dataset(name) for name in inventory.index]
 
 
 def get_dataset(name: str) -> Dataset:
