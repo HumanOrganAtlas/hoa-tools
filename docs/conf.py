@@ -46,3 +46,4 @@ html_theme_options = {
 html_use_index = False
 html_show_sourcelink = False
 html_show_copyright = False
+html_sidebars = {"**": ["sidebar-nav-bs", "sidebar-ethical-ads"]}
