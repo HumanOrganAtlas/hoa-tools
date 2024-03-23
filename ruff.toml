@@ -1,0 +1,35 @@
+fix = true
+force-exclude = true
+
+[lint]
+ignore = [
+    "COM812", # trailing commas (ruff-format recommended)
+    "D203", # no-blank-line-before-class
+    "D212", # multi-line-summary-first-line
+    "D407", # removed dashes lines under sections
+    "D417", # argument description in docstring (unreliable)
+    "ISC001", # simplify implicit str concatenation (ruff-format recommended)
+]
+select = [
+    "ALL",
+]
+isort.known-first-party = [
+    "HOA Tools",
+]
+mccabe.max-complexity = 18
+pep8-naming.classmethod-decorators = [
+    "classmethod",
+]
+
+[lint.per-file-ignores]
+"docs*" = [
+    "INP001", # File is part of an implicit namespace package.
+]
+"docs/conf.py" = [
+    "A001", # Variable `copyright` is shadowing a Python builtin
+    "ERA001", # Found commented-out code
+]
+"tests*" = [
+    "INP001", # File is part of an implicit namespace package.
+    "S101",
+]
