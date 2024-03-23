@@ -5,4 +5,5 @@ Human Organ Atlas Python Tools
    :maxdepth: 2
    :caption: Contents:
 
+   tutorials
    api
