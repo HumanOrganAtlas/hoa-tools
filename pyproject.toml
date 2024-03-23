@@ -19,7 +19,9 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "pandas",
+    "pandas>=2",
+    "pydantic>=2",
+    "unyt>3",
 ]
 description = "Tools for working with the Human Organ Atlas"
 dynamic = [
@@ -39,7 +41,7 @@ optional-dependencies = {dev = [
     "pydata-sphinx-theme",
     "sphinx",
     'numpydoc',
-    'sphinx-automodapi',
+    'sphinx-autoapi',
 ], test = [
     "pytest",
     "pytest-cov",
@@ -62,6 +64,7 @@ paths.source = [
 
 [tool.mypy]
 explicit_package_bases = true
+plugins = ["pydantic.mypy"]
 
 [tool.setuptools_scm]
 local_scheme = "no-local-version"

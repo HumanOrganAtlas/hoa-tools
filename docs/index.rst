@@ -6,4 +6,3 @@ Human Organ Atlas Python Tools
    :caption: Contents:
 
    tutorials
-   api

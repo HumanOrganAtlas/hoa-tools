@@ -25,10 +25,11 @@ nitpicky = True
 language = "en"
 
 # Extension configuration
-extensions = ["numpydoc", "sphinx_automodapi.automodapi", "sphinx.ext.intersphinx"]
+extensions = ["numpydoc", "autoapi.extension", "sphinx.ext.intersphinx"]
 
-automodapi_toctreedirnm = "_api_autogen"
-numpydoc_show_class_members = False
+# autodoc_default_options = {'members': True}
+autoapi_dirs = ["../src"]
+autoapi_ignore = ["*test*.py", "*version.py"]
 intersphinx_mapping = {"pandas": ("https://pandas.pydata.org/docs/", None)}
 
 # Options for HTML output
