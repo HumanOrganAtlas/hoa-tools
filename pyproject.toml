@@ -21,6 +21,7 @@ classifiers = [
 dependencies = [
     "pandas>=2",
     "pydantic>=2",
+    "unyt>3",
 ]
 description = "Tools for working with the Human Organ Atlas"
 dynamic = [

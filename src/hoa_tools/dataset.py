@@ -2,13 +2,14 @@
 Tools for working with individual datasets.
 """
 
-from pydantic.dataclasses import dataclass
+import pydantic
+import unyt
 
 import hoa_tools.inventory
 import hoa_tools.types
 
 
-@dataclass
+@pydantic.dataclasses.dataclass(config={"arbitrary_types_allowed": True})
 class Dataset:
     """
     An individual Human Organ Atlas dataset.
@@ -24,7 +25,7 @@ class Dataset:
     """Region of Interest. Takes an arbitrary (and often not descriptive) value
     that is unique between scans of the same organ. Takes the special value
     'full-organ' if the dataset is a scan of the full organ."""
-    resolution: float
+    resolution: unyt.array.unyt_quantity
     """Size of a single voxel in the dataset. All datasets have isotropic voxels."""
     beamline: hoa_tools.types.Beamline
     """ESRF beamline ID."""
@@ -58,6 +59,6 @@ def get_dataset(name: str) -> Dataset:
             "nz",
         ]
     }
-    attributes["resolution"] = attributes.pop("resolution_um")
+    attributes["resolution"] = attributes.pop("resolution_um") * unyt.um
     attributes["beamline"] = "bm" + str(attributes["beamline"]).zfill(2)
     return Dataset(**attributes)
