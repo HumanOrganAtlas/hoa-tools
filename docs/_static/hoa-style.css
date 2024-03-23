@@ -16,3 +16,8 @@ html {
 h1 {
   font-weight: 300;
 }
+
+html[data-theme="dark"] {
+  --pst-color-background: black;
+  --pst-color-on-background: #1a1a1a;
+}
