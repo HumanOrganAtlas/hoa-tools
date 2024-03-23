@@ -1,10 +1,8 @@
 Dataset Inventory
 =================
 
-The `hoa_tools.inventory` module contains tools for loading and working with
-the inventory of datasets available in the Human Organ Atlas.
-
-In this tutorial the end goal is to find all the datasets that are lungs.
+In this tutorial we will use the  `hoa_tools.inventory` module
+to find all the spleen datasets in the Human Organ Atlas.
 
 Loading the inventory
 ---------------------
@@ -75,3 +73,18 @@ contains the properties of the dataset. The available columns are::
 
     >>> print(list(inventory.columns))
     ['donor', 'organ', 'organ_context', 'roi', 'resolution_um', 'beamline', 'nx', 'ny', 'nz', 'contrast_low', 'contrast_high', 'size_gb_uncompressed']
+
+Searching the inventory
+-----------------------
+
+To find all the spleen datasets we can filter the dataframe::
+
+    >>> spleen_inventory = inventory[inventory["organ"] == "spleen"]
+    >>> print(spleen_inventory)
+                                                              donor   organ organ_context             roi  resolution_um  ...    ny     nz  contrast_low  contrast_high  size_gb_uncompressed
+    name                                                                                                                  ...
+    LADAF-2020-27_spleen_central-column_1.29um_bm05   LADAF-2020-27  spleen           NaN  central-column           1.29  ...  3823  10982         27852          30408            321.011086
+    LADAF-2020-27_spleen_complete-organ_25.08um_bm05  LADAF-2020-27  spleen           NaN  complete-organ          25.08  ...  2151   1900         28069          33269             23.859322
+    LADAF-2020-27_spleen_central-column_6.05um_bm05   LADAF-2020-27  spleen           NaN  central-column           6.05  ...  3791   7540          4139           7143            216.724949
+    <BLANKLINE>
+    [3 rows x 12 columns]
