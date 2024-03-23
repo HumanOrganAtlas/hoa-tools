@@ -37,8 +37,10 @@ the same organ taken at a higher resolution over a subset of the full volume. Fo
 dataset these child datasets are::
 
     >>> child_datasets = whole_spleen.get_children()
-    >>> print(child_datasets)
-    [Dataset(donor='LADAF-2020-27', organ='spleen', organ_context='', roi='central-column', resolution=unyt_quantity(1.29, 'μm'), beamline='bm05', nx=3823, ny=3823, nz=10982), Dataset(donor='LADAF-2020-27', organ='spleen', organ_context='', roi='central-column', resolution=unyt_quantity(6.05, 'μm'), beamline='bm05', nx=3791, ny=3791, nz=7540)]
+    >>> for dataset in child_datasets:
+    ...     print(dataset)
+    Dataset(donor='LADAF-2020-27', organ='spleen', organ_context='', roi='central-column', resolution=unyt_quantity(1.29, 'μm'), beamline='bm05', nx=3823, ny=3823, nz=10982)
+    Dataset(donor='LADAF-2020-27', organ='spleen', organ_context='', roi='central-column', resolution=unyt_quantity(6.05, 'μm'), beamline='bm05', nx=3791, ny=3791, nz=7540)
 
 We can see there are two child datsets, one at a resolution of 1.29 μm and one at a
 resolution of 6.05 μm.
