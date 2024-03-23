@@ -21,3 +21,9 @@ First we'll load the inventory::
     3   FO-20-129_lung_left_upper_lobe_VOI-08.2_2.22um...      FO-20-129    lung   left_upper_lobe  ...   7466          4058           8465            220.525467
     4   FO-20-129_lung_left_upper_lobe_VOI-03b-bis_2.2...      FO-20-129    lung   left_upper_lobe  ...   7281         10655          34421            199.677187
     ...
+
+The inventory is a `pandas.DataFrame` object. Each row is a different dataset, and each column
+contains the properties of the dataset. The available columns are::
+
+    >>> print(list(inventory.columns))
+     ['name', 'donor', 'organ', 'organ_context', 'roi', 'resolution_um', 'beamline', 'nx', 'ny', 'nz', 'contrast_low', 'contrast_high', 'size_gb_uncompressed']

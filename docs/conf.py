@@ -18,7 +18,7 @@ author = "David Stansby"
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
-
+default_role = "any"
 
 # Extension configuration
 extensions = ["numpydoc", "sphinx_automodapi.automodapi"]
