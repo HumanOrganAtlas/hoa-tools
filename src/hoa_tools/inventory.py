@@ -18,4 +18,4 @@ def load_inventory() -> pd.DataFrame:
 
     """
     inventory_file = Path(__file__).parent / "data" / "hoa_inventory.csv"
-    return pd.read_csv(inventory_file)
+    return pd.read_csv(inventory_file, index_col="name")
