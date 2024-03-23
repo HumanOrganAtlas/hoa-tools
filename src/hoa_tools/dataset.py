@@ -19,12 +19,11 @@ class Dataset:
     organ: hoa_tools.types.Organ
     """Organ name."""
     organ_context: str
-    """Context for dataset within organ. Takes the special value 'full-organ' if
-    the dataset is a scan of the full organ. Otherwise takes an arbitrary
-    (but descriptive) value."""
+    """Context for dataset within organ. Not always present."""
     roi: str
     """Region of Interest. Takes an arbitrary (and often not descriptive) value
-    that is unique between scans of the same organ."""
+    that is unique between scans of the same organ. Takes the special value
+    'full-organ' if the dataset is a scan of the full organ."""
     resolution: float
     """Size of a single voxel in the dataset. All datasets have isotropic voxels."""
     beamline: hoa_tools.types.Beamline
@@ -35,3 +34,29 @@ class Dataset:
     """Number of voxels along the y-axis."""
     nz: int
     """Number of voxels along the z-axis."""
+
+
+def get_dataset(name: str) -> Dataset:
+    """
+    Get a dataset from its name.
+
+    The name of datasets can be looked up using the `hoa_tools.inventory` module.
+    """
+    inventory = hoa_tools.inventory.load_inventory()
+    dataset_row = inventory.loc[name]
+    attributes = {
+        attr: dataset_row[attr]
+        for attr in [
+            "donor",
+            "organ",
+            "organ_context",
+            "roi",
+            "resolution_um",
+            "beamline",
+            "nx",
+            "ny",
+            "nz",
+        ]
+    }
+    attributes["resolution"] = attributes.pop("resolution_um")
+    return Dataset(**attributes)
