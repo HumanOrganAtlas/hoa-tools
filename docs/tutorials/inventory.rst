@@ -17,7 +17,7 @@ First we'll load the inventory::
     >>> inventory = hoa_tools.inventory.load_inventory()
     >>> print(inventory)
                                                                 donor   organ    organ_context                   roi  resolution_um  beamline    nx     ny     nz  contrast_low  contrast_high  size_gb_uncompressed
-    name                                                                                                                                                                                                            
+    name
     FO-20-129_lung_left_upper_lobe_VOI-aa_0.65um_bm05       FO-20-129    lung  left_upper_lobe                VOI-aa           0.65         5  3794   3794   7626         15545          22743            219.543938
     FO-20-129_lung_left_upper_lobe_VOI-01.2b_2.22um...      FO-20-129    lung  left_upper_lobe             VOI-01.2b           2.22         5  3845   3845  50838         17480          36263           1503.180526
     FO-20-129_lung_left_upper_lobe_VOI-03.2_2.22um_...      FO-20-129    lung  left_upper_lobe              VOI-03.2           2.22         5  3848   3848  20119          8950          21600            595.808251
@@ -46,7 +46,7 @@ To find all the spleen datasets we can filter the dataframe::
     >>> spleen_inventory = inventory[inventory["organ"] == "spleen"]
     >>> print(spleen_inventory)
                                                               donor   organ organ_context             roi  resolution_um  beamline    nx    ny     nz  contrast_low  contrast_high  size_gb_uncompressed
-    name                                                                                                                                                                                                
+    name
     LADAF-2020-27_spleen_central-column_1.29um_bm05   LADAF-2020-27  spleen           NaN  central-column           1.29         5  3823  3823  10982         27852          30408            321.011086
     LADAF-2020-27_spleen_complete-organ_25.08um_bm05  LADAF-2020-27  spleen           NaN  complete-organ          25.08         5  2919  2151   1900         28069          33269             23.859322
     LADAF-2020-27_spleen_central-column_6.05um_bm05   LADAF-2020-27  spleen           NaN  central-column           6.05         5  3791  3791   7540          4139           7143            216.724949
