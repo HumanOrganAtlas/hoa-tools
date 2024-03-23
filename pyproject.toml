@@ -38,6 +38,8 @@ optional-dependencies = {dev = [
 ], docs = [
     "pydata-sphinx-theme",
     "sphinx",
+    'numpydoc',
+    'sphinx-automodapi',
 ], test = [
     "pytest",
     "pytest-cov",
