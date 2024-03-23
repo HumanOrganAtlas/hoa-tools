@@ -4,11 +4,13 @@ force-exclude = true
 [lint]
 ignore = [
     "COM812", # trailing commas (ruff-format recommended)
+    "D200", # One-line docstring should fit on one line
     "D203", # no-blank-line-before-class
     "D212", # multi-line-summary-first-line
     "D407", # removed dashes lines under sections
     "D417", # argument description in docstring (unreliable)
     "ISC001", # simplify implicit str concatenation (ruff-format recommended)
+    "PD901", # Avoid using the generic variable name `df` for DataFrames
 ]
 select = [
     "ALL",
@@ -29,7 +31,9 @@ pep8-naming.classmethod-decorators = [
     "A001", # Variable `copyright` is shadowing a Python builtin
     "ERA001", # Found commented-out code
 ]
-"tests*" = [
+"src/hoa_tools/tests*" = [
+    "D100", # Missing docstring in public module
+    "D103", # Missing docstring in public function
     "INP001", # File is part of an implicit namespace package.
-    "S101",
+    "S101", # Use of `assert` detected
 ]

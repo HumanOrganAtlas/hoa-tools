@@ -19,6 +19,7 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
+    "pandas",
 ]
 description = "Tools for working with the Human Organ Atlas"
 dynamic = [
@@ -66,7 +67,7 @@ addopts = """
     --verbose
 """
 testpaths = [
-    "tests",
+    "src/*",
 ]
 
 [tool.setuptools_scm]
