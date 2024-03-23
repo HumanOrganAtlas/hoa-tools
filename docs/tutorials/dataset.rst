@@ -31,3 +31,14 @@ dataset::
     >>> whole_spleen = hoa_tools.dataset.get_dataset('LADAF-2020-27_spleen_complete-organ_25.08um_bm05')
     >>> print(whole_spleen)
     Dataset(donor='LADAF-2020-27', organ='spleen', organ_context='', roi='complete-organ', resolution=unyt_quantity(25.08, 'μm'), beamline='bm05', nx=2919, ny=2151, nz=1900)
+
+Because this is a full-organ dataset, it will have a number of child datasets. These are scans of
+the same organ taken at a higher resolution over a subset of the full volume. For our selected
+dataset these child datasets are::
+
+    >>> child_datasets = whole_spleen.get_children()
+    >>> print(child_datasets)
+    [Dataset(donor='LADAF-2020-27', organ='spleen', organ_context='', roi='central-column', resolution=unyt_quantity(1.29, 'μm'), beamline='bm05', nx=3823, ny=3823, nz=10982), Dataset(donor='LADAF-2020-27', organ='spleen', organ_context='', roi='central-column', resolution=unyt_quantity(6.05, 'μm'), beamline='bm05', nx=3791, ny=3791, nz=7540)]
+
+We can see there are two child datsets, one at a resolution of 1.29 μm and one at a
+resolution of 6.05 μm.
