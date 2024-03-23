@@ -2,14 +2,13 @@
 Tools for working with individual datasets.
 """
 
-from dataclasses import dataclass
+from pydantic import BaseModel
 
 import hoa_tools.inventory
 import hoa_tools.types
 
 
-@dataclass
-class Dataset:
+class Dataset(BaseModel):
     """
     An individual Human Organ Atlas dataset.
     """
@@ -59,4 +58,5 @@ def get_dataset(name: str) -> Dataset:
         ]
     }
     attributes["resolution"] = attributes.pop("resolution_um")
+    attributes["beamline"] = "bm" + str(attributes["beamline"]).zfill(2)
     return Dataset(**attributes)

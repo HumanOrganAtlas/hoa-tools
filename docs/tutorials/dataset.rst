@@ -14,9 +14,9 @@ First, lets print all the spleen datasets available from the inventory::
     >>> print(spleen_inventory)
                                                               donor   organ organ_context             roi  resolution_um  ...    ny     nz  contrast_low  contrast_high  size_gb_uncompressed
     name                                                                                                                  ...
-    LADAF-2020-27_spleen_central-column_1.29um_bm05   LADAF-2020-27  spleen           NaN  central-column           1.29  ...  3823  10982         27852          30408            321.011086
-    LADAF-2020-27_spleen_complete-organ_25.08um_bm05  LADAF-2020-27  spleen           NaN  complete-organ          25.08  ...  2151   1900         28069          33269             23.859322
-    LADAF-2020-27_spleen_central-column_6.05um_bm05   LADAF-2020-27  spleen           NaN  central-column           6.05  ...  3791   7540          4139           7143            216.724949
+    LADAF-2020-27_spleen_central-column_1.29um_bm05   LADAF-2020-27  spleen                central-column           1.29  ...  3823  10982         27852          30408            321.011086
+    LADAF-2020-27_spleen_complete-organ_25.08um_bm05  LADAF-2020-27  spleen                complete-organ          25.08  ...  2151   1900         28069          33269             23.859322
+    LADAF-2020-27_spleen_central-column_6.05um_bm05   LADAF-2020-27  spleen                central-column           6.05  ...  3791   7540          4139           7143            216.724949
     <BLANKLINE>
     [3 rows x 12 columns]
 
@@ -28,4 +28,4 @@ dataset::
     >>>
     >>> whole_spleen = hoa_tools.dataset.get_dataset('LADAF-2020-27_spleen_complete-organ_25.08um_bm05')
     >>> print(whole_spleen)
-    Dataset(donor='LADAF-2020-27', organ='spleen', organ_context=nan, roi='complete-organ', resolution=25.08, beamline=5, nx=2919, ny=2151, nz=1900)
+    donor='LADAF-2020-27' organ='spleen' organ_context='' roi='complete-organ' resolution=25.08 beamline='bm05' nx=2919 ny=2151 nz=1900

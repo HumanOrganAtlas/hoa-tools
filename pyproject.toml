@@ -19,7 +19,8 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "pandas",
+    "pandas>=2",
+    "pydantic>=2",
 ]
 description = "Tools for working with the Human Organ Atlas"
 dynamic = [
