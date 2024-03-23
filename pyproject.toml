@@ -53,7 +53,7 @@ urls.homepage = "https://github.com/HumanOrganAtlas/hoa-tools"
 [tool.coverage]
 report = {sort = "cover"}
 run = {branch = true, parallel = true, source = [
-    "HOA Tools",
+    "hoa_tools",
 ]}
 paths.source = [
     "src",
