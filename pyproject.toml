@@ -43,6 +43,7 @@ optional-dependencies = {dev = [
 ], test = [
     "pytest",
     "pytest-cov",
+    "pytest-doctestplus",
 ]}
 readme = "README.md"
 requires-python = ">=3.10"
@@ -61,16 +62,6 @@ paths.source = [
 
 [tool.mypy]
 explicit_package_bases = true
-
-[tool.pytest.ini_options]
-addopts = """
-    --color=yes
-    --import-mode=importlib
-    --verbose
-"""
-testpaths = [
-    "src/*",
-]
 
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
