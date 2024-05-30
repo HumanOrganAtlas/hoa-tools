@@ -41,6 +41,12 @@ def test_child_datasets() -> None:
     ]
 
 
+@pytest.mark.vcr()
+def test_remote_array(dataset: Dataset) -> None:
+    remote_arr = dataset.remote_array(level=2)
+    assert remote_arr.shape == (475, 730, 538)
+
+
 def test_invalid_level(dataset: Dataset) -> None:
     with pytest.raises(
         ValueError, match=re.escape("'level' must be in [0, 1, 2, 3, 4]")

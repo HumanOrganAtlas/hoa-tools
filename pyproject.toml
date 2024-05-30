@@ -51,6 +51,7 @@ optional-dependencies = {dev = [
     "pytest",
     "pytest-cov",
     "pytest-doctestplus",
+    "pytest-vcr",
     "scikit-image",
 ]}
 readme = "README.md"
