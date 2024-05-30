@@ -164,6 +164,3 @@ _version.py
 
 # Docs
 docs/_api_autogen
-
-# macOS
-*.DS_Store
