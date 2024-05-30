@@ -75,6 +75,7 @@ paths.source = [
 [tool.mypy]
 explicit_package_bases = true
 plugins = ["pydantic.mypy"]
+strict = true
 
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
