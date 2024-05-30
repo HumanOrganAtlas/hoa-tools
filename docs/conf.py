@@ -32,7 +32,8 @@ extensions = ["numpydoc", "autoapi.extension", "sphinx.ext.intersphinx"]
 
 # autodoc_default_options = {'members': True}
 autoapi_dirs = ["../src/hoa_tools/"]
-autoapi_ignore = ["*test*.py"]
+autoapi_ignore = ["*tests/test_*.py"]
+
 intersphinx_mapping = {
     "pandas": ("https://pandas.pydata.org/docs/", None),
     "unyt": ("https://unyt.readthedocs.io/en/stable/", None),
