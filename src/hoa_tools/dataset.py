@@ -67,6 +67,13 @@ class Dataset:
             f"{self._resolution_str()}um_{self.beamline}"
         )
 
+    @property
+    def is_full_organ(self) -> bool:
+        """
+        Whether this dataset contains the whole organ or not.
+        """
+        return self.roi.startswith("complete")
+
     def get_children(self) -> list["Dataset"]:
         """
         Get child dataset(s).

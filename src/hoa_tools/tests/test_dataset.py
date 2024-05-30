@@ -15,6 +15,7 @@ def test_dataset_properties() -> None:
     dataset = get_dataset(name)
 
     assert dataset.name == name
+    assert dataset.is_full_organ
 
 
 def test_child_datasets() -> None:
