@@ -41,18 +41,17 @@ show a slice in the x-y plane::
     >>>
     >>> middle_slice = remote_array_l4[437, :, :]
     >>> plt.imshow(skimage.exposure.equalize_hist(middle_slice))
-    <matplotlib.image.AxesImage object at 0x14ae33810>
+    <matplotlib.image.AxesImage object at ...>
 
 .. plot::
     :include-source: false
 
-    >>> import hoa_tools.dataset
-    >>> import matplotlib.pyplot as plt
-    >>> import skimage.exposure
-    >>>
-    >>> dataset = hoa_tools.dataset.get_dataset('FO-20-129_lung_left_upper_lobe_VOI-aa_0.65um_bm05')
-    >>> remote_array_l4 = dataset.remote_array(level=4)
-    >>>
-    >>> middle_slice = remote_array_l4[437, :, :]
-    >>> plt.imshow(skimage.exposure.equalize_hist(middle_slice))
-    <matplotlib.image.AxesImage object at 0x14a8da990>
+    import hoa_tools.dataset
+    import matplotlib.pyplot as plt
+    import skimage.exposure
+
+    dataset = hoa_tools.dataset.get_dataset('FO-20-129_lung_left_upper_lobe_VOI-aa_0.65um_bm05')
+    remote_array_l4 = dataset.remote_array(level=4)
+
+    middle_slice = remote_array_l4[437, :, :]
+    plt.imshow(skimage.exposure.equalize_hist(middle_slice))
