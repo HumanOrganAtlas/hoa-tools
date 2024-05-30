@@ -9,7 +9,7 @@ import pandas as pd
 
 def load_inventory() -> pd.DataFrame:
     """
-    Load the public HiP-CT inventory.
+    Load the public Human Organ Atlas inventory.
 
     Returns
     -------
