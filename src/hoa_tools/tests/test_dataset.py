@@ -1,5 +1,13 @@
+import re
+
+import pytest
 from hoa_tools.dataset import Dataset, get_dataset
 from unyt import unyt_quantity
+
+
+@pytest.fixture()
+def dataset() -> Dataset:
+    return get_dataset("LADAF-2020-27_spleen_complete-organ_25.08um_bm05")
 
 
 def test_child_datasets() -> None:
@@ -31,3 +39,10 @@ def test_child_datasets() -> None:
             nz=7540,
         ),
     ]
+
+
+def test_invalid_level(dataset: Dataset) -> None:
+    with pytest.raises(
+        ValueError, match=re.escape("'level' must be in [0, 1, 2, 3, 4]")
+    ):
+        dataset.remote_array(level=-1)
