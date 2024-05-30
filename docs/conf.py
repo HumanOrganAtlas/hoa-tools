@@ -28,7 +28,12 @@ nitpicky = True
 language = "en"
 
 # Extension configuration
-extensions = ["numpydoc", "autoapi.extension", "sphinx.ext.intersphinx"]
+extensions = [
+    "numpydoc",
+    "autoapi.extension",
+    "sphinx.ext.intersphinx",
+    "matplotlib.sphinxext.plot_directive",
+]
 
 # autodoc_default_options = {'members': True}
 autoapi_dirs = ["../src/hoa_tools/"]

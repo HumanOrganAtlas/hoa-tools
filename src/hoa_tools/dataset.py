@@ -2,11 +2,18 @@
 Tools for working with individual datasets.
 """
 
+from functools import cached_property
+from typing import Literal
+
+import gcsfs
 import pydantic
 import unyt
+import zarr.n5
 
 import hoa_tools.inventory
 import hoa_tools.types
+
+_BUCKET = "ucl-hip-ct-35a68e99feaae8932b1d44da0358940b"
 
 
 @pydantic.dataclasses.dataclass(config={"arbitrary_types_allowed": True})
@@ -58,6 +65,30 @@ class Dataset:
         inventory = inventory.loc[inventory["roi"] != "complete-organ"]
 
         return [get_dataset(name) for name in inventory.index]
+
+    @cached_property
+    def _remote_store(self) -> zarr.Group:
+        """
+        Remote data store.
+        """
+        path = f"/{self.donor}/{self.organ}"
+        if self.organ_context:
+            path += f"-{self.organ_context}"
+        path += f"/{self.resolution.to_value('um')}um_{self.roi}_{self.beamline}"
+
+        fs = gcsfs.GCSFileSystem(project=_BUCKET, token="anon", access="read_only")  # noqa: S106
+        store = zarr.n5.N5FSStore(url=_BUCKET, fs=fs, mode="r")
+        return zarr.open_group(store, mode="r", path=path)
+
+    def remote_array(self, *, level: Literal[0, 1, 2, 3, 4]) -> zarr.Array:
+        """
+        Get an object representing the data array in the remote Google Cloud Store.
+        """
+        if level not in (levels := [0, 1, 2, 3, 4]):
+            msg = f"'level' must be in {levels}"
+            raise ValueError(msg)
+
+        return self._remote_store[f"s{level}"]
 
 
 def get_dataset(name: str) -> Dataset:

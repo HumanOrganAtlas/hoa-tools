@@ -7,3 +7,4 @@ Tutorials
 
    tutorials/inventory
    tutorials/dataset
+   tutorials/fetching_data
