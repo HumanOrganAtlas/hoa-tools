@@ -7,7 +7,7 @@ from typing import Literal
 
 import gcsfs
 import pydantic
-import unyt
+import unyt.array
 import zarr.core
 import zarr.n5
 
@@ -43,6 +43,29 @@ class Dataset:
     """Number of voxels along the y-axis."""
     nz: int
     """Number of voxels along the z-axis."""
+
+    def _organ_str(self) -> str:
+        """
+        Get name of organ, with organ context appended if present.
+        """
+        organ_str = str(self.organ)
+        if self.organ_context:
+            organ_str += "_" + self.organ_context
+        return organ_str
+
+    def _resolution_str(self) -> str:
+        # Make sure that resolution includes a .0 if an integer value.
+        return str(float(self.resolution.to_value("um")))
+
+    @property
+    def name(self) -> str:
+        """
+        Unique name for dataset.
+        """
+        return (
+            f"{self.donor}_{self._organ_str()}_{self.roi}_"
+            f"{self._resolution_str()}um_{self.beamline}"
+        )
 
     def get_children(self) -> list["Dataset"]:
         """
