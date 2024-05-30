@@ -73,7 +73,9 @@ paths.source = [
 ]
 
 [tool.mypy]
-explicit_package_bases = true
+exclude = [
+    'docs/_build.*',
+]
 plugins = ["pydantic.mypy"]
 strict = true
 

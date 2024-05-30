@@ -10,6 +10,13 @@ def dataset() -> Dataset:
     return get_dataset("LADAF-2020-27_spleen_complete-organ_25.08um_bm05")
 
 
+def test_dataset_properties() -> None:
+    name = "LADAF-2020-27_spleen_complete-organ_25.08um_bm05"
+    dataset = get_dataset(name)
+
+    assert dataset.name == name
+
+
 def test_child_datasets() -> None:
     whole_spleen = get_dataset("LADAF-2020-27_spleen_complete-organ_25.08um_bm05")
     child_datasets = whole_spleen.get_children()
@@ -71,4 +78,4 @@ def test_invalid_level(dataset: Dataset) -> None:
     with pytest.raises(
         ValueError, match=re.escape("'level' must be in [0, 1, 2, 3, 4]")
     ):
-        dataset.remote_array(level=-1)
+        dataset.remote_array(level=-1)  # type: ignore[arg-type]
