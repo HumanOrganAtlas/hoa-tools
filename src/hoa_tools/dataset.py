@@ -19,8 +19,6 @@ class Dataset:
     """Donor ID."""
     organ: hoa_tools.types.Organ
     """Organ name."""
-    organ_context: str
-    """Context for dataset within organ. Not always present."""
     roi: str
     """Region of Interest. Takes an arbitrary (and often not descriptive) value
     that is unique between scans of the same organ. Takes the special value
@@ -73,7 +71,6 @@ def get_dataset(name: str) -> Dataset:
         for attr in [
             "donor",
             "organ",
-            "organ_context",
             "roi",
             "resolution_um",
             "beamline",
