@@ -8,3 +8,4 @@ This package contains tools for working with data from the `Human Organ Atlas <h
    :caption: Contents:
 
    tutorials
+   development
