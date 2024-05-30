@@ -41,6 +41,26 @@ def test_child_datasets() -> None:
     ]
 
 
+def test_parent_datasets() -> None:
+    roi = get_dataset("LADAF-2020-31_kidney_lateral-transect_2.5um_bm05")
+    parent_datasets = roi.get_parents()
+    assert len(parent_datasets) == 1
+
+    assert parent_datasets == [
+        Dataset(
+            donor="LADAF-2020-31",
+            organ="kidney",
+            organ_context="",
+            roi="complete-organ",
+            resolution=unyt_quantity(25.0, "μm"),
+            beamline="bm05",
+            nx=2215,
+            ny=3287,
+            nz=4282,
+        )
+    ]
+
+
 @pytest.mark.vcr()
 def test_remote_array(dataset: Dataset) -> None:
     remote_arr = dataset.remote_array(level=2)
