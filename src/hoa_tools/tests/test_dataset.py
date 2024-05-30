@@ -11,6 +11,7 @@ def test_child_datasets() -> None:
         Dataset(
             donor="LADAF-2020-27",
             organ="spleen",
+            organ_context="",
             roi="central-column",
             resolution=unyt_quantity(1.29, "μm"),
             beamline="bm05",
@@ -21,6 +22,7 @@ def test_child_datasets() -> None:
         Dataset(
             donor="LADAF-2020-27",
             organ="spleen",
+            organ_context="",
             roi="central-column",
             resolution=unyt_quantity(6.05, "μm"),
             beamline="bm05",

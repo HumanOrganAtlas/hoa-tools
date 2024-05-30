@@ -21,5 +21,6 @@ def load_inventory() -> pd.DataFrame:
     return pd.read_csv(
         inventory_file,
         index_col="name",
+        dtype={"organ_context": str},
         keep_default_na=False,
     )
