@@ -5,7 +5,10 @@ For the full list of built-in configuration values, see the documentation:
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
 
+from typing import Any
+
 import hoa_tools
+import sphinx.application
 
 # Project information
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -28,9 +31,36 @@ language = "en"
 extensions = ["numpydoc", "autoapi.extension", "sphinx.ext.intersphinx"]
 
 # autodoc_default_options = {'members': True}
-autoapi_dirs = ["../src"]
-autoapi_ignore = ["*test*.py", "*version.py"]
-intersphinx_mapping = {"pandas": ("https://pandas.pydata.org/docs/", None)}
+autoapi_dirs = ["../src/hoa_tools/"]
+autoapi_ignore = ["*test*.py"]
+intersphinx_mapping = {
+    "pandas": ("https://pandas.pydata.org/docs/", None),
+    "unyt": ("https://unyt.readthedocs.io/en/stable/", None),
+}
+
+
+def skip_private_modules(
+    app: sphinx.application.Sphinx,
+    what: str,
+    name: str,
+    obj: object,
+    skip: bool,
+    options: dict[str, Any],
+) -> bool:
+    """
+    Skip any modules starting with '_'.
+    """
+    if "._" in name:
+        return True
+    return False
+
+
+def setup(app: sphinx.application.Sphinx) -> None:
+    """
+    Setup Sphinx app.
+    """
+    app.connect("autoapi-skip-member", skip_private_modules)
+
 
 # Options for HTML output
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
