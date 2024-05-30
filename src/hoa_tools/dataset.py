@@ -67,6 +67,29 @@ class Dataset:
 
         return [get_dataset(name) for name in inventory.index]
 
+    def get_parents(self) -> list["Dataset"]:
+        """
+        Get parent dataset(s).
+
+        Parent datasets are full-organ datasets from which a ROI dataset is taken from.
+
+        Notes
+        -----
+        For ROI datasets, this returns an empty list.
+
+        """
+        inventory = hoa_tools.inventory.load_inventory()
+        # Filter on successive attributes
+        inventory = inventory.loc[inventory["donor"] == self.donor]
+        inventory = inventory.loc[inventory["organ"] == self.organ]
+        inventory = inventory.loc[
+            inventory["beamline"] == int(self.beamline.strip("bm"))
+        ]
+        # Only want full-organ datasets
+        inventory = inventory.loc[inventory["roi"] == "complete-organ"]
+
+        return [get_dataset(name) for name in inventory.index]
+
     @cached_property
     def _remote_store(self) -> zarr.Group:
         """
