@@ -42,6 +42,7 @@ autoapi_ignore = ["*tests/test_*.py"]
 intersphinx_mapping = {
     "pandas": ("https://pandas.pydata.org/docs/", None),
     "unyt": ("https://unyt.readthedocs.io/en/stable/", None),
+    "zarr": ("https://zarr.readthedocs.io/en/main/", None),
 }
 
 

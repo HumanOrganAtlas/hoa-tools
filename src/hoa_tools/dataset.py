@@ -8,6 +8,7 @@ from typing import Literal
 import gcsfs
 import pydantic
 import unyt
+import zarr.core
 import zarr.n5
 
 import hoa_tools.inventory
@@ -80,7 +81,7 @@ class Dataset:
         store = zarr.n5.N5FSStore(url=_BUCKET, fs=fs, mode="r")
         return zarr.open_group(store, mode="r", path=path)
 
-    def remote_array(self, *, level: Literal[0, 1, 2, 3, 4]) -> zarr.Array:
+    def remote_array(self, *, level: Literal[0, 1, 2, 3, 4]) -> zarr.core.Array:
         """
         Get an object representing the data array in the remote Google Cloud Store.
         """
