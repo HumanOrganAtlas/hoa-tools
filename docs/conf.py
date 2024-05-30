@@ -28,7 +28,12 @@ nitpicky = True
 language = "en"
 
 # Extension configuration
-extensions = ["numpydoc", "autoapi.extension", "sphinx.ext.intersphinx"]
+extensions = [
+    "numpydoc",
+    "autoapi.extension",
+    "sphinx.ext.intersphinx",
+    "matplotlib.sphinxext.plot_directive",
+]
 
 # autodoc_default_options = {'members': True}
 autoapi_dirs = ["../src/hoa_tools/"]
@@ -37,6 +42,7 @@ autoapi_ignore = ["*tests/test_*.py"]
 intersphinx_mapping = {
     "pandas": ("https://pandas.pydata.org/docs/", None),
     "unyt": ("https://unyt.readthedocs.io/en/stable/", None),
+    "zarr": ("https://zarr.readthedocs.io/en/main/", None),
 }
 
 

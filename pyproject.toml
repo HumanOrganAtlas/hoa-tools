@@ -19,9 +19,11 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
+    "gcsfs>2023",
     "pandas>=2",
     "pydantic>=2",
     "unyt>3",
+    "zarr<3,>2.16",
 ]
 description = "Tools for working with the Human Organ Atlas"
 dynamic = [
@@ -38,14 +40,19 @@ optional-dependencies = {dev = [
     "tox",
     "twine",
 ], docs = [
+    "matplotlib",
+    "numpydoc",
     "pydata-sphinx-theme",
+    "scikit-image",
     "sphinx",
-    'numpydoc',
-    'sphinx-autoapi',
+    "sphinx-autoapi",
 ], test = [
+    "matplotlib",
     "pytest",
     "pytest-cov",
     "pytest-doctestplus",
+    "pytest-vcr",
+    "scikit-image",
 ]}
 readme = "README.md"
 requires-python = ">=3.10"
