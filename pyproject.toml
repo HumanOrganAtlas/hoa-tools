@@ -59,6 +59,9 @@ requires-python = ">=3.10"
 license.file = "LICENSE.md"
 urls.homepage = "https://github.com/HumanOrganAtlas/hoa-tools"
 
+[tool.codespell]
+skip = 'schemas/*'
+
 [tool.coverage]
 report = {sort = "cover"}
 run = {branch = true, parallel = true, source = [

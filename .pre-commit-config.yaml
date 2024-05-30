@@ -42,3 +42,9 @@ repos:
         files: ^\.github/ISSUE_TEMPLATE/.*\.yml$
         exclude: ^\.github/ISSUE_TEMPLATE/config\.yml$
         args: ["--verbose", "--schemafile", "schemas/github-issue-forms.json"]
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell
+        args: ["--write-changes"]
