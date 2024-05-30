@@ -8,7 +8,6 @@ def test_load_inventory() -> None:
     assert list(df.columns) == [
         "donor",
         "organ",
-        "organ_context",
         "roi",
         "resolution_um",
         "beamline",
