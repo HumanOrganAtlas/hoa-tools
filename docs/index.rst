@@ -7,5 +7,5 @@ This package contains tools for working with data from the `Human Organ Atlas <h
    :maxdepth: 2
    :caption: Contents:
 
-   tutorials
+   tutorial
    development
