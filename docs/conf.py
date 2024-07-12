@@ -57,9 +57,7 @@ def skip_private_modules(
     """
     Skip any modules starting with '_'.
     """
-    if "._" in name:
-        return True
-    return False
+    return "._" in name
 
 
 def setup(app: sphinx.application.Sphinx) -> None:
