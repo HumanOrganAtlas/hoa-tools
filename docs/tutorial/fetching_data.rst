@@ -33,6 +33,9 @@ resolution copy of the data:
     <zarr.core.Array '/FO-20-129/lung-left_upper_lobe/0.65um_VOI-aa_bm05/s4' (477, 238, 238) uint16 read-only>
 
 Here we can see that the array is read-only, 16 bit, and has shape ``(477, 238, 238)``.
+
+Getting low-res data
+--------------------
 This array can be accessed like any normal numpy array. As an example, lets fetch and
 show a slice in the x-y plane::
 
@@ -53,5 +56,12 @@ show a slice in the x-y plane::
     dataset = hoa_tools.dataset.get_dataset('FO-20-129_lung_left_upper_lobe_VOI-aa_0.65um_bm05')
     remote_array_l4 = dataset.remote_array(level=4)
 
-    middle_slice = remote_array_l4[437, :, :]
+    z = 437
+    middle_slice = remote_array_l4[z, :, :]
     plt.imshow(skimage.exposure.equalize_hist(middle_slice))
+
+Now you know how to fetch data!
+To keep the data size small, in this section of the tutorial we only fetched the lowest
+resolution (``level=4``) data available for this dataset. In the next section of the tutorial
+we will look at some higher resolution data as we learn to work with coordinates across
+different downsampling levels.
