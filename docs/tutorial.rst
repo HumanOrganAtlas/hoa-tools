@@ -8,6 +8,6 @@ They are designed to be read in sequence, each page building upon the previous o
 .. toctree::
    :maxdepth: 1
 
-   tutorials/inventory
-   tutorials/dataset
-   tutorials/fetching_data
+   tutorial/inventory
+   tutorial/dataset
+   tutorial/fetching_data

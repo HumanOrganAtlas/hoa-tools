@@ -77,9 +77,16 @@ html_css_files = [
 html_theme_options = {
     "logo": {
         "text": "HOA Tools",
-    }
+    },
+    "navigation_with_keys": False,
 }
 html_use_index = False
 html_show_sourcelink = False
 html_show_copyright = False
 html_sidebars = {"**": ["sidebar-nav-bs", "sidebar-ethical-ads"]}
+
+# Because of https://github.com/sphinx-doc/sphinx/issues/10785
+nitpick_ignore = {
+    ("py:class", "hoa_tools.types.Organ"),
+    ("py:class", "hoa_tools.types.Beamline"),
+}
