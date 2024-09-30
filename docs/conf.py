@@ -7,8 +7,9 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 from typing import Any
 
-import hoa_tools
 import sphinx.application
+
+import hoa_tools
 
 # Project information
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information

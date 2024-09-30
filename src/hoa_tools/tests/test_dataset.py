@@ -1,11 +1,12 @@
 import re
 
 import pytest
-from hoa_tools.dataset import Dataset, get_dataset
 from unyt import unyt_quantity
 
+from hoa_tools.dataset import Dataset, get_dataset
 
-@pytest.fixture()
+
+@pytest.fixture
 def dataset() -> Dataset:
     return get_dataset("LADAF-2020-27_spleen_complete-organ_25.08um_bm05")
 
@@ -69,7 +70,7 @@ def test_parent_datasets() -> None:
     ]
 
 
-@pytest.mark.vcr()
+@pytest.mark.vcr
 def test_remote_array(dataset: Dataset) -> None:
     remote_arr = dataset.remote_array(level=2)
     assert remote_arr.shape == (475, 730, 538)
