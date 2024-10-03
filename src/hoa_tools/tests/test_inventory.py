@@ -1,5 +1,6 @@
-import hoa_tools.inventory
 import pandas as pd
+
+import hoa_tools.inventory
 
 
 def test_load_inventory() -> None:
