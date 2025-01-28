@@ -4,43 +4,37 @@ target-version = "py39"
 
 [lint]
 ignore = [
-    "ANN101", # Missing type annotation for `self` in method
-    "ARG001", # Unused function argument
-    "COM812", # trailing commas (ruff-format recommended)
-    "D200", # One-line docstring should fit on one line
-    "D203", # no-blank-line-before-class
-    "D212", # multi-line-summary-first-line
-    "D401", # First line of docstring should be in imperative mood
-    "D407", # removed dashes lines under sections
-    "D417", # argument description in docstring (unreliable)
-    "ISC001", # simplify implicit str concatenation (ruff-format recommended)
-    "PD901", # Avoid using the generic variable name `df` for DataFrames
+    "ANN101",  # Missing type annotation for `self` in method
+    "ARG001",  # Unused function argument
+    "COM812",  # trailing commas (ruff-format recommended)
+    "D200",    # One-line docstring should fit on one line
+    "D203",    # no-blank-line-before-class
+    "D212",    # multi-line-summary-first-line
+    "D401",    # First line of docstring should be in imperative mood
+    "D407",    # removed dashes lines under sections
+    "D417",    # argument description in docstring (unreliable)
+    "ISC001",  # simplify implicit str concatenation (ruff-format recommended)
+    "PD901",   # Avoid using the generic variable name `df` for DataFrames
     "PLR0913", # Too many arguments in function definition
 ]
-select = [
-    "ALL",
-]
-isort.known-first-party = [
-    "HOA Tools",
-]
+select = ["ALL"]
+isort.known-first-party = ["HOA Tools"]
 mccabe.max-complexity = 18
-pep8-naming.classmethod-decorators = [
-    "classmethod",
-]
+pep8-naming.classmethod-decorators = ["classmethod"]
 
 [lint.per-file-ignores]
 "docs*" = [
     "INP001", # File is part of an implicit namespace package.
 ]
 "docs/conf.py" = [
-    "A001", # Variable `copyright` is shadowing a Python builtin
+    "A001",   # Variable `copyright` is shadowing a Python builtin
     "ERA001", # Found commented-out code
     "FBT001", # Boolean-typed positional argument in function definition
 ]
 "src/hoa_tools/tests*" = [
-    "D100", # Missing docstring in public module
-    "D103", # Missing docstring in public function
-    "INP001", # File is part of an implicit namespace package.
+    "D100",    # Missing docstring in public module
+    "D103",    # Missing docstring in public function
+    "INP001",  # File is part of an implicit namespace package.
     "PLR2004", # Magic value used in comparison
-    "S101", # Use of `assert` detected
+    "S101",    # Use of `assert` detected
 ]
