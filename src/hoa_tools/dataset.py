@@ -157,7 +157,9 @@ class Dataset:
         """
         remote_array = self._remote_array(downsample_level=downsample_level)
         return xr.DataArray(
-            da.from_array(remote_array, chunks=remote_array.chunks), name=self.name
+            da.from_array(remote_array, chunks=remote_array.chunks),
+            name=self.name,
+            dims=["z", "y", "x"],
         )
 
 

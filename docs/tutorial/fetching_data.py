@@ -35,5 +35,6 @@ data_array
 import matplotlib.pyplot as plt
 import skimage.exposure
 
-middle_slice = data_array[437, :, :]
-plt.imshow(skimage.exposure.equalize_hist(middle_slice.values))
+middle_slice = data_array.isel(z=437)
+middle_slice.values = skimage.exposure.equalize_hist(middle_slice.values)
+middle_slice.plot(cmap="Grays_r")
