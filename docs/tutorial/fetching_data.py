@@ -26,7 +26,7 @@ print(dataset)
 # for the lowest resolution copy of the data.
 
 data_array = dataset.data_array(level=4)
-print(data_array)
+data_array
 
 # Here we can see that the array is read-only, 16 bit, and has shape ``(477, 238, 238)``.
 # At this point no data has been downloaded - to download data you need to index the remote array.
@@ -36,6 +36,4 @@ import matplotlib.pyplot as plt
 import skimage.exposure
 
 middle_slice = data_array[437, :, :]
-print(middle_slice)
-
 plt.imshow(skimage.exposure.equalize_hist(middle_slice.values))
