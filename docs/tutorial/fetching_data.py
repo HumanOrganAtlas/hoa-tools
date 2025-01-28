@@ -38,4 +38,4 @@ import skimage.exposure
 middle_slice = data_array[437, :, :]
 print(middle_slice)
 
-plt.imshow(skimage.exposure.equalize_hist(middle_slice))
+plt.imshow(skimage.exposure.equalize_hist(middle_slice.values))
