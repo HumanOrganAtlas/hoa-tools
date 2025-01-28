@@ -60,6 +60,8 @@ plugins:
 
 nav:
   - Home: index.md
+  - Tutorial:
+      - Inventory: tutorial/inventory.py
   - API reference: api.md
   - Development: development.md
 

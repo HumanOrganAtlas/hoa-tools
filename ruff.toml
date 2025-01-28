@@ -23,13 +23,18 @@ mccabe.max-complexity = 18
 pep8-naming.classmethod-decorators = ["classmethod"]
 
 [lint.per-file-ignores]
-"docs*" = [
-    "INP001", # File is part of an implicit namespace package.
-]
 "docs/conf.py" = [
     "A001",   # Variable `copyright` is shadowing a Python builtin
     "ERA001", # Found commented-out code
     "FBT001", # Boolean-typed positional argument in function definition
+]
+"docs*" = [
+    "INP001", # File is part of an implicit namespace package.
+]
+"docs/tutorial/*" = [
+    "T201", # Allow print()
+    "D100", # don't require docstring
+    "B108",
 ]
 "src/hoa_tools/tests*" = [
     "D100",    # Missing docstring in public module
