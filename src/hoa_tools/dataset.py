@@ -14,12 +14,17 @@ import zarr.core
 import zarr.n5
 
 import hoa_tools.inventory
-import hoa_tools.types
 from hoa_tools._n5 import N5FSStore
 
 _BUCKET = "ucl-hip-ct-35a68e99feaae8932b1d44da0358940b"
 
 __all__ = ["Dataset", "get_dataset"]
+
+
+Organ = Literal["lung", "heart", "kidney", "spleen", "brain"]
+"""Organ name."""
+Beamline = Literal["bm05", "bm18"]
+"""ESRF beamline ID."""
 
 
 @pydantic.dataclasses.dataclass(config={"arbitrary_types_allowed": True})
@@ -30,7 +35,7 @@ class Dataset:
 
     donor: str
     """Donor ID."""
-    organ: hoa_tools.types.Organ
+    organ: Organ
     """Organ name."""
     organ_context: str
     """Context for dataset within organ. Not always present."""
@@ -40,7 +45,7 @@ class Dataset:
     'complete-organ' if the dataset is a scan of the full organ."""
     resolution: unyt.array.unyt_quantity
     """Size of a single voxel in the dataset. All datasets have isotropic voxels."""
-    beamline: hoa_tools.types.Beamline
+    beamline: Beamline
     """ESRF beamline ID."""
     nx: int
     """Number of voxels along the x-axis."""
