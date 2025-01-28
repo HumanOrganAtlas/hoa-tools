@@ -167,3 +167,6 @@ docs/_api_autogen
 
 # macOS
 .DS_Store
+
+# uv
+uv.lock

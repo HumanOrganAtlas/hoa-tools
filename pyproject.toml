@@ -1,14 +1,9 @@
 [build-system]
 build-backend = "setuptools.build_meta"
-requires = [
-    "setuptools",
-    "setuptools-scm",
-]
+requires = ["setuptools", "setuptools-scm"]
 
 [project]
-authors = [
-    {email = "d.stansby@ucl.ac.uk", name = "David Stansby"},
-]
+authors = [{ email = "d.stansby@ucl.ac.uk", name = "David Stansby" }]
 classifiers = [
     "Operating System :: POSIX",
     "Programming Language :: Python :: 3",
@@ -26,13 +21,10 @@ dependencies = [
     "zarr<3,>2.16",
 ]
 description = "Tools for working with the Human Organ Atlas"
-dynamic = [
-    "version",
-]
-keywords = [
-]
+dynamic = ["version"]
+keywords = []
 name = "hoa-tools"
-optional-dependencies = {dev = [
+optional-dependencies = { dev = [
     "build",
     "mypy",
     "pre-commit",
@@ -40,12 +32,15 @@ optional-dependencies = {dev = [
     "tox",
     "twine",
 ], docs = [
+    "mkdocs",
+    "mkdocstrings-python",
+    "mkdocs-material",
+    "mkdocs-jupyter",
+    "griffe-pydantic",
+    # Packages needed for tutorial
     "matplotlib",
     "numpydoc",
-    "pydata-sphinx-theme",
     "scikit-image",
-    "sphinx",
-    "sphinx-autoapi",
 ], test = [
     "matplotlib",
     "pytest",
@@ -53,7 +48,7 @@ optional-dependencies = {dev = [
     "pytest-doctestplus",
     "pytest-vcr",
     "scikit-image",
-]}
+] }
 readme = "README.md"
 requires-python = ">=3.10"
 license.file = "LICENSE.md"
@@ -63,19 +58,12 @@ urls.homepage = "https://github.com/HumanOrganAtlas/hoa-tools"
 skip = 'schemas/*'
 
 [tool.coverage]
-report = {sort = "cover"}
-run = {branch = true, parallel = true, source = [
-    "hoa_tools",
-]}
-paths.source = [
-    "src",
-    ".tox*/*/lib/python*/site-packages",
-]
+report = { sort = "cover" }
+run = { branch = true, parallel = true, source = ["hoa_tools"] }
+paths.source = ["src", ".tox*/*/lib/python*/site-packages"]
 
 [tool.mypy]
-exclude = [
-    'docs/_build.*',
-]
+exclude = ['docs/_build.*']
 plugins = ["pydantic.mypy"]
 strict = true
 
@@ -89,3 +77,6 @@ spaces_indent_inline_array = 4
 trailing_comma_inline_array = true
 overrides."project.classifiers".inline_arrays = false
 overrides."tool.coverage.paths.source".inline_arrays = false
+
+[dependency-groups]
+dev = ["hoa-tools[docs,dev,test]"]
