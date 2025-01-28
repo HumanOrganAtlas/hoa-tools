@@ -14,10 +14,12 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
+    "dask[array]",
     "gcsfs>2023",
     "pandas>=2",
     "pydantic>=2",
     "unyt>3",
+    "xarray",
     "zarr<3,>2.16",
 ]
 description = "Tools for working with the Human Organ Atlas"
@@ -44,6 +46,7 @@ optional-dependencies = { dev = [
 ], test = [
     "matplotlib",
     "pytest",
+    "pytest-accept",
     "pytest-cov",
     "pytest-doctestplus",
     "pytest-vcr",

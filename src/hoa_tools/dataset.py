@@ -5,9 +5,12 @@ Tools for working with individual datasets.
 from functools import cached_property
 from typing import Literal
 
+
+import dask.array as da
 import gcsfs
 import pydantic
 import unyt.array
+import xarray as xr
 import zarr.core
 import zarr.n5
 
@@ -134,7 +137,7 @@ class Dataset:
         store = zarr.n5.N5FSStore(url=_BUCKET, fs=fs, mode="r")
         return zarr.open_group(store, mode="r", path=path)
 
-    def remote_array(self, *, level: Literal[0, 1, 2, 3, 4]) -> zarr.core.Array:
+    def _remote_array(self, *, level: Literal[0, 1, 2, 3, 4]) -> zarr.core.Array:
         """
         Get an object representing the data array in the remote Google Cloud Store.
         """
@@ -143,6 +146,13 @@ class Dataset:
             raise ValueError(msg)
 
         return self._remote_store[f"s{level}"]
+
+    def data_array(self, *, level: Literal[0, 1, 2, 3, 4]) -> xr.DataArray:
+        """
+        Get a DataArray representing the array for this image.
+        """
+        remote_array = self._remote_array(level=level)
+        return xr.DataArray(da.from_array(remote_array, chunks=remote_array.chunks))
 
 
 def get_dataset(name: str) -> Dataset:
