@@ -32,12 +32,15 @@ optional-dependencies = { dev = [
     "tox",
     "twine",
 ], docs = [
+    "mkdocs",
+    "mkdocstrings-python",
+    "mkdocs-material",
+    "mkdocs-jupyter",
+    "griffe-pydantic",
+    # Packages needed for tutorial
     "matplotlib",
     "numpydoc",
-    "pydata-sphinx-theme",
     "scikit-image",
-    "sphinx",
-    "sphinx-autoapi",
 ], test = [
     "matplotlib",
     "pytest",
