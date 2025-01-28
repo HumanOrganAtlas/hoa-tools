@@ -63,6 +63,7 @@ nav:
   - Tutorial:
       - Inventory: tutorial/inventory.py
       - Datasets: tutorial/dataset.py
+      - Getting data: tutorial/fetching_data.py
   - API reference: api.md
   - Development: development.md
 
