@@ -25,7 +25,7 @@ print(dataset)
 # by a factor of 2. All datasets are downsampled to ``level=4``, so lets get a remote store
 # for the lowest resolution copy of the data.
 
-data_array = dataset.data_array(level=4)
+data_array = dataset.data_array(downsample_level=4)
 data_array
 
 # Here we can see that the array is read-only, 16 bit, and has shape ``(477, 238, 238)``.
