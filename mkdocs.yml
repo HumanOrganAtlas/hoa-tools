@@ -62,6 +62,7 @@ nav:
   - Home: index.md
   - Tutorial:
       - Inventory: tutorial/inventory.py
+      - Datasets: tutorial/dataset.py
   - API reference: api.md
   - Development: development.md
 
