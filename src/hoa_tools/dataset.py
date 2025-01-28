@@ -5,7 +5,6 @@ Tools for working with individual datasets.
 from functools import cached_property
 from typing import Literal
 
-
 import dask.array as da
 import gcsfs
 import pydantic
