@@ -3,7 +3,7 @@ build-backend = "setuptools.build_meta"
 requires = ["setuptools", "setuptools-scm"]
 
 [dependency-groups]
-dev = ["hoa-tools[test]"]
+dev = ["hoa-tools[dev,test]"]
 
 [project]
 authors = [{ email = "d.stansby@ucl.ac.uk", name = "David Stansby" }]

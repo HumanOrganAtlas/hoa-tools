@@ -15,6 +15,7 @@ import zarr.n5
 
 import hoa_tools.inventory
 import hoa_tools.types
+from hoa_tools._n5 import N5FSStore
 
 _BUCKET = "ucl-hip-ct-35a68e99feaae8932b1d44da0358940b"
 
@@ -133,7 +134,7 @@ class Dataset:
         path += f"/{self.resolution.to_value('um')}um_{self.roi}_{self.beamline}"
 
         fs = gcsfs.GCSFileSystem(project=_BUCKET, token="anon", access="read_only")  # noqa: S106
-        store = zarr.n5.N5FSStore(url=_BUCKET, fs=fs, mode="r")
+        store = N5FSStore(url=_BUCKET, fs=fs, mode="r")
         return zarr.open_group(store, mode="r", path=path)
 
     def _remote_array(self, *, level: Literal[0, 1, 2, 3, 4]) -> zarr.core.Array:
@@ -151,7 +152,9 @@ class Dataset:
         Get a DataArray representing the array for this image.
         """
         remote_array = self._remote_array(level=level)
-        return xr.DataArray(da.from_array(remote_array, chunks=remote_array.chunks))
+        return xr.DataArray(
+            da.from_array(remote_array, chunks=remote_array.chunks), name=self.name
+        )
 
 
 def get_dataset(name: str) -> Dataset:
