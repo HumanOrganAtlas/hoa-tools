@@ -72,12 +72,12 @@ def test_parent_datasets() -> None:
 
 @pytest.mark.vcr
 def test_remote_array(dataset: Dataset) -> None:
-    remote_arr = dataset.remote_array(level=2)
-    assert remote_arr.shape == (475, 730, 538)
+    data_array = dataset.data_array(level=2)
+    assert data_array.shape == (475, 730, 538)
 
 
 def test_invalid_level(dataset: Dataset) -> None:
     with pytest.raises(
         ValueError, match=re.escape("'level' must be in [0, 1, 2, 3, 4]")
     ):
-        dataset.remote_array(level=-1)  # type: ignore[arg-type]
+        dataset.data_array(level=-1)  # type: ignore[arg-type]

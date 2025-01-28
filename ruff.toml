@@ -5,6 +5,7 @@ target-version = "py39"
 [lint]
 ignore = [
     "ANN101",  # Missing type annotation for `self` in method
+    "ANN401",  # Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
     "ARG001",  # Unused function argument
     "COM812",  # trailing commas (ruff-format recommended)
     "D200",    # One-line docstring should fit on one line

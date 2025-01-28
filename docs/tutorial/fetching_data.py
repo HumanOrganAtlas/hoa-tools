@@ -25,8 +25,8 @@ print(dataset)
 # by a factor of 2. All datasets are downsampled to ``level=4``, so lets get a remote store
 # for the lowest resolution copy of the data.
 
-remote_array_l4 = dataset.remote_array(level=4)
-print(remote_array_l4)
+data_array = dataset.data_array(level=4)
+data_array
 
 # Here we can see that the array is read-only, 16 bit, and has shape ``(477, 238, 238)``.
 # At this point no data has been downloaded - to download data you need to index the remote array.
@@ -35,5 +35,5 @@ print(remote_array_l4)
 import matplotlib.pyplot as plt
 import skimage.exposure
 
-middle_slice = remote_array_l4[437, :, :]
-plt.imshow(skimage.exposure.equalize_hist(middle_slice))
+middle_slice = data_array[437, :, :]
+plt.imshow(skimage.exposure.equalize_hist(middle_slice.values))

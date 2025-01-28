@@ -2,6 +2,9 @@
 build-backend = "setuptools.build_meta"
 requires = ["setuptools", "setuptools-scm"]
 
+[dependency-groups]
+dev = ["hoa-tools[docs,dev,test]"]
+
 [project]
 authors = [{ email = "d.stansby@ucl.ac.uk", name = "David Stansby" }]
 classifiers = [
@@ -14,10 +17,12 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
+    "dask[array]",
     "gcsfs>2023",
     "pandas>=2",
     "pydantic>=2",
     "unyt>3",
+    "xarray",
     "zarr<3,>2.16",
 ]
 description = "Tools for working with the Human Organ Atlas"
@@ -44,6 +49,7 @@ optional-dependencies = { dev = [
 ], test = [
     "matplotlib",
     "pytest",
+    "pytest-accept",
     "pytest-cov",
     "pytest-doctestplus",
     "pytest-vcr",
@@ -77,6 +83,3 @@ spaces_indent_inline_array = 4
 trailing_comma_inline_array = true
 overrides."project.classifiers".inline_arrays = false
 overrides."tool.coverage.paths.source".inline_arrays = false
-
-[dependency-groups]
-dev = ["hoa-tools[docs,dev,test]"]
