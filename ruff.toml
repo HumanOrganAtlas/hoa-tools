@@ -34,8 +34,9 @@ pep8-naming.classmethod-decorators = ["classmethod"]
 "docs/tutorial/*" = [
     "T201", # Allow print()
     "D100", # don't require docstring
-    "B108",
+    "B018",
     "E402",
+    "E501",
 ]
 "src/hoa_tools/tests*" = [
     "D100",    # Missing docstring in public module

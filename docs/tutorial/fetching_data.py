@@ -9,8 +9,8 @@
 
 # First we'll fetch a `Dataset` object from the inventory.
 
-import hoa_tools.inventory
 import hoa_tools.dataset
+import hoa_tools.inventory
 
 inventory = hoa_tools.inventory.load_inventory()
 dataset_name = inventory.index[0]
