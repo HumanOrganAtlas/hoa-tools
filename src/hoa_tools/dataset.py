@@ -19,6 +19,8 @@ from hoa_tools._n5 import N5FSStore
 
 _BUCKET = "ucl-hip-ct-35a68e99feaae8932b1d44da0358940b"
 
+__all__ = ["Dataset", "get_dataset"]
+
 
 @pydantic.dataclasses.dataclass(config={"arbitrary_types_allowed": True})
 class Dataset:
