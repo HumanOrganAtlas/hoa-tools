@@ -10,4 +10,4 @@
 
 ## Volumes of interest
 
-::: hoa_tools.vois
+::: hoa_tools.voi
