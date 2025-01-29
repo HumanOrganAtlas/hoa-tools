@@ -7,3 +7,7 @@
 ## Inventory
 
 ::: hoa_tools.inventory
+
+## Volumes of interest
+
+::: hoa_tools.vois

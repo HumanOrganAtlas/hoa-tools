@@ -8,6 +8,7 @@ ignore = [
     "ARG001",  # Unused function argument
     "COM812",  # trailing commas (ruff-format recommended)
     "D200",    # One-line docstring should fit on one line
+    "D100",    # No docstring in public module
     "D203",    # no-blank-line-before-class
     "D212",    # multi-line-summary-first-line
     "D401",    # First line of docstring should be in imperative mood
