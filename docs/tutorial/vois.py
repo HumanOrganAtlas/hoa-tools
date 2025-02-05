@@ -100,11 +100,10 @@ import hoa_tools.registration
 # -
 
 transform = hoa_tools.registration.build_transform(
-    translation=(591.9188598, 904.645141, 267.368216),
+    translation={"x": 591.9188598, "y": 904.645141, "z": 267.368216},
     rotation_deg=0.5000321977,
     scale=0.2412282173,
 )
-transform.TransformPoint((0, 0, 0))
 
 hoa_tools.registration.Inventory.add_registration(
     source_dataset=child,

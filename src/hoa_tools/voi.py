@@ -1,23 +1,14 @@
 import itertools
 from dataclasses import dataclass
 from math import ceil, floor
-from typing import Literal, TypedDict
+from typing import Literal
 
 import numpy as np
 import xarray as xr
 
 from hoa_tools.dataset import Dataset
 from hoa_tools.registration import Inventory as RegInventory
-
-
-class Coordinate(TypedDict):
-    """
-    A single coordinate.
-    """
-
-    x: int
-    y: int
-    z: int
+from hoa_tools.types import Coordinate
 
 
 @dataclass(kw_only=True)
@@ -51,12 +42,12 @@ class VOI:
         """
         All 8 corners of the VOI.
         """
-        l: list[tuple[int, int, int]] = list(
+        corner_tuples: list[tuple[int, int, int]] = list(
             itertools.product(  # type: ignore[arg-type]
                 *zip(self.lower_corner.values(), self.upper_corner.values())
             )
         )
-        return [{"x": i[0], "y": i[1], "z": i[2]} for i in l]
+        return [{"x": i[0], "y": i[1], "z": i[2]} for i in corner_tuples]
 
     def get_data_array(self) -> xr.DataArray:
         """
