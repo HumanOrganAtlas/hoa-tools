@@ -61,3 +61,42 @@ axs[1].set_aspect("equal")
 axs[1].set_title("Downsample level = 4")
 
 fig.tight_layout()
+# -
+
+# ## Transforming between registered datasets
+
+children = dataset.get_children()
+children
+
+child = children[1]
+child
+
+child_array = child.data_array(downsample_level=1)
+child_array
+
+child_voi = hoa_tools.voi.VOI(
+    dataset=child,
+    downsample_level=1,
+    lower_corner={"x": 1000, "y": 1000, "z": 2000},
+    size={"x": 128, "y": 128, "z": 128},
+)
+child_array = child_voi.get_data_array()
+child_array
+
+plt.figure()
+ax = child_array.isel(z=64).plot(cmap="Grays_r")
+ax.axes.set_aspect("equal")
+ax.axes.set_title("VOI slice")
+
+# +
+import SimpleITK as sitk
+
+import hoa_tools.registration
+
+# -
+
+hoa_tools.registration.Inventory.add_registration(
+    source_dataset=child,
+    target_dataset=dataset,
+    transform=sitk.Transform(3, sitk.sitkIdentity),
+)
