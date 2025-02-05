@@ -3,6 +3,7 @@ Tools for working with individual datasets.
 """
 
 from functools import cached_property
+from turtle import down
 from typing import Literal
 
 import dask.array as da
@@ -167,9 +168,15 @@ class Dataset:
             name=self.name,
             dims=["z", "y", "x"],
             coords={
-                "z": np.arange(dask_array.shape[0]) * self.resolution_um,
-                "y": np.arange(dask_array.shape[1]) * self.resolution_um,
-                "x": np.arange(dask_array.shape[2]) * self.resolution_um,
+                "z": np.arange(dask_array.shape[0])
+                * self.resolution_um
+                * 2**downsample_level,
+                "y": np.arange(dask_array.shape[1])
+                * self.resolution_um
+                * 2**downsample_level,
+                "x": np.arange(dask_array.shape[2])
+                * self.resolution_um
+                * 2**downsample_level,
             },
         )
 
