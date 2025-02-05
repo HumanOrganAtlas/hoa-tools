@@ -189,6 +189,6 @@ def get_dataset(name: str) -> Dataset:
             "nz",
         ]
     }
-    attributes["resolution"] = attributes.pop("resolution_um")
+    attributes["resolution_um"] = attributes.pop("resolution_um")
     attributes["beamline"] = "bm" + str(attributes["beamline"]).zfill(2)
     return Dataset(**attributes)
