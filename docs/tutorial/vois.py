@@ -13,14 +13,14 @@ import hoa_tools.voi
 
 # First we'll get a dataset.
 
-dataset = hoa_tools.dataset.get_dataset(
+overview_dataset = hoa_tools.dataset.get_dataset(
     "LADAF-2020-27_spleen_complete-organ_25.08um_bm05"
 )
 
 # Now we'll define a volume of interest (VOI) object. This represents a cuboid shape area within our dataset.
 
 voi = hoa_tools.voi.VOI(
-    dataset=dataset,
+    dataset=overview_dataset,
     downsample_level=4,
     lower_corner={"x": 100, "y": 50, "z": 23},
     size={"x": 40, "y": 20, "z": 1},
@@ -64,8 +64,11 @@ fig.tight_layout()
 # -
 
 # ## Transforming between registered datasets
+#
+# Now we'll step through transforming a VOI between two datasets that have been registered to each other.
+# We'll start by getting one of the children of the overview dataset used above.
 
-children = dataset.get_children()
+children = overview_dataset.get_children()
 children
 
 child = children[1]
@@ -73,6 +76,8 @@ child
 
 child_array = child.data_array(downsample_level=1)
 child_array
+
+# Now select a smaller volume of interest from the child array, and plot it
 
 child_voi = hoa_tools.voi.VOI(
     dataset=child,
@@ -97,6 +102,8 @@ import hoa_tools.registration
 
 hoa_tools.registration.Inventory.add_registration(
     source_dataset=child,
-    target_dataset=dataset,
+    target_dataset=overview_dataset,
     transform=sitk.Transform(3, sitk.sitkIdentity),
 )
+
+child_voi.transform_to(overview_dataset)

@@ -1,10 +1,13 @@
+import itertools
 from dataclasses import dataclass
 from math import ceil, floor
 from typing import Literal, TypedDict
 
+import numpy as np
 import xarray as xr
 
 from hoa_tools.dataset import Dataset
+from hoa_tools.registration import Inventory as RegInventory
 
 
 class Coordinate(TypedDict):
@@ -43,6 +46,17 @@ class VOI:
             "z": self.lower_corner["z"] + self.size["z"],
         }
 
+    @property
+    def corners(self) -> list[tuple[int, int, int]]:
+        """
+        All 8 corners of the VOI.
+        """
+        return list(
+            itertools.product(
+                *zip(self.lower_corner.values(), self.upper_corner.values())
+            )
+        )
+
     def get_data_array(self) -> xr.DataArray:
         """
         Get data array for this VOI.
@@ -71,4 +85,44 @@ class VOI:
             downsample_level=new_downsample_level,
             lower_corner=new_lower_corner,  # type: ignore[arg-type]
             size=new_size,  # type: ignore[arg-type]
+        )
+
+    def transform_to(self, dataset: Dataset) -> "VOI":
+        """
+        Transform this VOI to another dataset.
+
+        The new VOI will completely contain the transformed original VOI.
+        """
+        if (self.dataset, dataset) not in RegInventory:
+            msg = (
+                f"Transform between {self.dataset.name} and {dataset.name} not found "
+                "in registration inventory."
+            )
+            raise RuntimeError(msg)
+
+        old_voi = self.change_downsample_level(new_downsample_level=0)
+        transform = RegInventory.get_registration(
+            source_datset=self.dataset, target_dataset=dataset
+        )
+
+        corners_transformed = np.array(
+            [transform.TransformPoint(corner) for corner in old_voi.corners]
+        )
+        lower_corner = (
+            np.floor(np.min(corners_transformed, axis=0)).astype(int).tolist()
+        )
+        upper_corner = np.ceil(np.max(corners_transformed, axis=0)).astype(int).tolist()
+        return VOI(
+            dataset=dataset,
+            downsample_level=0,
+            lower_corner={
+                "x": lower_corner[0],
+                "y": lower_corner[1],
+                "z": lower_corner[2],
+            },
+            size={
+                "x": upper_corner[0] - lower_corner[0],
+                "y": upper_corner[1] - lower_corner[1],
+                "z": upper_corner[2] - lower_corner[2],
+            },
         )

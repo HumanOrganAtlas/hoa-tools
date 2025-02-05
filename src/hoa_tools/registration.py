@@ -14,6 +14,20 @@ class RegistrationInventory:
         """
         self._registrations: dict[tuple[Dataset, Dataset], sitk.Transform] = {}
 
+    def __contains__(self, item: tuple[Dataset, Dataset]) -> bool:
+        """
+        Check for existence of registration.
+        """
+        return item in self._registrations
+
+    def get_registration(
+        self, *, source_datset: Dataset, target_dataset: Dataset
+    ) -> sitk.Transform:
+        """
+        Get a registration.
+        """
+        return self._registrations[(source_datset, target_dataset)]
+
     def add_registration(
         self,
         *,
