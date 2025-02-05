@@ -7,6 +7,7 @@ from typing import Literal
 
 import dask.array as da
 import gcsfs
+import numpy as np
 import pydantic
 import xarray as xr
 import zarr.core
@@ -160,10 +161,22 @@ class Dataset:
         Get a DataArray representing the array for this image.
         """
         remote_array = self._remote_array(downsample_level=downsample_level)
+        dask_array = da.from_array(remote_array, chunks=remote_array.chunks)
         return xr.DataArray(
-            da.from_array(remote_array, chunks=remote_array.chunks),
+            dask_array,
             name=self.name,
             dims=["z", "y", "x"],
+            coords={
+                "z": np.arange(dask_array.shape[0])
+                * self.resolution_um
+                * 2**downsample_level,
+                "y": np.arange(dask_array.shape[1])
+                * self.resolution_um
+                * 2**downsample_level,
+                "x": np.arange(dask_array.shape[2])
+                * self.resolution_um
+                * 2**downsample_level,
+            },
         )
 
 

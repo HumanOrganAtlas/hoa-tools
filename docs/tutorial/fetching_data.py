@@ -32,8 +32,7 @@ data_array
 # At this point no data has been downloaded - to download data you need to index the remote array.
 # As an example, lets fetch and show a slice in the x-y plane::
 
-import skimage.exposure
 
 middle_slice = data_array.isel(z=437)
-middle_slice.values = skimage.exposure.equalize_hist(middle_slice.values)
-middle_slice.plot(cmap="Grays_r")
+im = middle_slice.plot(cmap="Grays_r")
+im.axes.set_aspect("equal")

@@ -62,7 +62,7 @@ class VOI:
         Get data array for this VOI.
         """
         da = self.dataset.data_array(downsample_level=self.downsample_level)
-        return da.sel(
+        return da.isel(
             x=slice(self.lower_corner["x"], self.upper_corner["x"]),
             y=slice(self.lower_corner["y"], self.upper_corner["y"]),
             z=slice(self.lower_corner["z"], self.upper_corner["z"]),
