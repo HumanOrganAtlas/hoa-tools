@@ -35,7 +35,8 @@ optional-dependencies = { dev = [
     "pre-commit",
     "ruff",
     "tox",
-    "twine",
+    "jupyterlab",
+    "jupytext",
 ], docs = [
     "mkdocs",
     "mkdocstrings-python",
