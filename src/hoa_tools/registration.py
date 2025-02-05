@@ -1,3 +1,4 @@
+import numpy as np
 import SimpleITK as sitk
 
 from hoa_tools.dataset import Dataset
@@ -48,3 +49,16 @@ class RegistrationInventory:
 
 
 Inventory = RegistrationInventory()
+
+
+def build_transform(
+    *, translation: tuple[float, float, float], rotation_deg: float, scale: float
+) -> sitk.CompositeTransform:
+    """
+    Build a transform from a translation, scale, and rotation.
+    """
+    dims = 3
+    T1 = sitk.ScaleTransform(dims, (scale, scale, scale))
+    T2 = sitk.Euler3DTransform((0, 0, 0), 0, 0, np.deg2rad(rotation_deg))
+    T3 = sitk.TranslationTransform(dims, translation)
+    return sitk.CompositeTransform([T3, T2, T1])

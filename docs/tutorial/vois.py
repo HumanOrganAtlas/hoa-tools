@@ -100,10 +100,20 @@ import hoa_tools.registration
 
 # -
 
+transform = hoa_tools.registration.build_transform(
+    translation=(591.9188598, 904.645141, 267.368216), rotation_deg=0.5000321977, scale=0.2412282173)
+
 hoa_tools.registration.Inventory.add_registration(
     source_dataset=child,
     target_dataset=overview_dataset,
-    transform=sitk.Transform(3, sitk.sitkIdentity),
+    transform=transform,
 )
 
-child_voi.transform_to(overview_dataset)
+overview_voi = child_voi.transform_to(overview_dataset)
+overview_voi
+
+overview_voi.get_data_array()
+
+overview_voi.get_data_array().isel(z=34).plot(cmap='Grays_r')
+
+
