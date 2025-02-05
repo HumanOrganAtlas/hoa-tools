@@ -74,22 +74,22 @@ children
 child = children[1]
 child
 
-child_array = child.data_array(downsample_level=1)
+child_array = child.data_array(downsample_level=0)
 child_array
 
 # Now select a smaller volume of interest from the child array, and plot it
 
 child_voi = hoa_tools.voi.VOI(
     dataset=child,
-    downsample_level=1,
-    lower_corner={"x": 1000, "y": 1000, "z": 2000},
-    size={"x": 128, "y": 128, "z": 128},
+    downsample_level=0,
+    lower_corner={"x": 1871, "y": 2389, "z": 3770},
+    size={"x": 256, "y": 256, "z": 128},
 )
 child_array = child_voi.get_data_array()
 child_array
 
 plt.figure()
-ax = child_array.isel(z=64).plot(cmap="Grays_r")
+ax = child_array.isel(z=0).plot(cmap="Grays_r")
 ax.axes.set_aspect("equal")
 ax.axes.set_title("VOI slice")
 
@@ -104,6 +104,7 @@ transform = hoa_tools.registration.build_transform(
     rotation_deg=0.5000321977,
     scale=0.2412282173,
 )
+transform.TransformPoint((0, 0, 0))
 
 hoa_tools.registration.Inventory.add_registration(
     source_dataset=child,
@@ -111,9 +112,13 @@ hoa_tools.registration.Inventory.add_registration(
     transform=transform,
 )
 
+
 overview_voi = child_voi.transform_to(overview_dataset)
 overview_voi
 
 overview_voi.get_data_array()
 
-overview_voi.get_data_array().isel(z=34).plot(cmap="Grays_r")
+im = overview_voi.get_data_array().isel(z=0).plot(cmap="Grays_r")
+im.axes.set_aspect('equal')
+
+

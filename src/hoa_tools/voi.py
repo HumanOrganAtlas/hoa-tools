@@ -47,15 +47,16 @@ class VOI:
         }
 
     @property
-    def corners(self) -> list[tuple[int, int, int]]:
+    def corners(self) -> list[Coordinate]:
         """
         All 8 corners of the VOI.
         """
-        return list(
+        l: list[tuple[int, int, int]] = list(
             itertools.product(  # type: ignore[arg-type]
                 *zip(self.lower_corner.values(), self.upper_corner.values())
             )
         )
+        return [{"x": i[0], "y": i[1], "z": i[2]} for i in l]
 
     def get_data_array(self) -> xr.DataArray:
         """
@@ -105,24 +106,29 @@ class VOI:
             source_datset=self.dataset, target_dataset=dataset
         )
 
+        # Using zyx order from here
         corners_transformed = np.array(
-            [transform.TransformPoint(corner) for corner in old_voi.corners]
+            [
+                transform.TransformPoint((corner["z"], corner["y"], corner["x"]))
+                for corner in old_voi.corners
+            ]
         )
         lower_corner = (
             np.floor(np.min(corners_transformed, axis=0)).astype(int).tolist()
         )
         upper_corner = np.ceil(np.max(corners_transformed, axis=0)).astype(int).tolist()
+        # Converting back from zyx order here
         return VOI(
             dataset=dataset,
             downsample_level=0,
             lower_corner={
-                "x": lower_corner[0],
+                "x": lower_corner[2],
                 "y": lower_corner[1],
-                "z": lower_corner[2],
+                "z": lower_corner[0],
             },
             size={
-                "x": upper_corner[0] - lower_corner[0],
+                "x": upper_corner[2] - lower_corner[2],
                 "y": upper_corner[1] - lower_corner[1],
-                "z": upper_corner[2] - lower_corner[2],
+                "z": upper_corner[0] - lower_corner[0],
             },
         )

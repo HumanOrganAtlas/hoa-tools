@@ -7,6 +7,10 @@ from hoa_tools.dataset import Dataset
 class RegistrationInventory:
     """
     Inventory of transforms between datasets.
+
+    Transforms are defined as acting on the zyx axes in that order. Note that this
+    is different from the order in which the SimpleITK API defines axes in its function
+    signatures.
     """
 
     def __init__(self) -> None:
@@ -59,6 +63,6 @@ def build_transform(
     """
     dims = 3
     T1 = sitk.ScaleTransform(dims, (scale, scale, scale))
-    T2 = sitk.Euler3DTransform((0, 0, 0), 0, 0, np.deg2rad(rotation_deg))
-    T3 = sitk.TranslationTransform(dims, translation)
+    T2 = sitk.Euler3DTransform((0, 0, 0), np.deg2rad(rotation_deg), 0, 0)
+    T3 = sitk.TranslationTransform(dims, translation[::-1])
     return sitk.CompositeTransform([T3, T2, T1])
