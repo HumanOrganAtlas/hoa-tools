@@ -52,7 +52,7 @@ class VOI:
         All 8 corners of the VOI.
         """
         return list(
-            itertools.product(
+            itertools.product(  # type: ignore[arg-type]
                 *zip(self.lower_corner.values(), self.upper_corner.values())
             )
         )
