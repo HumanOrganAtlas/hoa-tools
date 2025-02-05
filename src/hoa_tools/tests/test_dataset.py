@@ -1,7 +1,6 @@
 import re
 
 import pytest
-from unyt import unyt_quantity
 
 from hoa_tools.dataset import Dataset, get_dataset
 
@@ -30,7 +29,7 @@ def test_child_datasets() -> None:
             organ="spleen",
             organ_context="",
             roi="central-column",
-            resolution=unyt_quantity(1.29, "μm"),
+            resolution_um=1.29,
             beamline="bm05",
             nx=3823,
             ny=3823,
@@ -41,7 +40,7 @@ def test_child_datasets() -> None:
             organ="spleen",
             organ_context="",
             roi="central-column",
-            resolution=unyt_quantity(6.05, "μm"),
+            resolution_um=6.05,
             beamline="bm05",
             nx=3791,
             ny=3791,
@@ -61,7 +60,7 @@ def test_parent_datasets() -> None:
             organ="kidney",
             organ_context="",
             roi="complete-organ",
-            resolution=unyt_quantity(25.0, "μm"),
+            resolution_um=25,
             beamline="bm05",
             nx=2215,
             ny=3287,

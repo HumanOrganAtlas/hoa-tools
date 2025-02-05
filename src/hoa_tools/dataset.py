@@ -8,7 +8,6 @@ from typing import Literal
 import dask.array as da
 import gcsfs
 import pydantic
-import unyt.array
 import xarray as xr
 import zarr.core
 import zarr.n5
@@ -27,7 +26,7 @@ Beamline = Literal["bm05", "bm18"]
 """ESRF beamline ID."""
 
 
-@pydantic.dataclasses.dataclass(config={"arbitrary_types_allowed": True})
+@pydantic.dataclasses.dataclass(config={"arbitrary_types_allowed": True}, frozen=True)
 class Dataset:
     """
     An individual Human Organ Atlas dataset.
@@ -43,7 +42,7 @@ class Dataset:
     """Region of Interest. Takes an arbitrary (and often not descriptive) value
     that is unique between scans of the same organ. Takes the special value
     'complete-organ' if the dataset is a scan of the full organ."""
-    resolution: unyt.array.unyt_quantity
+    resolution_um: float
     """Size of a single voxel in the dataset. All datasets have isotropic voxels."""
     beamline: Beamline
     """ESRF beamline ID."""
@@ -65,7 +64,7 @@ class Dataset:
 
     def _resolution_str(self) -> str:
         # Make sure that resolution includes a .0 if an integer value.
-        return str(float(self.resolution.to_value("um")))
+        return str(float(self.resolution_um))
 
     @property
     def name(self) -> str:
@@ -138,7 +137,7 @@ class Dataset:
         path = f"/{self.donor}/{self.organ}"
         if self.organ_context:
             path += f"-{self.organ_context}"
-        path += f"/{self.resolution.to_value('um')}um_{self.roi}_{self.beamline}"
+        path += f"/{self.resolution_um}um_{self.roi}_{self.beamline}"
 
         fs = gcsfs.GCSFileSystem(project=_BUCKET, token="anon", access="read_only")  # noqa: S106
         store = N5FSStore(url=_BUCKET, fs=fs, mode="r")
@@ -190,6 +189,6 @@ def get_dataset(name: str) -> Dataset:
             "nz",
         ]
     }
-    attributes["resolution"] = attributes.pop("resolution_um") * unyt.um
+    attributes["resolution_um"] = attributes.pop("resolution_um")
     attributes["beamline"] = "bm" + str(attributes["beamline"]).zfill(2)
     return Dataset(**attributes)

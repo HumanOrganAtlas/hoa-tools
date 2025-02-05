@@ -17,6 +17,7 @@ ignore = [
     "ISC001",  # simplify implicit str concatenation (ruff-format recommended)
     "PD901",   # Avoid using the generic variable name `df` for DataFrames
     "PLR0913", # Too many arguments in function definition
+    "N813",
 ]
 select = ["ALL"]
 isort.known-first-party = ["HOA Tools"]

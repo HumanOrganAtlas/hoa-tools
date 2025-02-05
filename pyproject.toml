@@ -21,7 +21,7 @@ dependencies = [
     "gcsfs>2023",
     "pandas>=2",
     "pydantic>=2",
-    "unyt>3",
+    "simpleitk",
     "xarray",
     "zarr<3,>2.16",
 ]
@@ -35,7 +35,8 @@ optional-dependencies = { dev = [
     "pre-commit",
     "ruff",
     "tox",
-    "twine",
+    "jupyterlab",
+    "jupytext",
 ], docs = [
     "mkdocs",
     "mkdocstrings-python",
