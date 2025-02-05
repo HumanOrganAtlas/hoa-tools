@@ -119,6 +119,4 @@ overview_voi
 overview_voi.get_data_array()
 
 im = overview_voi.get_data_array().isel(z=0).plot(cmap="Grays_r")
-im.axes.set_aspect('equal')
-
-
+im.axes.set_aspect("equal")
