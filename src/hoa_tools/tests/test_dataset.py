@@ -28,7 +28,7 @@ def test_child_datasets() -> None:
             donor="LADAF-2020-27",
             organ="spleen",
             organ_context="",
-            roi="central-column",
+            region="central-column",
             resolution_um=1.29,
             beamline="bm05",
             nx=3823,
@@ -39,7 +39,7 @@ def test_child_datasets() -> None:
             donor="LADAF-2020-27",
             organ="spleen",
             organ_context="",
-            roi="central-column",
+            region="central-column",
             resolution_um=6.05,
             beamline="bm05",
             nx=3791,
@@ -50,8 +50,8 @@ def test_child_datasets() -> None:
 
 
 def test_parent_datasets() -> None:
-    roi = get_dataset("LADAF-2020-31_kidney_lateral-transect_2.5um_bm05")
-    parent_datasets = roi.get_parents()
+    zoom = get_dataset("LADAF-2020-31_kidney_lateral-transect_2.5um_bm05")
+    parent_datasets = zoom.get_parents()
     assert len(parent_datasets) == 1
 
     assert parent_datasets == [
@@ -59,7 +59,7 @@ def test_parent_datasets() -> None:
             donor="LADAF-2020-31",
             organ="kidney",
             organ_context="",
-            roi="complete-organ",
+            region="complete-organ",
             resolution_um=25,
             beamline="bm05",
             nx=2215,
