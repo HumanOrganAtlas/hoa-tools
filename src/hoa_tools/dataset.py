@@ -39,9 +39,9 @@ class Dataset:
     """Organ name."""
     organ_context: str
     """Context for dataset within organ. Not always present."""
-    roi: str
-    """Region of Interest. Takes an arbitrary (and often not descriptive) value
-    that is unique between scans of the same organ. Takes the special value
+    region: str
+    """Region of dataset within a sample. Takes an arbitrary (and often not descriptive)
+    value that is unique between scans of the same organ. Takes the special value
     'complete-organ' if the dataset is a scan of the full organ."""
     resolution_um: float
     """Size of a single voxel in the dataset. All datasets have isotropic voxels."""
@@ -73,7 +73,7 @@ class Dataset:
         Unique name for dataset.
         """
         return (
-            f"{self.donor}_{self._organ_str()}_{self.roi}_"
+            f"{self.donor}_{self._organ_str()}_{self.region}_"
             f"{self._resolution_str()}um_{self.beamline}"
         )
 
@@ -82,7 +82,14 @@ class Dataset:
         """
         Whether this dataset contains the whole organ or not.
         """
-        return self.roi.startswith("complete")
+        return self.region.startswith("complete")
+
+    @property
+    def is_zoom(self) -> bool:
+        """
+        Whether this dataset is a zoom or not.
+        """
+        return not self.is_full_organ
 
     def get_children(self) -> list["Dataset"]:
         """
@@ -111,11 +118,11 @@ class Dataset:
         """
         Get parent dataset(s).
 
-        Parent datasets are full-organ datasets from which a ROI dataset is taken from.
+        Parent datasets are full-organ datasets from which a zoom dataset is taken from.
 
         Notes
         -----
-        For ROI datasets, this returns an empty list.
+        For zoom datasets, this returns an empty list.
 
         """
         inventory = hoa_tools.inventory.load_inventory()
@@ -138,7 +145,7 @@ class Dataset:
         path = f"/{self.donor}/{self.organ}"
         if self.organ_context:
             path += f"-{self.organ_context}"
-        path += f"/{self.resolution_um}um_{self.roi}_{self.beamline}"
+        path += f"/{self.resolution_um}um_{self.region}_{self.beamline}"
 
         fs = gcsfs.GCSFileSystem(project=_BUCKET, token="anon", access="read_only")  # noqa: S106
         store = N5FSStore(url=_BUCKET, fs=fs, mode="r")
@@ -202,6 +209,6 @@ def get_dataset(name: str) -> Dataset:
             "nz",
         ]
     }
-    attributes["resolution_um"] = attributes.pop("resolution_um")
+    attributes["region"] = attributes.pop("roi")
     attributes["beamline"] = "bm" + str(attributes["beamline"]).zfill(2)
     return Dataset(**attributes)
