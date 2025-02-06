@@ -90,7 +90,7 @@ ax = child_array.isel(z=0).plot(cmap="Grays_r")
 ax.axes.set_aspect("equal")
 ax.axes.set_title("Zoom dataset slice")
 
-# Next we'll define a transform between these two datasets. For now this is entered manually, but in the future we will automatically populate the registration inventory with transorms between datasets.
+# Next we'll define a transform between these two datasets. For now this is entered manually, but in the future we will automatically populate the registration inventory with transforms between datasets.
 
 import hoa_tools.registration
 
