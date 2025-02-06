@@ -169,20 +169,27 @@ class Dataset:
         """
         remote_array = self._remote_array(downsample_level=downsample_level)
         dask_array = da.from_array(remote_array, chunks=remote_array.chunks)
+        spacing = self.resolution_um * 2**downsample_level
         return xr.DataArray(
             dask_array,
             name=self.name,
             dims=["z", "y", "x"],
             coords={
-                "z": np.arange(dask_array.shape[0])
-                * self.resolution_um
-                * 2**downsample_level,
-                "y": np.arange(dask_array.shape[1])
-                * self.resolution_um
-                * 2**downsample_level,
-                "x": np.arange(dask_array.shape[2])
-                * self.resolution_um
-                * 2**downsample_level,
+                "z": xr.DataArray(
+                    data=(np.arange(dask_array.shape[0]) * spacing),
+                    dims=["z"],
+                    attrs={"units": "μm"},
+                ),
+                "y": xr.DataArray(
+                    data=(np.arange(dask_array.shape[1]) * spacing),
+                    dims=["y"],
+                    attrs={"units": "μm"},
+                ),
+                "x": xr.DataArray(
+                    data=(np.arange(dask_array.shape[2]) * spacing),
+                    dims=["x"],
+                    attrs={"units": "μm"},
+                ),
             },
         )
 
