@@ -13,4 +13,3 @@ updates:
       github-actions:
         patterns:
           - "*"
-
