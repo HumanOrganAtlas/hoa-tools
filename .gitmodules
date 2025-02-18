@@ -1,3 +1,0 @@
-[submodule "src/hoa_tools/data/metadata"]
-	path = src/hoa_tools/data/metadata
-	url = https://github.com/HumanOrganAtlas/metadata-schemas
