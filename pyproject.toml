@@ -34,7 +34,6 @@ optional-dependencies = { dev = [
     "mypy",
     "pre-commit",
     "ruff",
-    "tox",
     "jupyterlab",
     "jupytext",
 ], docs = [
@@ -67,7 +66,7 @@ skip = 'schemas/*'
 [tool.coverage]
 report = { sort = "cover" }
 run = { branch = true, parallel = true, source = ["hoa_tools"] }
-paths.source = ["src", ".tox*/*/lib/python*/site-packages"]
+paths.source = ["src/hoa_tools"]
 
 [tool.mypy]
 exclude = ['docs/_build.*']
