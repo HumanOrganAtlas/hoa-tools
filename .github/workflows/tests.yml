@@ -19,6 +19,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: "recursive"
+
+      - name: fetch submodules
+        run: git submodule update --init
+
+      - name: ls metadata
+        run: ls src/hoa_tools/data
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
