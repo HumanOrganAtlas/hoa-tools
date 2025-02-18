@@ -159,6 +159,11 @@ _DATASETS = {
     f.stem: Dataset.model_validate_json(f.read_text())
     for f in (hoa_tools.inventory.DATA_DIR / "metadata" / "metadata").glob("*.json")
 }
+if len(_DATASETS) == 0:
+    raise ImportError(
+        "Did not find any dataset metadata files. "
+        "This means there is something wrong with the hoa-tools installation."
+    )
 
 
 def get_dataset(name: str) -> Dataset:
