@@ -74,6 +74,10 @@ exclude = ['docs/_build.*']
 plugins = ["pydantic.mypy"]
 strict = true
 
+[[tool.mypy.overrides]]
+module = "hoa_tools._hoa_model"
+disallow_any_generics = false # See https://github.com/koxudaxi/datamodel-code-generator/issues/1546
+
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
 write_to = "src/hoa_tools/_version.py"

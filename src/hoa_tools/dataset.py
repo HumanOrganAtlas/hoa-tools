@@ -8,81 +8,41 @@ from typing import Literal
 import dask.array as da
 import gcsfs
 import numpy as np
-import pydantic
 import xarray as xr
 import zarr.core
 import zarr.n5
 
 import hoa_tools.inventory
+from hoa_tools._hoa_model import HOAMetadata
 from hoa_tools._n5 import N5FSStore
-
-_BUCKET = "ucl-hip-ct-35a68e99feaae8932b1d44da0358940b"
 
 __all__ = ["Dataset", "get_dataset"]
 
 
-Organ = Literal["lung", "heart", "kidney", "spleen", "brain"]
-"""Organ name."""
-Beamline = Literal["bm05", "bm18"]
-"""ESRF beamline ID."""
-
-
-@pydantic.dataclasses.dataclass(config={"arbitrary_types_allowed": True}, frozen=True)
-class Dataset:
+class Dataset(HOAMetadata):
     """
     An individual Human Organ Atlas dataset.
     """
-
-    donor: str
-    """Donor ID."""
-    organ: Organ
-    """Organ name."""
-    organ_context: str
-    """Context for dataset within organ. Not always present."""
-    region: str
-    """Region of dataset within a sample. Takes an arbitrary (and often not descriptive)
-    value that is unique between scans of the same organ. Takes the special value
-    'complete-organ' if the dataset is a scan of the full organ."""
-    resolution_um: float
-    """Size of a single voxel in the dataset. All datasets have isotropic voxels."""
-    beamline: Beamline
-    """ESRF beamline ID."""
-    nx: int
-    """Number of voxels along the x-axis."""
-    ny: int
-    """Number of voxels along the y-axis."""
-    nz: int
-    """Number of voxels along the z-axis."""
 
     def _organ_str(self) -> str:
         """
         Get name of organ, with organ context appended if present.
         """
-        organ_str = str(self.organ)
-        if self.organ_context:
-            organ_str += "_" + self.organ_context
+        organ_str = str(self.sample.organ)
+        if self.sample.organ_context:
+            organ_str += "_" + self.sample.organ_context
         return organ_str
 
-    def _resolution_str(self) -> str:
-        # Make sure that resolution includes a .0 if an integer value.
-        return str(float(self.resolution_um))
-
-    @property
-    def name(self) -> str:
-        """
-        Unique name for dataset.
-        """
-        return (
-            f"{self.donor}_{self._organ_str()}_{self.region}_"
-            f"{self._resolution_str()}um_{self.beamline}"
-        )
+    def _voxel_size_str(self) -> str:
+        # Make sure that voxel size includes a .0 if an integer value.
+        return str(float(self.data.voxel_size_um))
 
     @property
     def is_full_organ(self) -> bool:
         """
         Whether this dataset contains the whole organ or not.
         """
-        return self.region.startswith("complete")
+        return self.voi.startswith("complete")
 
     @property
     def is_zoom(self) -> bool:
@@ -102,17 +62,16 @@ class Dataset:
         For full-organ datasets, this returns an empty list.
 
         """
-        inventory = hoa_tools.inventory.load_inventory()
-        # Filter on successive attributes
-        inventory = inventory.loc[inventory["donor"] == self.donor]
-        inventory = inventory.loc[inventory["organ"] == self.organ]
-        inventory = inventory.loc[
-            inventory["beamline"] == int(self.beamline.strip("bm"))
+        return [
+            d
+            for d in _DATASETS.values()
+            if (
+                d.donor.id == self.donor.id
+                and d.sample.organ == self.sample.organ
+                and d.scan.beamline == self.scan.beamline
+                and d.is_zoom
+            )
         ]
-        # Only want non-full-organ datasets
-        inventory = inventory.loc[inventory["roi"] != "complete-organ"]
-
-        return [get_dataset(name) for name in inventory.index]
 
     def get_parents(self) -> list["Dataset"]:
         """
@@ -125,30 +84,32 @@ class Dataset:
         For zoom datasets, this returns an empty list.
 
         """
-        inventory = hoa_tools.inventory.load_inventory()
-        # Filter on successive attributes
-        inventory = inventory.loc[inventory["donor"] == self.donor]
-        inventory = inventory.loc[inventory["organ"] == self.organ]
-        inventory = inventory.loc[
-            inventory["beamline"] == int(self.beamline.strip("bm"))
+        return [
+            d
+            for d in _DATASETS.values()
+            if (
+                d.donor.id == self.donor.id
+                and d.sample.organ == self.sample.organ
+                and d.scan.beamline == self.scan.beamline
+                and d.is_full_organ
+            )
         ]
-        # Only want full-organ datasets
-        inventory = inventory.loc[inventory["roi"] == "complete-organ"]
-
-        return [get_dataset(name) for name in inventory.index]
 
     @cached_property
     def _remote_store(self) -> zarr.Group:
         """
         Remote data store.
         """
-        path = f"/{self.donor}/{self.organ}"
-        if self.organ_context:
-            path += f"-{self.organ_context}"
-        path += f"/{self.resolution_um}um_{self.region}_{self.beamline}"
+        gcs_url = self.data.gcs_url
+        if not gcs_url.startswith("n5://"):
+            raise RuntimeError("Only N5 supported")
 
-        fs = gcsfs.GCSFileSystem(project=_BUCKET, token="anon", access="read_only")  # noqa: S106
-        store = N5FSStore(url=_BUCKET, fs=fs, mode="r")
+        gcs_url = gcs_url.removeprefix("n5://gs://")
+        # n5://gs://ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/S-20-29/heart/2.5um_VOI-01_bm05/
+        bucket, path = gcs_url.split("/", maxsplit=1)
+
+        fs = gcsfs.GCSFileSystem(project=bucket, token="anon", access="read_only")  # noqa: S106
+        store = N5FSStore(url=bucket, fs=fs, mode="r")
         return zarr.open_group(store, mode="r", path=path)
 
     def _remote_array(
@@ -169,7 +130,7 @@ class Dataset:
         """
         remote_array = self._remote_array(downsample_level=downsample_level)
         dask_array = da.from_array(remote_array, chunks=remote_array.chunks)
-        spacing = self.resolution_um * 2**downsample_level
+        spacing = self.data.voxel_size_um * 2**downsample_level
         return xr.DataArray(
             dask_array,
             name=self.name,
@@ -194,28 +155,16 @@ class Dataset:
         )
 
 
+_DATASETS = {
+    f.stem: Dataset.model_validate_json(f.read_text())
+    for f in (hoa_tools.inventory.DATA_DIR / "metadata" / "metadata").glob("*.json")
+}
+
+
 def get_dataset(name: str) -> Dataset:
     """
     Get a dataset from its name.
 
     The name of datasets can be looked up using the `hoa_tools.inventory` module.
     """
-    inventory = hoa_tools.inventory.load_inventory()
-    dataset_row = inventory.loc[name]
-    attributes = {
-        attr: dataset_row[attr]
-        for attr in [
-            "donor",
-            "organ",
-            "organ_context",
-            "roi",
-            "resolution_um",
-            "beamline",
-            "nx",
-            "ny",
-            "nz",
-        ]
-    }
-    attributes["region"] = attributes.pop("roi")
-    attributes["beamline"] = "bm" + str(attributes["beamline"]).zfill(2)
-    return Dataset(**attributes)
+    return _DATASETS[name]

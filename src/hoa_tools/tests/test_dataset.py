@@ -23,29 +23,9 @@ def test_child_datasets() -> None:
     child_datasets = whole_spleen.get_children()
     assert len(child_datasets) == 2
 
-    assert child_datasets == [
-        Dataset(
-            donor="LADAF-2020-27",
-            organ="spleen",
-            organ_context="",
-            region="central-column",
-            resolution_um=1.29,
-            beamline="bm05",
-            nx=3823,
-            ny=3823,
-            nz=10982,
-        ),
-        Dataset(
-            donor="LADAF-2020-27",
-            organ="spleen",
-            organ_context="",
-            region="central-column",
-            resolution_um=6.05,
-            beamline="bm05",
-            nx=3791,
-            ny=3791,
-            nz=7540,
-        ),
+    assert [p.name for p in child_datasets] == [
+        "LADAF-2020-27_spleen_central-column_6.05um_bm05",
+        "LADAF-2020-27_spleen_central-column_1.29um_bm05",
     ]
 
 
@@ -54,18 +34,8 @@ def test_parent_datasets() -> None:
     parent_datasets = zoom.get_parents()
     assert len(parent_datasets) == 1
 
-    assert parent_datasets == [
-        Dataset(
-            donor="LADAF-2020-31",
-            organ="kidney",
-            organ_context="",
-            region="complete-organ",
-            resolution_um=25,
-            beamline="bm05",
-            nx=2215,
-            ny=3287,
-            nz=4282,
-        )
+    assert [p.name for p in parent_datasets] == [
+        "LADAF-2020-31_kidney_complete-organ_25.0um_bm05"
     ]
 
 

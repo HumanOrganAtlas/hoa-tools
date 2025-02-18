@@ -6,6 +6,8 @@ from pathlib import Path
 
 import pandas as pd
 
+DATA_DIR = inventory_file = Path(__file__).parent / "data"
+
 
 def load_inventory() -> pd.DataFrame:
     """
@@ -17,7 +19,7 @@ def load_inventory() -> pd.DataFrame:
         Inventory as a pandas DataFrame.
 
     """
-    inventory_file = Path(__file__).parent / "data" / "hoa_inventory.csv"
+    inventory_file = DATA_DIR / "hoa_inventory.csv"
     return pd.read_csv(
         inventory_file,
         index_col="name",
