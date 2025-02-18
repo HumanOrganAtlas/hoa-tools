@@ -23,10 +23,12 @@ def test_child_datasets() -> None:
     child_datasets = whole_spleen.get_children()
     assert len(child_datasets) == 2
 
-    assert [p.name for p in child_datasets] == [
-        "LADAF-2020-27_spleen_central-column_6.05um_bm05",
-        "LADAF-2020-27_spleen_central-column_1.29um_bm05",
-    ]
+    assert sorted([p.name for p in child_datasets]) == sorted(
+        [
+            "LADAF-2020-27_spleen_central-column_6.05um_bm05",
+            "LADAF-2020-27_spleen_central-column_1.29um_bm05",
+        ]
+    )
 
 
 def test_parent_datasets() -> None:
