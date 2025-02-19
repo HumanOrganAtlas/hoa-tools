@@ -34,19 +34,19 @@ markdown_extensions:
 
 plugins:
   - mkdocs-jupyter:
-      execute: true
+      execute: false
       allow_errors: false
   - mkdocstrings:
       handlers:
         python:
           paths: [src]
-          import:
+          inventories:
             - https://docs.python.org/3/objects.inv
 
           options:
             docstring_style: numpy
             show_root_toc_entry: false
-            show_object_full_path: true
+            show_object_full_path: false
             group_by_category: true
             heading_level: 3
             show_symbol_type_heading: true
@@ -54,6 +54,10 @@ plugins:
             show_source: false
             show_signature_annotations: true
             signature_crossrefs: true
+            show_if_no_docstring: true
+            filters:
+              # Skip anything starting with "_"
+              - "!^_"
             extensions:
               - griffe_pydantic:
                   schema: false
@@ -65,7 +69,11 @@ nav:
       - Datasets: tutorial/dataset.py
       - Getting data: tutorial/fetching_data.py
       - Sub-volumes: tutorial/vois.py
-  - API reference: api.md
+  - API reference:
+      - dataset: api/dataset.md
+      - inventory: api/inventory.md
+      - metadata: api/metadata.md
+      - voi: api/voi.md
   - Development: development.md
 
 watch:
