@@ -1,6 +1,6 @@
 fix = true
 force-exclude = true
-target-version = "py39"
+target-version = "py311"
 
 [lint]
 ignore = [

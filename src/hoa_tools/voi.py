@@ -63,6 +63,7 @@ class VOI(BaseModel):
                 *zip(
                     [self.lower_corner.x, self.lower_corner.y, self.lower_corner.z],
                     [self.upper_corner.x, self.upper_corner.y, self.upper_corner.z],
+                    strict=True,
                 )
             )
         )
