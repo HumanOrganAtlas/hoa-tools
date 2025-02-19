@@ -1,5 +1,9 @@
 version: 2
 
+submodules:
+  include:
+    - src/hoa_tools/data/metadata
+
 build:
   os: ubuntu-22.04
   tools:

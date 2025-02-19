@@ -18,13 +18,13 @@ class RegistrationInventory:
         """
         Create registration inventory.
         """
-        self._registrations: dict[tuple[Dataset, Dataset], sitk.Transform] = {}
+        self._registrations: dict[tuple[str, str], sitk.Transform] = {}
 
     def __contains__(self, item: tuple[Dataset, Dataset]) -> bool:
         """
-        Check for existence of registration.
+        Check for existence of registration between two datasets.
         """
-        return item in self._registrations
+        return (item[0].name, item[1].name) in self._registrations
 
     def get_registration(
         self, *, source_datset: Dataset, target_dataset: Dataset
@@ -32,7 +32,7 @@ class RegistrationInventory:
         """
         Get a registration.
         """
-        return self._registrations[(source_datset, target_dataset)]
+        return self._registrations[(source_datset.name, target_dataset.name)]
 
     def add_registration(
         self,
@@ -49,8 +49,10 @@ class RegistrationInventory:
         This will override any already defined transforms for these two datasets.
 
         """
-        self._registrations[(source_dataset, target_dataset)] = transform
-        self._registrations[(target_dataset, source_dataset)] = transform.GetInverse()
+        self._registrations[(source_dataset.name, target_dataset.name)] = transform
+        self._registrations[(target_dataset.name, source_dataset.name)] = (
+            transform.GetInverse()
+        )
 
 
 Inventory = RegistrationInventory()
