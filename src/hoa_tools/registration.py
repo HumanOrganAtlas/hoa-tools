@@ -11,7 +11,7 @@ Transforms are defined using the `SimpleITK` library.
 import numpy as np
 import SimpleITK as sitk
 
-from hoa_tools.dataset import Dataset
+from hoa_tools.dataset import _DATASETS, Dataset
 from hoa_tools.types import PhysicalCoordinate
 
 
@@ -65,9 +65,6 @@ class RegistrationInventory:
         )
 
 
-Inventory = RegistrationInventory()
-
-
 def build_transform(
     *, translation: PhysicalCoordinate, rotation_deg: float, scale: float
 ) -> sitk.Similarity3DTransform:
@@ -83,3 +80,33 @@ def build_transform(
         (translation.z, translation.y, translation.x),
         center,
     )
+
+
+Inventory = RegistrationInventory()
+
+
+def _populate_registrations_from_metadata(inventory: RegistrationInventory) -> None:
+    for dataset_name in _DATASETS:
+        dataset = _DATASETS[dataset_name]
+        if (registration := dataset.registration) is not None:
+            source_dataset = _DATASETS[registration.source_dataset]
+            target_dataset = _DATASETS[registration.target_dataset]
+            transform = build_transform(
+                translation=PhysicalCoordinate(
+                    x=registration.translation[0] * target_dataset.data.voxel_size_um,
+                    y=registration.translation[1] * target_dataset.data.voxel_size_um,
+                    z=registration.translation[2] * target_dataset.data.voxel_size_um,
+                ),
+                rotation_deg=registration.rotation,
+                scale=registration.scale
+                * target_dataset.data.voxel_size_um
+                / source_dataset.data.voxel_size_um,
+            )
+            Inventory.add_registration(
+                source_dataset=_DATASETS[registration.source_dataset],
+                target_dataset=_DATASETS[registration.target_dataset],
+                transform=transform,
+            )
+
+
+_populate_registrations_from_metadata(Inventory)

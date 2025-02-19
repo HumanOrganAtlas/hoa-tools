@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 
 import hoa_tools.dataset
 import hoa_tools.voi
-from hoa_tools.types import PhysicalCoordinate
 
 # -
 
@@ -93,30 +92,8 @@ ax = child_array.isel(z=0).plot(cmap="Grays_r")
 ax.axes.set_aspect("equal")
 ax.axes.set_title("Zoom dataset slice")
 
-# Next we'll define a transform between these two datasets. For now this is entered manually, but in the future we will automatically populate the registration inventory with transforms between datasets.
 
-import hoa_tools.registration
-
-transform = hoa_tools.registration.build_transform(
-    translation=PhysicalCoordinate(
-        x=2073.796888 * overview_dataset.data.voxel_size_um,
-        y=1199.064571 * overview_dataset.data.voxel_size_um,
-        z=3634.531617 * overview_dataset.data.voxel_size_um,
-    ),
-    rotation_deg=2.299992208,
-    scale=0.2566130457 * overview_dataset.data.voxel_size_um / child.data.voxel_size_um,
-)
-
-# With the trainsform defined, add it to the registration inventory.
-
-hoa_tools.registration.Inventory.add_registration(
-    source_dataset=child,
-    target_dataset=overview_dataset,
-    transform=transform,
-)
-
-
-# Now that `hoa_tools` has this transformation in the registration registry, it can transform a VOI in one dataset to the other dataset.
+# Now lets transform the VOI to the overview dataset
 
 overview_voi = child_voi.transform_to(overview_dataset)
 overview_voi
