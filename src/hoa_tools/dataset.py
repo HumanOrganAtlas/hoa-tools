@@ -162,7 +162,9 @@ _DATASETS = {
 if len(_DATASETS) == 0:
     raise ImportError(
         "Did not find any dataset metadata files. "
-        "This means there is something wrong with the hoa-tools installation."
+        "This means there is something wrong with the hoa-tools installation. "
+        "If you are installing from source, you might need to "
+        "initialise and fetch git submodules. "
     )
 
 
