@@ -1,5 +1,5 @@
 """
-Common types used accross the library.
+Common types used across the library.
 """
 
 from typing import TypedDict
