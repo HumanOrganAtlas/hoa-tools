@@ -2,11 +2,9 @@
 Tools for working with the Human Organ Atlas Inventory.
 """
 
-from pathlib import Path
-
 import pandas as pd
 
-DATA_DIR = inventory_file = Path(__file__).parent / "data"
+from hoa_tools.dataset import _DATASETS
 
 
 def load_inventory() -> pd.DataFrame:
@@ -19,10 +17,14 @@ def load_inventory() -> pd.DataFrame:
         Inventory as a pandas DataFrame.
 
     """
-    inventory_file = DATA_DIR / "hoa_inventory.csv"
-    return pd.read_csv(
-        inventory_file,
-        index_col="name",
-        dtype={"organ_context": str},
-        keep_default_na=False,
-    )
+    data = [
+        {
+            "donor": d.donor.id,
+            "organ": d.sample.organ,
+            "organ_context": d.sample.organ_context,
+            "voi": d.voi,
+            "voxel_size_um": d.data.voxel_size_um,
+        }
+        for d in _DATASETS.values()
+    ]
+    return pd.DataFrame(data=data, index=list(_DATASETS.keys()))

@@ -3,6 +3,7 @@ Tools for working with individual datasets.
 """
 
 from functools import cached_property
+from pathlib import Path
 from typing import Literal
 
 import dask.array as da
@@ -12,7 +13,6 @@ import xarray as xr
 import zarr.core
 import zarr.n5
 
-import hoa_tools.inventory
 from hoa_tools._hoa_model import HOAMetadata
 from hoa_tools._n5 import N5FSStore
 
@@ -155,9 +155,10 @@ class Dataset(HOAMetadata):
         )
 
 
+_DATA_DIR = inventory_file = Path(__file__).parent / "data"
 _DATASETS = {
     f.stem: Dataset.model_validate_json(f.read_text())
-    for f in (hoa_tools.inventory.DATA_DIR / "metadata" / "metadata").glob("*.json")
+    for f in (_DATA_DIR / "metadata" / "metadata").glob("*.json")
 }
 if len(_DATASETS) == 0:
     raise ImportError(
