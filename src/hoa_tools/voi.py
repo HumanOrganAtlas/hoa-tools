@@ -100,7 +100,7 @@ class VOI:
         # Using zyx order from here
         corners_transformed = np.array(
             [
-                transform.TransformPoint((corner["z"], corner["y"], corner["x"]))
+                transform.TransformPoint((corner["z"], corner["y"], corner["x"]))  # type: ignore[no-untyped-call]
                 for corner in old_voi.corners
             ]
         )

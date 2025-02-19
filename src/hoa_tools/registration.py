@@ -51,7 +51,7 @@ class RegistrationInventory:
         """
         self._registrations[(source_dataset.name, target_dataset.name)] = transform
         self._registrations[(target_dataset.name, source_dataset.name)] = (
-            transform.GetInverse()
+            transform.GetInverse()  # type: ignore[no-untyped-call]
         )
 
 
@@ -65,9 +65,9 @@ def build_transform(
     Build a transform from a translation, scale, and rotation.
     """
     dims = 3
-    T1 = sitk.ScaleTransform(dims, (scale, scale, scale))
-    T2 = sitk.Euler3DTransform((0, 0, 0), np.deg2rad(rotation_deg), 0, 0)
-    T3 = sitk.TranslationTransform(
+    T1 = sitk.ScaleTransform(dims, (scale, scale, scale))  # type: ignore[no-untyped-call]
+    T2 = sitk.Euler3DTransform((0, 0, 0), np.deg2rad(rotation_deg), 0, 0)  # type: ignore[no-untyped-call]
+    T3 = sitk.TranslationTransform(  # type: ignore[no-untyped-call]
         dims, (translation["z"], translation["y"], translation["x"])
     )
-    return sitk.CompositeTransform([T3, T2, T1])
+    return sitk.CompositeTransform([T3, T2, T1])  # type: ignore[no-untyped-call]
