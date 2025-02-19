@@ -3,7 +3,11 @@ build-backend = "setuptools.build_meta"
 requires = ["setuptools", "setuptools-scm"]
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+package-dir = { "" = "src" }
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+write_to = "src/hoa_tools/_version.py"
 
 [dependency-groups]
 dev = ["hoa-tools[docs,dev,test]"]
@@ -11,53 +15,53 @@ dev = ["hoa-tools[docs,dev,test]"]
 [project]
 authors = [{ email = "d.stansby@ucl.ac.uk", name = "David Stansby" }]
 classifiers = [
-    "Operating System :: POSIX",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Typing :: Typed",
+  "Operating System :: POSIX",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Typing :: Typed",
 ]
 dependencies = [
-    "dask[array]",
-    "gcsfs>2023",
-    "pandas>=2",
-    "pydantic>=2",
-    "simpleitk",
-    "xarray",
-    "zarr<3,>2.16",
+  "dask[array]",
+  "gcsfs>2023",
+  "pandas>=2",
+  "pydantic>=2",
+  "simpleitk",
+  "xarray",
+  "zarr<3,>2.16",
 ]
 description = "Tools for working with the Human Organ Atlas"
 dynamic = ["version"]
 keywords = []
 name = "hoa-tools"
 optional-dependencies = { dev = [
-    "build",
-    "mypy",
-    "pre-commit",
-    "ruff",
-    "jupyterlab",
-    "jupytext",
-    "pandas-stubs"
+  "build",
+  "mypy",
+  "pre-commit",
+  "ruff",
+  "jupyterlab",
+  "jupytext",
+  "pandas-stubs",
 ], docs = [
-    "mkdocs",
-    "mkdocstrings-python",
-    "mkdocs-material",
-    "mkdocs-jupyter",
-    "griffe-pydantic",
-    # Packages needed for tutorial
-    "matplotlib",
-    "numpydoc",
-    "scikit-image",
+  "mkdocs",
+  "mkdocstrings-python",
+  "mkdocs-material",
+  "mkdocs-jupyter",
+  "griffe-pydantic",
+  # Packages needed for tutorial
+  "matplotlib",
+  "numpydoc",
+  "scikit-image",
 ], test = [
-    "matplotlib",
-    "pytest",
-    "pytest-accept",
-    "pytest-cov",
-    "pytest-doctestplus",
-    "pytest-vcr",
-    "scikit-image",
+  "matplotlib",
+  "pytest",
+  "pytest-accept",
+  "pytest-cov",
+  "pytest-doctestplus",
+  "pytest-vcr",
+  "scikit-image",
 ] }
 readme = "README.md"
 requires-python = ">=3.10"
@@ -66,6 +70,17 @@ urls.homepage = "https://github.com/HumanOrganAtlas/hoa-tools"
 
 [tool.codespell]
 skip = 'schemas/*'
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
+addopts = [
+  "--color=yes",
+  "--cov=hoa_tools",
+  "--cov-report=xml",
+  "--verbose",
+  "--doctest-rst",
+]
 
 [tool.coverage]
 report = { sort = "cover" }
@@ -76,6 +91,8 @@ paths.source = ["src/hoa_tools"]
 exclude = ['docs/_build.*']
 plugins = ["pydantic.mypy"]
 strict = true
+warn_unreachable = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 
 [[tool.mypy.overrides]]
 module = "hoa_tools.metadata"
@@ -96,14 +113,3 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "matplotlib.*"
 ignore_missing_imports = true
-
-[tool.setuptools_scm]
-local_scheme = "no-local-version"
-write_to = "src/hoa_tools/_version.py"
-
-[tool.tomlsort]
-all = true
-spaces_indent_inline_array = 4
-trailing_comma_inline_array = true
-overrides."project.classifiers".inline_arrays = false
-overrides."tool.coverage.paths.source".inline_arrays = false

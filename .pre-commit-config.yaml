@@ -1,17 +1,18 @@
+ci:
+  autoupdate_commit_msg: "Update pre-commit hooks"
+
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.9.6
     hooks:
       - id: ruff
       - id: ruff-format
-  - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.5.5
-    hooks:
-      - id: forbid-tabs
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.8
+
+  - repo: https://github.com/rbubley/mirrors-prettier
+    rev: v3.5.1
     hooks:
       - id: prettier
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
@@ -23,18 +24,21 @@ repos:
         args:
           - --fix=lf
       - id: trailing-whitespace
-  - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.31.1
-    hooks:
-      # Schemas taken from https://www.schemastore.org/json/
-      - id: check-jsonschema
-        name: "Validate GitHub issue templates"
-        files: ^\.github/ISSUE_TEMPLATE/.*\.yml$
-        exclude: ^\.github/ISSUE_TEMPLATE/config\.yml$
-        args: ["--verbose", "--schemafile", "schemas/github-issue-forms.json"]
 
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
     hooks:
       - id: codespell
         args: ["--write-changes"]
+
+  - repo: https://github.com/adamchainz/blacken-docs
+    rev: 1.19.1
+    hooks:
+      - id: blacken-docs
+        additional_dependencies:
+          - black==22.12.0
+
+  - repo: https://github.com/ComPWA/taplo-pre-commit
+    rev: v0.9.3
+    hooks:
+      - id: taplo-format
