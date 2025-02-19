@@ -13,8 +13,8 @@ import xarray as xr
 import zarr.core
 import zarr.n5
 
-from hoa_tools._hoa_model import HOAMetadata
 from hoa_tools._n5 import N5FSStore
+from hoa_tools.metadata import HOAMetadata
 
 __all__ = ["Dataset", "get_dataset"]
 
