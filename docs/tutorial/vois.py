@@ -1,3 +1,5 @@
+# mypy: disable-error-code="call-arg"
+
 # # Volumes of interest
 #
 # In this tutorial we will look at how to represent volumes of

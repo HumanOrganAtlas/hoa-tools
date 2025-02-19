@@ -8,7 +8,7 @@ import pandas as pd
 import hoa_tools.dataset
 import hoa_tools.inventory
 
-pd.options.display.width = None
+pd.options.display.width = None  # type: ignore[assignment]
 
 # First, lets print all the spleen datasets available from the inventory::
 
