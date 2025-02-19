@@ -93,6 +93,10 @@ ignore_missing_imports = true
 module = "SimpleITK.*"
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = "matplotlib.*"
+ignore_missing_imports = true
+
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
 write_to = "src/hoa_tools/_version.py"
