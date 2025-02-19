@@ -80,7 +80,10 @@ class VOI(BaseModel):
             z=slice(self.lower_corner.z, self.upper_corner.z),
         )
 
-    def _get_image(self) -> sitk.Image:
+    def get_sitk_image(self) -> sitk.Image:
+        """
+        Get a SimpleITK image of this VOI.
+        """
         data_array = self.get_data_array()
         image = sitk.GetImageFromArray(data_array.transpose("x", "y", "z").values)
         image.SetSpacing((self.voxel_size_um, self.voxel_size_um, self.voxel_size_um))  # type: ignore[no-untyped-call]
@@ -94,7 +97,11 @@ class VOI(BaseModel):
         return image
 
     def get_data_array_on_voi(
-        self, target_voi: "VOI", *, interpolator: Any = sitk.sitkLinear
+        self,
+        target_voi: "VOI",
+        *,
+        interpolator: Any = sitk.sitkLinear,
+        transform: sitk.Transform | None = None,
     ) -> xr.DataArray:
         """
         Get data array for this VOI resampled to the grid of another VOI.
@@ -108,22 +115,26 @@ class VOI(BaseModel):
         interpolator :
             Interpolation method to use.
             See https://simpleitk.org/doxygen/v2_4/html/namespaceitk_1_1simple.html#a7cb1ef8bd02c669c02ea2f9f5aa374e5
+        transform :
+            If given, transform used to map this VOI on to the target VOI.
+            If not given, transform is taken from the registration inventory.
 
         """
-        transform = RegInventory.get_registration(
-            source_dataset=self.dataset, target_dataset=target_voi.dataset
-        )
+        if transform is None:
+            transform = RegInventory.get_registration(
+                source_dataset=self.dataset, target_dataset=target_voi.dataset
+            )
         default_value = 0
         new_image = sitk.Resample(
-            self._get_image(),
-            target_voi._get_image(),  # noqa: SLF001
+            self.get_sitk_image(),
+            target_voi.get_sitk_image(),
             transform.GetInverse(),  # type: ignore[no-untyped-call]
             interpolator,
             default_value,
         )
 
         new_array = target_voi.get_data_array().copy()
-        new_array.values = sitk.GetArrayViewFromImage(new_image).T
+        new_array.values = sitk.GetArrayFromImage(new_image).T
         return new_array
 
     def change_downsample_level(
