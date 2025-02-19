@@ -70,14 +70,16 @@ Inventory = RegistrationInventory()
 
 def build_transform(
     *, translation: PhysicalCoordinate, rotation_deg: float, scale: float
-) -> sitk.CompositeTransform:
+) -> sitk.Similarity3DTransform:
     """
     Build a transform from a translation, scale, and rotation.
     """
-    dims = 3
-    T1 = sitk.ScaleTransform(dims, (scale, scale, scale))  # type: ignore[no-untyped-call]
-    T2 = sitk.Euler3DTransform((0, 0, 0), np.deg2rad(rotation_deg), 0, 0)  # type: ignore[no-untyped-call]
-    T3 = sitk.TranslationTransform(  # type: ignore[no-untyped-call]
-        dims, (translation.z, translation.y, translation.x)
+    axis = (1, 0, 0)
+    center = (0, 0, 0)
+    return sitk.Similarity3DTransform(  # type: ignore[no-untyped-call]
+        scale,
+        axis,
+        np.deg2rad(rotation_deg),
+        (translation.z, translation.y, translation.x),
+        center,
     )
-    return sitk.CompositeTransform([T3, T2, T1])  # type: ignore[no-untyped-call]
