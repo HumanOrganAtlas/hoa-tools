@@ -17,7 +17,7 @@ repos:
           - pytest
           - pandas-stubs
           - "zarr<3"
-          - dask
+          - "dask[array]"
           - xarray
           - matplotlib
         args: [--config-file, pyproject.toml]
