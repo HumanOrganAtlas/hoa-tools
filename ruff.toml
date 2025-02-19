@@ -51,4 +51,4 @@ pep8-naming.classmethod-decorators = ["classmethod"]
     "PLR2004", # Magic value used in comparison
     "S101",    # Use of `assert` detected
 ]
-"src/hoa_tools/_hoa_model.py" = ["E501", "TC003", "ERA001"]
+"src/hoa_tools/metadata.py" = ["E501", "TC003", "ERA001"]

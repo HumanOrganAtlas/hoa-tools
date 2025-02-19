@@ -78,7 +78,7 @@ plugins = ["pydantic.mypy"]
 strict = true
 
 [[tool.mypy.overrides]]
-module = "hoa_tools._hoa_model"
+module = "hoa_tools.metadata"
 disallow_any_generics = false # See https://github.com/koxudaxi/datamodel-code-generator/issues/1546
 
 [[tool.mypy.overrides]]
