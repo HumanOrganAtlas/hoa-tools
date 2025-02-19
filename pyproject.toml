@@ -39,6 +39,7 @@ optional-dependencies = { dev = [
     "ruff",
     "jupyterlab",
     "jupytext",
+    "pandas-stubs"
 ], docs = [
     "mkdocs",
     "mkdocstrings-python",
@@ -79,6 +80,18 @@ strict = true
 [[tool.mypy.overrides]]
 module = "hoa_tools._hoa_model"
 disallow_any_generics = false # See https://github.com/koxudaxi/datamodel-code-generator/issues/1546
+
+[[tool.mypy.overrides]]
+module = "zarr.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "gcsfs.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "SimpleITK.*"
+ignore_missing_imports = true
 
 [tool.setuptools_scm]
 local_scheme = "no-local-version"

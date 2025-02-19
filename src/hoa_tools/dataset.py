@@ -6,7 +6,7 @@ from functools import cached_property
 from pathlib import Path
 from typing import Literal
 
-import dask.array as da
+import dask.array.core
 import gcsfs
 import numpy as np
 import xarray as xr
@@ -129,7 +129,9 @@ class Dataset(HOAMetadata):
         Get a DataArray representing the array for this image.
         """
         remote_array = self._remote_array(downsample_level=downsample_level)
-        dask_array = da.from_array(remote_array, chunks=remote_array.chunks)
+        dask_array = dask.array.core.from_array(  # type: ignore[no-untyped-call]
+            remote_array, chunks=remote_array.chunks
+        )
         spacing = self.data.voxel_size_um * 2**downsample_level
         return xr.DataArray(
             dask_array,

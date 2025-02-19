@@ -7,7 +7,7 @@ import pandas as pd
 
 import hoa_tools.inventory
 
-pd.options.display.width = None
+pd.options.display.width = None  # type: ignore[assignment]
 
 # ## Loading the inventory
 #
