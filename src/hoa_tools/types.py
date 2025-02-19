@@ -2,7 +2,7 @@
 Common types used across the library.
 """
 
-from typing import TypedDict
+from typing_extensions import TypedDict
 
 
 class ArrayCoordinate(TypedDict):
