@@ -1,3 +1,6 @@
+ci:
+  autoupdate_commit_msg: "Update pre-commit hooks"
+
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.9.6
