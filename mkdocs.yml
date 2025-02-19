@@ -34,7 +34,7 @@ markdown_extensions:
 
 plugins:
   - mkdocs-jupyter:
-      execute: false
+      execute: true
       allow_errors: false
   - mkdocstrings:
       handlers:
@@ -42,6 +42,7 @@ plugins:
           paths: [src]
           inventories:
             - https://docs.python.org/3/objects.inv
+            - https://pandas.pydata.org/docs/objects.inv
 
           options:
             docstring_style: numpy
@@ -73,6 +74,7 @@ nav:
       - dataset: api/dataset.md
       - inventory: api/inventory.md
       - metadata: api/metadata.md
+      - types: api/types.md
       - voi: api/voi.md
   - Development: development.md
 

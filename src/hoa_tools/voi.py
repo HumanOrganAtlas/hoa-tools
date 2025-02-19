@@ -1,18 +1,27 @@
+"""
+Tools for working with volumes of interest (VOIs).
+
+A volume of interest is a sub-volume contained within a full dataset.
+It is represented by the [`VOI`][hoa_tools.voi.VOI] class.
+
+All coordinates are given in 'array coordinates',
+where 0 is the centre of the first voxel, 1 is the centre of the second voxel etc.
+"""
+
 import itertools
-from dataclasses import dataclass
 from math import ceil, floor
 from typing import Literal
 
 import numpy as np
 import xarray as xr
+from pydantic import BaseModel
 
 from hoa_tools.dataset import Dataset
 from hoa_tools.registration import Inventory as RegInventory
-from hoa_tools.types import Coordinate
+from hoa_tools.types import ArrayCoordinate
 
 
-@dataclass(kw_only=True)
-class VOI:
+class VOI(BaseModel):
     """
     A volume of interest attached to a given dataset.
     """
@@ -21,13 +30,13 @@ class VOI:
     """Dataset that this VOI is in."""
     downsample_level: Literal[0, 1, 2, 3, 4]
     """Downsampling level of the dataset that this VOI is defined in."""
-    lower_corner: Coordinate
+    lower_corner: ArrayCoordinate
     """Index of lower corner in array coordinates."""
-    size: Coordinate
+    size: ArrayCoordinate
     """Size of VOI in array coordinates."""
 
     @property
-    def upper_corner(self) -> Coordinate:
+    def upper_corner(self) -> ArrayCoordinate:
         """
         Upper corner of the VOI.
         """
@@ -38,7 +47,7 @@ class VOI:
         }
 
     @property
-    def corners(self) -> list[Coordinate]:
+    def corners(self) -> list[ArrayCoordinate]:
         """
         All 8 corners of the VOI.
         """
@@ -75,8 +84,8 @@ class VOI:
         return VOI(
             dataset=self.dataset,
             downsample_level=new_downsample_level,
-            lower_corner=new_lower_corner,  # type: ignore[arg-type]
-            size=new_size,  # type: ignore[arg-type]
+            lower_corner=new_lower_corner,
+            size=new_size,
         )
 
     def transform_to(self, dataset: Dataset) -> "VOI":

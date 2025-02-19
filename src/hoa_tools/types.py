@@ -1,11 +1,15 @@
+"""
+Common types used across the library.
+"""
+
 from typing import TypedDict
 
 
-class Coordinate(TypedDict):
+class ArrayCoordinate(TypedDict):
     """
     A single coordinate.
     """
 
-    x: float
-    y: float
-    z: float
+    x: int
+    y: int
+    z: int

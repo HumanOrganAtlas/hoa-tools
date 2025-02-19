@@ -2,7 +2,7 @@ import numpy as np
 import SimpleITK as sitk
 
 from hoa_tools.dataset import Dataset
-from hoa_tools.types import Coordinate
+from hoa_tools.types import ArrayCoordinate
 
 
 class RegistrationInventory:
@@ -59,7 +59,7 @@ Inventory = RegistrationInventory()
 
 
 def build_transform(
-    *, translation: Coordinate, rotation_deg: float, scale: float
+    *, translation: ArrayCoordinate, rotation_deg: float, scale: float
 ) -> sitk.CompositeTransform:
     """
     Build a transform from a translation, scale, and rotation.
