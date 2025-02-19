@@ -10,8 +10,9 @@ where 0 is the centre of the first voxel, 1 is the centre of the second voxel et
 
 import itertools
 from math import ceil, floor
-from typing import Literal
+from typing import Any, Literal
 
+import SimpleITK as sitk
 import xarray as xr
 from pydantic import BaseModel
 
@@ -33,6 +34,13 @@ class VOI(BaseModel):
     """Index of lower corner in array coordinates."""
     size: ArrayCoordinate
     """Size of VOI in array coordinates."""
+
+    @property
+    def voxel_size_um(self) -> float:
+        """
+        Voxel size in micrometers.
+        """
+        return self.dataset.data.voxel_size_um * 2 ** (self.downsample_level)
 
     @property
     def upper_corner(self) -> ArrayCoordinate:
@@ -70,6 +78,52 @@ class VOI(BaseModel):
             y=slice(self.lower_corner.y, self.upper_corner.y),
             z=slice(self.lower_corner.z, self.upper_corner.z),
         )
+
+    def _get_image(self) -> sitk.Image:
+        data_array = self.get_data_array()
+        image = sitk.GetImageFromArray(data_array.transpose("x", "y", "z").values)
+        image.SetSpacing((self.voxel_size_um, self.voxel_size_um, self.voxel_size_um))  # type: ignore[no-untyped-call]
+        image.SetOrigin(  # type: ignore[no-untyped-call]
+            (
+                float(data_array.coords["z"][0]),
+                float(data_array.coords["y"][0]),
+                float(data_array.coords["x"][0]),
+            )
+        )
+        return image
+
+    def get_data_array_on_voi(
+        self, target_voi: "VOI", *, interpolator: Any = sitk.sitkLinear
+    ) -> xr.DataArray:
+        """
+        Get data array for this VOI resampled to the grid of another VOI.
+
+        This uses the transform between two datasets in the registration inventory.
+
+        Parameters
+        ----------
+        target_voi :
+            VOI to resample data in this VOI on to.
+        interpolator :
+            Interpolation method to use.
+            See https://simpleitk.org/doxygen/v2_4/html/namespaceitk_1_1simple.html#a7cb1ef8bd02c669c02ea2f9f5aa374e5
+
+        """
+        transform = RegInventory.get_registration(
+            source_dataset=self.dataset, target_dataset=target_voi.dataset
+        )
+        default_value = 0
+        new_image = sitk.Resample(
+            self._get_image(),
+            target_voi._get_image(),  # noqa: SLF001
+            transform.GetInverse(),  # type: ignore[no-untyped-call]
+            interpolator,
+            default_value,
+        )
+
+        new_array = target_voi.get_data_array().copy()
+        new_array.values = sitk.GetArrayViewFromImage(new_image).T
+        return new_array
 
     def change_downsample_level(
         self, *, new_downsample_level: Literal[0, 1, 2, 3, 4]
@@ -110,7 +164,7 @@ class VOI(BaseModel):
 
         old_voi = self.change_downsample_level(new_downsample_level=0)
         transform = RegInventory.get_registration(
-            source_datset=self.dataset, target_dataset=dataset
+            source_dataset=self.dataset, target_dataset=dataset
         )
 
         # Convert to physical space

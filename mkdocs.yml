@@ -70,6 +70,7 @@ nav:
       - Datasets: tutorial/dataset.py
       - Getting data: tutorial/fetching_data.py
       - Sub-volumes: tutorial/vois.py
+      - Registration: tutorial/registration.py
   - API reference:
       - dataset: api/dataset.md
       - inventory: api/inventory.md
