@@ -11,12 +11,12 @@ import hoa_tools.voi
 
 # -
 
+# Lets start by getting an overview dataset, a zoom dataset, and defining a VOI in the zoom dataset.
+
 overview_dataset = hoa_tools.dataset.get_dataset(
     "S-20-29_brain_complete-organ_25.33um_bm05"
 )
 zoom_dataset = hoa_tools.dataset.get_dataset("S-20-29_brain_VOI-04_6.5um_bm05")
-
-# +
 zoom_voi = hoa_tools.voi.VOI(
     dataset=zoom_dataset,
     downsample_level=0,
@@ -24,10 +24,17 @@ zoom_voi = hoa_tools.voi.VOI(
     size={"x": 256, "y": 256, "z": 128},
 )
 
+
+# Get the data in the VOI
+
+# +
 zoom_array = zoom_voi.get_data_array()
 
 overview_voi = zoom_voi.transform_to(overview_dataset)
 overview_array = overview_voi.get_data_array()
+# -
+
+# Plot the data
 
 # +
 fig = plt.figure()
@@ -41,7 +48,13 @@ ax.axes.set_aspect("equal")
 ax.axes.set_title("Overview dataset")
 # -
 
+# These plots show that the two datasets are defined on different grids.
+# In order to do a quanititive comparison, we need to resample one dataset on to the grid of the other datsaet.
+# Here we resample the overview VOI on to the grid of the zoom VOI:
+
 resampled_overview = overview_voi.get_data_array_on_voi(zoom_voi)
+
+# Now they are resampled, lets plot the middle slice of each dataset as a simple qualititive comparison
 
 # +
 yslice = 128

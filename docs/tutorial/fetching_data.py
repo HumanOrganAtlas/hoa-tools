@@ -1,5 +1,3 @@
-# mypy: disable-error-code="call-arg"
-
 # # Fetching data
 
 # In this tutorial we will fetch some of the data. All public Human Organ Atlas
