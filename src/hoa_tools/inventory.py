@@ -1,5 +1,5 @@
 """
-Tools for working with the Human Organ Atlas Inventory.
+Tools for working with the dataset inventory.
 """
 
 import pandas as pd
@@ -9,12 +9,12 @@ from hoa_tools.dataset import _DATASETS
 
 def load_inventory() -> pd.DataFrame:
     """
-    Load the public Human Organ Atlas inventory.
+    Load the dataset inventory.
 
     Returns
     -------
     inventory :
-        Inventory as a pandas DataFrame.
+        Dataset inventory.
 
     """
     data = [

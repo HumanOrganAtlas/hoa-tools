@@ -1,5 +1,13 @@
 """
 Tools for working with individual datasets.
+
+The core class representing a single dataset is [`Dataset`][hoa_tools.dataset.Dataset].
+This inherits from [`HOAMetadata`][hoa_tools.metadata.HOAMetadata],
+which stores all the metadata for a given dataset.
+
+[`Dataset`][hoa_tools.dataset.Dataset] objects are not designed to be created by users.
+To get a [`Dataset`][hoa_tools.dataset.Dataset], use the
+[`get_dataset`][hoa_tools.dataset.get_dataset] function in this sub-module.
 """
 
 from functools import cached_property
@@ -157,7 +165,7 @@ class Dataset(HOAMetadata):
         )
 
 
-_DATA_DIR = inventory_file = Path(__file__).parent / "data"
+_DATA_DIR = Path(__file__).parent / "data"
 _DATASETS = {
     f.stem: Dataset.model_validate_json(f.read_text())
     for f in (_DATA_DIR / "metadata" / "metadata").glob("*.json")

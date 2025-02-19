@@ -42,6 +42,7 @@ plugins:
           paths: [src]
           inventories:
             - https://docs.python.org/3/objects.inv
+            - https://pandas.pydata.org/docs/objects.inv
 
           options:
             docstring_style: numpy

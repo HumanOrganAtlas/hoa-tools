@@ -1,18 +1,24 @@
+"""
+Tools for working with volumes of interest (VOIs).
+
+A volume of interest is a sub-volume contained within a full dataset.
+It is represented by the [`VOI`][hoa_tools.voi.VOI] class.
+"""
+
 import itertools
-from dataclasses import dataclass
 from math import ceil, floor
 from typing import Literal
 
 import numpy as np
 import xarray as xr
+from pydantic import BaseModel
 
 from hoa_tools.dataset import Dataset
 from hoa_tools.registration import Inventory as RegInventory
 from hoa_tools.types import Coordinate
 
 
-@dataclass(kw_only=True)
-class VOI:
+class VOI(BaseModel):
     """
     A volume of interest attached to a given dataset.
     """
