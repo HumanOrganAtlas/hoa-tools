@@ -5,6 +5,10 @@ requires = ["setuptools", "setuptools-scm"]
 [tool.setuptools]
 package-dir = {"" = "src"}
 
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+write_to = "src/hoa_tools/_version.py"
+
 [dependency-groups]
 dev = ["hoa-tools[docs,dev,test]"]
 
@@ -96,7 +100,3 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "matplotlib.*"
 ignore_missing_imports = true
-
-[tool.setuptools_scm]
-local_scheme = "no-local-version"
-write_to = "src/hoa_tools/_version.py"
