@@ -37,12 +37,12 @@ class RegistrationInventory:
         return (item[0].name, item[1].name) in self._registrations
 
     def get_registration(
-        self, *, source_datset: Dataset, target_dataset: Dataset
+        self, *, source_dataset: Dataset, target_dataset: Dataset
     ) -> sitk.Transform:
         """
         Get a registration.
         """
-        return self._registrations[(source_datset.name, target_dataset.name)]
+        return self._registrations[(source_dataset.name, target_dataset.name)]
 
     def add_registration(
         self,
