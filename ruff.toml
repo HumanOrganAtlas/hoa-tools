@@ -44,7 +44,7 @@ pep8-naming.classmethod-decorators = ["classmethod"]
     "E402",
     "E501",
 ]
-"src/hoa_tools/tests*" = [
+"tests*" = [
     "D100",    # Missing docstring in public module
     "D103",    # Missing docstring in public function
     "INP001",  # File is part of an implicit namespace package.

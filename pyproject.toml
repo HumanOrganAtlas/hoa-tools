@@ -2,6 +2,9 @@
 build-backend = "setuptools.build_meta"
 requires = ["setuptools", "setuptools-scm"]
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+
 [dependency-groups]
 dev = ["hoa-tools[docs,dev,test]"]
 
