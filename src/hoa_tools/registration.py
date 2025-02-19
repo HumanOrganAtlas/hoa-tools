@@ -1,8 +1,18 @@
+"""
+Registration inventory and helpers.
+
+A registration defines a transform between two datasets.
+The transform is defined in physical space, and in this library data is always
+in units of micro-meters (μm).
+
+Transforms are defined using the `SimpleITK` library.
+"""
+
 import numpy as np
 import SimpleITK as sitk
 
 from hoa_tools.dataset import Dataset
-from hoa_tools.types import ArrayCoordinate
+from hoa_tools.types import PhysicalCoordinate
 
 
 class RegistrationInventory:
@@ -59,7 +69,7 @@ Inventory = RegistrationInventory()
 
 
 def build_transform(
-    *, translation: ArrayCoordinate, rotation_deg: float, scale: float
+    *, translation: PhysicalCoordinate, rotation_deg: float, scale: float
 ) -> sitk.CompositeTransform:
     """
     Build a transform from a translation, scale, and rotation.
@@ -68,6 +78,6 @@ def build_transform(
     T1 = sitk.ScaleTransform(dims, (scale, scale, scale))  # type: ignore[no-untyped-call]
     T2 = sitk.Euler3DTransform((0, 0, 0), np.deg2rad(rotation_deg), 0, 0)  # type: ignore[no-untyped-call]
     T3 = sitk.TranslationTransform(  # type: ignore[no-untyped-call]
-        dims, (translation["z"], translation["y"], translation["x"])
+        dims, (translation.z, translation.y, translation.x)
     )
     return sitk.CompositeTransform([T3, T2, T1])  # type: ignore[no-untyped-call]

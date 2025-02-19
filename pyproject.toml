@@ -27,7 +27,6 @@ dependencies = [
     "simpleitk",
     "xarray",
     "zarr<3,>2.16",
-    "typing_extensions"
 ]
 description = "Tools for working with the Human Organ Atlas"
 dynamic = ["version"]

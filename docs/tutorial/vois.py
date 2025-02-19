@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 
 import hoa_tools.dataset
 import hoa_tools.voi
+from hoa_tools.types import PhysicalCoordinate
 
 # -
 
@@ -97,9 +98,13 @@ ax.axes.set_title("Zoom dataset slice")
 import hoa_tools.registration
 
 transform = hoa_tools.registration.build_transform(
-    translation={"x": 2073.796888, "y": 1199.064571, "z": 3634.531617},
+    translation=PhysicalCoordinate(
+        x=2073.796888 * overview_dataset.data.voxel_size_um,
+        y=1199.064571 * overview_dataset.data.voxel_size_um,
+        z=3634.531617 * overview_dataset.data.voxel_size_um,
+    ),
     rotation_deg=2.299992208,
-    scale=0.2566130457,
+    scale=0.2566130457 * overview_dataset.data.voxel_size_um / child.data.voxel_size_um,
 )
 
 # With the trainsform defined, add it to the registration inventory.
