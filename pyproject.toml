@@ -71,6 +71,15 @@ urls.homepage = "https://github.com/HumanOrganAtlas/hoa-tools"
 [tool.codespell]
 skip = 'schemas/*'
 
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
+addopts =["--color=yes",
+    "--cov=hoa_tools",
+   "--cov-report=xml",
+    "--verbose",
+    "--doctest-rst"]
+
 [tool.coverage]
 report = { sort = "cover" }
 run = { branch = true, parallel = true, source = ["hoa_tools"] }
