@@ -74,6 +74,7 @@ nav:
       - dataset: api/dataset.md
       - inventory: api/inventory.md
       - metadata: api/metadata.md
+      - types: api/types.md
       - voi: api/voi.md
   - Development: development.md
 

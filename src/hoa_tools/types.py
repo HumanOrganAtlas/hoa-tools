@@ -1,3 +1,7 @@
+"""
+Common types used accross the library.
+"""
+
 from typing import TypedDict
 
 
