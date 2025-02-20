@@ -134,8 +134,8 @@ class Dataset(HOAMetadata):
         """
         Get an object representing the data array in the remote Google Cloud Store.
         """
-        if downsample_level not in (levels := [0, 1, 2, 3, 4]):
-            msg = f"'level' must be in {levels}"
+        if not downsample_level >= 0:
+            msg = "level must be >= 0"
             raise ValueError(msg)
 
         if self._remote_fmt == "n5":
