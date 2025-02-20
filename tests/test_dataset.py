@@ -47,6 +47,14 @@ def test_remote_array(dataset: Dataset) -> None:
     assert data_array.shape == (475, 730, 538)
 
 
+@pytest.mark.vcr
+def test_remote_array_zarr() -> None:
+    dataset = get_dataset("A186_lung_right_complete-organ_24.132um_bm18")
+    assert dataset._remote_fmt == "zarr"  # noqa: SLF001
+    data_array = dataset.data_array(downsample_level=2)
+    assert data_array.shape == (2391, 2077, 2077)
+
+
 def test_invalid_level(dataset: Dataset) -> None:
     with pytest.raises(
         ValueError, match=re.escape("'level' must be in [0, 1, 2, 3, 4]")

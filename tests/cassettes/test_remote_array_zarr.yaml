@@ -1,0 +1,460 @@
+interactions:
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.2.0
+      method: GET
+      uri: https://storage.googleapis.com/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zgroup
+    response:
+      body:
+        string:
+          "{\n  \"kind\": \"storage#object\",\n  \"id\": \"ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/.zgroup/1734624776989731\",\n
+          \ \"selfLink\": \"https://www.googleapis.com/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zgroup\",\n
+          \ \"mediaLink\": \"https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zgroup?generation=1734624776989731&alt=media\",\n
+          \ \"name\": \"A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/.zgroup\",\n
+          \ \"bucket\": \"ucl-hip-ct-35a68e99feaae8932b1d44da0358940b\",\n  \"generation\":
+          \"1734624776989731\",\n  \"metageneration\": \"1\",\n  \"contentType\": \"application/octet-stream\",\n
+          \ \"storageClass\": \"STANDARD\",\n  \"size\": \"24\",\n  \"md5Hash\": \"4gKXk15z3QFUEE1OpTBAqw==\",\n
+          \ \"contentLanguage\": \"en\",\n  \"crc32c\": \"REp3Bw==\",\n  \"etag\": \"CKPYmu2ctIoDEAE=\",\n
+          \ \"timeCreated\": \"2024-12-19T16:12:57.055Z\",\n  \"updated\": \"2024-12-19T16:12:57.055Z\",\n
+          \ \"timeStorageClassUpdated\": \"2024-12-19T16:12:57.055Z\",\n  \"timeFinalized\":
+          \"2024-12-19T16:12:57.055Z\",\n  \"metadata\": {\n    \"goog-reserved-file-mtime\":
+          \"1733767202\"\n  }\n}\n"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0, must-revalidate, no-transform
+        Content-Length:
+          - "1223"
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Etag:
+          - CKPYmu2ctIoDEAE=
+        Expires:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AHMx-iHvx-2WzaCElyE66gUvOX-VTdTF_x7gRtpfmw7yEAD9SAeeXeGwBUwvnwngX6691dC8
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.2.0
+      method: GET
+      uri: https://storage.googleapis.com/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zarray
+    response:
+      body:
+        string:
+          "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"No such object:
+          ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/.zarray\",\n
+          \   \"errors\": [\n      {\n        \"message\": \"No such object: ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/.zarray\",\n
+          \       \"domain\": \"global\",\n        \"reason\": \"notFound\"\n      }\n
+          \   ]\n  }\n}\n"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - no-cache, no-store, max-age=0, must-revalidate
+        Content-Length:
+          - "417"
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Expires:
+          - Mon, 01 Jan 1990 00:00:00 GMT
+        Pragma:
+          - no-cache
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AHMx-iF1Pj8kjBneaI2ml97c67eKLRUMmmolcxcYCfn-SXalUALiRYK6YDmqxVuIwr5lfcwD
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.2.0
+      method: GET
+      uri: https://storage.googleapis.com/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o?delimiter=/&prefix=A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/.zarray/&maxResults=5000
+    response:
+      body:
+        string: "{\n  \"kind\": \"storage#objects\"\n}\n"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0, must-revalidate, no-transform
+        Content-Length:
+          - "32"
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Expires:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AHMx-iEDmhTMPudgU4q2QwpOnSC4IzmkP79LE_YRKrYfw06V2gjcikB-rg1tsBzcfjGGIg9k
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.2.0
+      method: GET
+      uri: https://storage.googleapis.com/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zarray
+    response:
+      body:
+        string:
+          "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"No such object:
+          ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/.zarray\",\n
+          \   \"errors\": [\n      {\n        \"message\": \"No such object: ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/.zarray\",\n
+          \       \"domain\": \"global\",\n        \"reason\": \"notFound\"\n      }\n
+          \   ]\n  }\n}\n"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - no-cache, no-store, max-age=0, must-revalidate
+        Content-Length:
+          - "417"
+        Content-Type:
+          - application/json; charset=UTF-8
+        Date:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Expires:
+          - Mon, 01 Jan 1990 00:00:00 GMT
+        Pragma:
+          - no-cache
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AHMx-iEvljDCBFd3K708jfCXcjdpDqCXtd-f4jSFu3NAsCQMnOG0Dj08yNDHpD5uJdIe59OQ
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.2.0
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zgroup?alt=media
+    response:
+      body:
+        string: "{\n    \"zarr_format\": 2\n}"
+      headers:
+        Age:
+          - "73"
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Language:
+          - en
+        Content-Length:
+          - "24"
+        Content-Type:
+          - application/octet-stream
+        Date:
+          - Thu, 20 Feb 2025 12:10:42 GMT
+        Etag:
+          - CKPYmu2ctIoDEAE=
+        Expires:
+          - Thu, 20 Feb 2025 12:10:42 GMT
+        Last-Modified:
+          - Thu, 19 Dec 2024 16:12:57 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources,Origin,X-Origin
+        X-GUploader-UploadID:
+          - AHMx-iGKhyL_MJqczbcz85x1D56Y_bbUGHlnMlb0ZUy4IasYor5BIkT1Bg63v6HQPe7bAVPt
+        X-Goog-Generation:
+          - "1734624776989731"
+        X-Goog-Hash:
+          - crc32c=REp3Bw==,md5=4gKXk15z3QFUEE1OpTBAqw==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "24"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.2.0
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F2%2F.zarray?alt=media
+    response:
+      body:
+        string:
+          "{\n    \"chunks\": [\n        128,\n        128,\n        128\n    ],\n
+          \   \"compressor\": {\n        \"blocksize\": 0,\n        \"clevel\": 8,\n
+          \       \"cname\": \"zstd\",\n        \"id\": \"blosc\",\n        \"shuffle\":
+          1\n    },\n    \"dimension_separator\": \"/\",\n    \"dtype\": \"<u2\",\n
+          \   \"fill_value\": 0,\n    \"filters\": null,\n    \"order\": \"C\",\n    \"shape\":
+          [\n        2077,\n        2077,\n        2391\n    ],\n    \"zarr_format\":
+          2\n}"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Language:
+          - en
+        Content-Length:
+          - "401"
+        Content-Type:
+          - application/octet-stream
+        Date:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Etag:
+          - CKLXmJHStIoDEAE=
+        Expires:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Last-Modified:
+          - Thu, 19 Dec 2024 20:11:19 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AHMx-iFkNpv1QIXzrP_9toAdUOXwDwpYf53rSbaFn1gYbIjFWMHeAbgliM5_-qsQT16gT1Xw
+        X-Goog-Generation:
+          - "1734639079533474"
+        X-Goog-Hash:
+          - crc32c=eSH96g==,md5=PWnvW3BYZiXG0BRskhNQrg==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "401"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.2.0
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F2%2F.zarray?alt=media
+    response:
+      body:
+        string:
+          "{\n    \"chunks\": [\n        128,\n        128,\n        128\n    ],\n
+          \   \"compressor\": {\n        \"blocksize\": 0,\n        \"clevel\": 8,\n
+          \       \"cname\": \"zstd\",\n        \"id\": \"blosc\",\n        \"shuffle\":
+          1\n    },\n    \"dimension_separator\": \"/\",\n    \"dtype\": \"<u2\",\n
+          \   \"fill_value\": 0,\n    \"filters\": null,\n    \"order\": \"C\",\n    \"shape\":
+          [\n        2077,\n        2077,\n        2391\n    ],\n    \"zarr_format\":
+          2\n}"
+      headers:
+        Age:
+          - "0"
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Language:
+          - en
+        Content-Length:
+          - "401"
+        Content-Type:
+          - application/octet-stream
+        Date:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Etag:
+          - CKLXmJHStIoDEAE=
+        Expires:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Last-Modified:
+          - Thu, 19 Dec 2024 20:11:19 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources,Origin,X-Origin
+        X-GUploader-UploadID:
+          - AHMx-iFkNpv1QIXzrP_9toAdUOXwDwpYf53rSbaFn1gYbIjFWMHeAbgliM5_-qsQT16gT1Xw
+        X-Goog-Generation:
+          - "1734639079533474"
+        X-Goog-Hash:
+          - crc32c=eSH96g==,md5=PWnvW3BYZiXG0BRskhNQrg==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "401"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.2.0
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F2%2F.zarray?alt=media
+    response:
+      body:
+        string:
+          "{\n    \"chunks\": [\n        128,\n        128,\n        128\n    ],\n
+          \   \"compressor\": {\n        \"blocksize\": 0,\n        \"clevel\": 8,\n
+          \       \"cname\": \"zstd\",\n        \"id\": \"blosc\",\n        \"shuffle\":
+          1\n    },\n    \"dimension_separator\": \"/\",\n    \"dtype\": \"<u2\",\n
+          \   \"fill_value\": 0,\n    \"filters\": null,\n    \"order\": \"C\",\n    \"shape\":
+          [\n        2077,\n        2077,\n        2391\n    ],\n    \"zarr_format\":
+          2\n}"
+      headers:
+        Age:
+          - "0"
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Language:
+          - en
+        Content-Length:
+          - "401"
+        Content-Type:
+          - application/octet-stream
+        Date:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Etag:
+          - CKLXmJHStIoDEAE=
+        Expires:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Last-Modified:
+          - Thu, 19 Dec 2024 20:11:19 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources,Origin,X-Origin
+        X-GUploader-UploadID:
+          - AHMx-iFkNpv1QIXzrP_9toAdUOXwDwpYf53rSbaFn1gYbIjFWMHeAbgliM5_-qsQT16gT1Xw
+        X-Goog-Generation:
+          - "1734639079533474"
+        X-Goog-Hash:
+          - crc32c=eSH96g==,md5=PWnvW3BYZiXG0BRskhNQrg==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "401"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.2.0
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F2%2F.zarray?alt=media
+    response:
+      body:
+        string:
+          "{\n    \"chunks\": [\n        128,\n        128,\n        128\n    ],\n
+          \   \"compressor\": {\n        \"blocksize\": 0,\n        \"clevel\": 8,\n
+          \       \"cname\": \"zstd\",\n        \"id\": \"blosc\",\n        \"shuffle\":
+          1\n    },\n    \"dimension_separator\": \"/\",\n    \"dtype\": \"<u2\",\n
+          \   \"fill_value\": 0,\n    \"filters\": null,\n    \"order\": \"C\",\n    \"shape\":
+          [\n        2077,\n        2077,\n        2391\n    ],\n    \"zarr_format\":
+          2\n}"
+      headers:
+        Age:
+          - "0"
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Language:
+          - en
+        Content-Length:
+          - "401"
+        Content-Type:
+          - application/octet-stream
+        Date:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Etag:
+          - CKLXmJHStIoDEAE=
+        Expires:
+          - Thu, 20 Feb 2025 12:11:55 GMT
+        Last-Modified:
+          - Thu, 19 Dec 2024 20:11:19 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources,Origin,X-Origin
+        X-GUploader-UploadID:
+          - AHMx-iFkNpv1QIXzrP_9toAdUOXwDwpYf53rSbaFn1gYbIjFWMHeAbgliM5_-qsQT16gT1Xw
+        X-Goog-Generation:
+          - "1734639079533474"
+        X-Goog-Hash:
+          - crc32c=eSH96g==,md5=PWnvW3BYZiXG0BRskhNQrg==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "401"
+      status:
+        code: 200
+        message: OK
+version: 1
