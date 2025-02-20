@@ -10,7 +10,7 @@ where 0 is the centre of the first voxel, 1 is the centre of the second voxel et
 
 import itertools
 from math import ceil, floor
-from typing import Any, Literal
+from typing import Any
 
 import SimpleITK as sitk
 import xarray as xr
