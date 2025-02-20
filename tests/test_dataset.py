@@ -56,9 +56,7 @@ def test_remote_array_zarr() -> None:
 
 
 def test_invalid_level(dataset: Dataset) -> None:
-    with pytest.raises(
-        ValueError, match=re.escape("'level' must be in [0, 1, 2, 3, 4]")
-    ):
+    with pytest.raises(ValueError, match=re.escape("level must be >= 0")):
         dataset.data_array(downsample_level=-1)  # type: ignore[arg-type]
 
 
