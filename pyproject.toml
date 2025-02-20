@@ -44,6 +44,7 @@ optional-dependencies = { dev = [
   "jupyterlab",
   "jupytext",
   "pandas-stubs",
+  "datamodel-code-generator",
 ], docs = [
   "mkdocs",
   "mkdocstrings-python",
