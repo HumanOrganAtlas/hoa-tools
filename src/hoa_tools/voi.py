@@ -28,7 +28,7 @@ class VOI(BaseModel):
 
     dataset: Dataset
     """Dataset that this VOI is in."""
-    downsample_level: Literal[0, 1, 2, 3, 4]
+    downsample_level: int
     """Downsampling level of the dataset that this VOI is defined in."""
     lower_corner: ArrayCoordinate
     """Index of lower corner in array coordinates."""
