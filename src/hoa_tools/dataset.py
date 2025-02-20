@@ -165,11 +165,18 @@ class Dataset(HOAMetadata):
         )
 
 
-_DATA_DIR = Path(__file__).parent / "data"
-_DATASETS = {
-    f.stem: Dataset.model_validate_json(f.read_text())
-    for f in (_DATA_DIR / "metadata" / "metadata").glob("*.json")
-}
+def _get_datasets(data_dir: Path) -> dict[str, Dataset]:
+    """
+    Load dataset metadtata files.
+    """
+    return {
+        f.stem: Dataset.model_validate_json(f.read_text())
+        for f in (data_dir).glob("*.json")
+    }
+
+
+_META_DIR = Path(__file__).parent / "data" / "metadata" / "metadata"
+_DATASETS = _get_datasets(_META_DIR)
 if len(_DATASETS) == 0:
     raise ImportError(
         "Did not find any dataset metadata files. "
@@ -186,3 +193,17 @@ def get_dataset(name: str) -> Dataset:
     The name of datasets can be looked up using the `hoa_tools.inventory` module.
     """
     return _DATASETS[name]
+
+
+def update_metadata_directory(data_dir: Path) -> None:
+    """
+    Update available datasets from another directory of metadata files.
+
+    Designed for internal project members to load metadata files that aren't yet public.
+    """
+    global _DATASETS  # noqa: PLW0603
+    _DATASETS = _get_datasets(data_dir)
+    if len(_DATASETS) == 0:
+        raise FileNotFoundError(
+            f"Did not find any dataset metadata files at {data_dir}"  # noqa: EM102
+        )
