@@ -137,9 +137,7 @@ class VOI(BaseModel):
         new_array.values = sitk.GetArrayFromImage(new_image).T
         return new_array
 
-    def change_downsample_level(
-        self, *, new_downsample_level: Literal[0, 1, 2, 3, 4]
-    ) -> "VOI":
+    def change_downsample_level(self, *, new_downsample_level: int) -> "VOI":
         """
         Return a new VOI at a different downsample level.
         """
@@ -161,23 +159,39 @@ class VOI(BaseModel):
             size=new_size,
         )
 
-    def transform_to(self, dataset: Dataset) -> "VOI":
+    def transform_to(
+        self,
+        dataset: Dataset,
+        *,
+        transform: sitk.Transform | None = None,
+    ) -> "VOI":
         """
         Transform this VOI to another dataset.
 
         The new VOI will completely contain the transformed original VOI.
+
+        Parameters
+        ----------
+        dataset :
+            Dataset to transform to.
+        transform :
+            If given, transform used to map this VOI on to the target VOI.
+            If not given, transform is taken from the registration inventory.
+
         """
-        if (self.dataset, dataset) not in RegInventory:
-            msg = (
-                f"Transform between {self.dataset.name} and {dataset.name} not found "
-                "in registration inventory."
+        if transform is None:
+            if (self.dataset, dataset) not in RegInventory:
+                msg = (
+                    f"Transform between {self.dataset.name} and {dataset.name} "
+                    "not found in registration inventory."
+                )
+                raise RuntimeError(msg)
+
+            transform = RegInventory.get_registration(
+                source_dataset=self.dataset, target_dataset=dataset
             )
-            raise RuntimeError(msg)
 
         old_voi = self.change_downsample_level(new_downsample_level=0)
-        transform = RegInventory.get_registration(
-            source_dataset=self.dataset, target_dataset=dataset
-        )
 
         # Convert to physical space
         physical_corners = [
