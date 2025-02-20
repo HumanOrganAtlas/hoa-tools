@@ -20,6 +20,7 @@ import numpy as np
 import xarray as xr
 import zarr.core
 import zarr.n5
+import zarr.storage
 
 from hoa_tools._n5 import N5FSStore
 from hoa_tools.metadata import HOAMetadata
@@ -103,26 +104,33 @@ class Dataset(HOAMetadata):
             )
         ]
 
+    @property
+    def _remote_fmt(self) -> Literal["n5", "zarr"]:
+        if self.data.gcs_url.startswith("n5://"):
+            return "n5"
+        if self.data.gcs_url.startswith("zarr://"):
+            return "zarr"
+        raise RuntimeError("URL must start with n5:// or zarr://")
+
     @cached_property
     def _remote_store(self) -> zarr.Group:
         """
         Remote data store.
         """
         gcs_url = self.data.gcs_url
-        if not gcs_url.startswith("n5://"):
-            raise RuntimeError("Only N5 supported")
+        gcs_path = gcs_url.removeprefix("n5://gs://").removeprefix("zarr://gs://")
 
-        gcs_url = gcs_url.removeprefix("n5://gs://")
         # n5://gs://ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/S-20-29/heart/2.5um_VOI-01_bm05/
-        bucket, path = gcs_url.split("/", maxsplit=1)
-
+        bucket, path = gcs_path.split("/", maxsplit=1)
         fs = gcsfs.GCSFileSystem(project=bucket, token="anon", access="read_only")  # noqa: S106
-        store = N5FSStore(url=bucket, fs=fs, mode="r")
+        if self._remote_fmt == "n5":
+            store = N5FSStore(url=bucket, fs=fs, mode="r")
+        elif self._remote_fmt == "zarr":
+            store = zarr.storage.FSStore(url=bucket, fs=fs, mode="r")
+
         return zarr.open_group(store, mode="r", path=path)
 
-    def _remote_array(
-        self, *, downsample_level: Literal[0, 1, 2, 3, 4]
-    ) -> zarr.core.Array:
+    def _remote_array(self, *, downsample_level: int) -> zarr.core.Array:
         """
         Get an object representing the data array in the remote Google Cloud Store.
         """
@@ -130,9 +138,13 @@ class Dataset(HOAMetadata):
             msg = f"'level' must be in {levels}"
             raise ValueError(msg)
 
-        return self._remote_store[f"s{downsample_level}"]
+        if self._remote_fmt == "n5":
+            key = f"s{downsample_level}"
+        else:
+            key = f"{downsample_level}"
+        return self._remote_store[key]
 
-    def data_array(self, *, downsample_level: Literal[0, 1, 2, 3, 4]) -> xr.DataArray:
+    def data_array(self, *, downsample_level: int) -> xr.DataArray:
         """
         Get a DataArray representing the array for this image.
         """
@@ -140,6 +152,9 @@ class Dataset(HOAMetadata):
         dask_array = dask.array.core.from_array(  # type: ignore[no-untyped-call]
             remote_array, chunks=remote_array.chunks
         )
+        if self._remote_fmt == "zarr":
+            dask_array = dask_array.T
+
         spacing = self.data.voxel_size_um * 2**downsample_level
         return xr.DataArray(
             dask_array,
