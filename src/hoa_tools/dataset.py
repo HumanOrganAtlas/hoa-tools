@@ -71,7 +71,7 @@ class Dataset(HOAMetadata):
         For full-organ datasets, this returns an empty list.
 
         """
-        return [
+        children = [
             d
             for d in _DATASETS.values()
             if (
@@ -81,6 +81,7 @@ class Dataset(HOAMetadata):
                 and d.is_zoom
             )
         ]
+        return sorted(children, key=lambda c: c.name)
 
     def get_parents(self) -> list["Dataset"]:
         """
@@ -93,7 +94,7 @@ class Dataset(HOAMetadata):
         For zoom datasets, this returns an empty list.
 
         """
-        return [
+        parents = [
             d
             for d in _DATASETS.values()
             if (
@@ -103,6 +104,7 @@ class Dataset(HOAMetadata):
                 and d.is_full_organ
             )
         ]
+        return sorted(parents, key=lambda c: c.name)
 
     @property
     def _remote_fmt(self) -> Literal["n5", "zarr"]:
