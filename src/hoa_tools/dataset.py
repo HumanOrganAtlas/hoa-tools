@@ -7,7 +7,7 @@ which stores all the metadata for a given dataset.
 
 [`Dataset`][hoa_tools.dataset.Dataset] objects are not designed to be created by users.
 To get a [`Dataset`][hoa_tools.dataset.Dataset], use the
-[`get_dataset`][hoa_tools.dataset.get_dataset] function in this sub-module.
+[`get_dataset`][hoa_tools.dataset.get_dataset] function in this module.
 """
 
 from functools import cached_property

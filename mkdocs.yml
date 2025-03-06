@@ -8,8 +8,8 @@ theme:
   icon:
     repo: fontawesome/brands/github
   features:
-    #- navigation.tabs
-    # - navigation.indexes
+    - navigation.tabs
+    - navigation.indexes
   palette:
     # Palette toggle for light mode
 
@@ -34,7 +34,7 @@ markdown_extensions:
 
 plugins:
   - mkdocs-jupyter:
-      execute: true
+      execute: false
       allow_errors: false
   - mkdocstrings:
       handlers:
@@ -66,12 +66,14 @@ plugins:
 nav:
   - Home: index.md
   - Tutorial:
+      - tutorial/index.md
       - Inventory: tutorial/inventory.py
       - Datasets: tutorial/dataset.py
       - Getting data: tutorial/fetching_data.py
       - Sub-volumes: tutorial/vois.py
       - Registration: tutorial/registration.py
   - API reference:
+      - api/index.md
       - dataset: api/dataset.md
       - inventory: api/inventory.md
       - metadata: api/metadata.md

@@ -1,6 +1,6 @@
 # # Individual datasets
 #
-# In this tutorial we'll look at what we can do with an individual dataset.
+# In this chapter we'll look at what we can do with an individual dataset.
 # In ``hoa-tools`` individual datasets are represented by `Dataset` objects.
 
 import pandas as pd
