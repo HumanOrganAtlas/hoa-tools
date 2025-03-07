@@ -11,13 +11,13 @@ import hoa_tools.voi
 
 # -
 
-# First we'll get a dataset.
+# First we'll get an overview dataset, of the brain of donor S-20-29.
 
 overview_dataset = hoa_tools.dataset.get_dataset(
     "S-20-29_brain_complete-organ_25.33um_bm05"
 )
 
-# Now we'll define a volume of interest (VOI) object. This represents a cuboid shape area within our dataset.
+# Now we'll define a volume of interest (VOI) object. This represents a cuboid shape volume within the full dataset.
 
 voi = hoa_tools.voi.VOI(
     dataset=overview_dataset,
@@ -26,7 +26,7 @@ voi = hoa_tools.voi.VOI(
     size={"x": 40, "y": 20, "z": 1},
 )
 
-# Once we have a VOI, there's a number of useful things we can do.
+# Once we have a VOI object, there's a number of useful things we can do.
 # Lets get the data array for the VOI and plot it:
 
 data_array = voi.get_data_array()
@@ -69,8 +69,8 @@ fig.tight_layout()
 # We'll start by getting one of the children of the overview dataset used above.
 
 children = overview_dataset.get_children()
-child = children[9]
-child
+child = children[8]
+child.name
 
 child_array = child.data_array(downsample_level=0)
 child_array
@@ -101,6 +101,7 @@ overview_voi
 # In the next tutorial section we'll see how to do a more accurate registration of just these small sub-volumes of data in order to do quantitative comparisons.
 
 overview_array = overview_voi.get_data_array()
+overview_array
 
 # +
 fig, axs = plt.subplots(nrows=2, figsize=(6, 9))

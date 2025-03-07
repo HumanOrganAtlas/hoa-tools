@@ -1,7 +1,8 @@
 # # Dataset Inventory
 
-# In this tutorial we will use the  `hoa_tools.inventory` module
-# to find all the spleen datasets in the Human Organ Atlas.
+# In the first tutorial we will show how to search for available data
+# using the `hoa_tools.inventory` module. By the end you should know
+# how to search and filter the built in dataset inventory.
 
 import pandas as pd
 

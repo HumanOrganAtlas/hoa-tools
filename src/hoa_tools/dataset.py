@@ -7,7 +7,7 @@ which stores all the metadata for a given dataset.
 
 [`Dataset`][hoa_tools.dataset.Dataset] objects are not designed to be created by users.
 To get a [`Dataset`][hoa_tools.dataset.Dataset], use the
-[`get_dataset`][hoa_tools.dataset.get_dataset] function in this sub-module.
+[`get_dataset`][hoa_tools.dataset.get_dataset] function in this module.
 """
 
 from functools import cached_property
@@ -71,7 +71,7 @@ class Dataset(HOAMetadata):
         For full-organ datasets, this returns an empty list.
 
         """
-        return [
+        children = [
             d
             for d in _DATASETS.values()
             if (
@@ -81,6 +81,7 @@ class Dataset(HOAMetadata):
                 and d.is_zoom
             )
         ]
+        return sorted(children, key=lambda c: c.name)
 
     def get_parents(self) -> list["Dataset"]:
         """
@@ -93,7 +94,7 @@ class Dataset(HOAMetadata):
         For zoom datasets, this returns an empty list.
 
         """
-        return [
+        parents = [
             d
             for d in _DATASETS.values()
             if (
@@ -103,6 +104,7 @@ class Dataset(HOAMetadata):
                 and d.is_full_organ
             )
         ]
+        return sorted(parents, key=lambda c: c.name)
 
     @property
     def _remote_fmt(self) -> Literal["n5", "zarr"]:
