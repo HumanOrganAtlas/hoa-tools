@@ -36,3 +36,7 @@ data_array
 middle_slice = data_array.isel(z=437)
 im = middle_slice.plot(cmap="Grays_r")
 im.axes.set_aspect("equal")
+
+
+# If you want to save a part of the array for later analysis, see the [xarray guide
+# to reading and writing files](https://docs.xarray.dev/en/stable/user-guide/io.html).
