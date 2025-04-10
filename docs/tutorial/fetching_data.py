@@ -1,9 +1,8 @@
 # # Fetching data
 
 # In this tutorial we will fetch some of the data. All public Human Organ Atlas
-# data is available through a read-only public Google Cloud Storage bucket in
-# the N5 data format. This is a chunked data format, making it easy to access
-# sub-volumes of data.
+# data is available through a read-only public Google Cloud Storage bucket.
+# in a chunked data format, making it easy to access sub-volumes of data.
 
 # ## Getting a remote data store
 
