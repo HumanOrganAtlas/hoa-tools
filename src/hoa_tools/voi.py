@@ -40,7 +40,7 @@ class VOI(BaseModel):
         """
         Voxel size in micrometers.
         """
-        return self.dataset.data.voxel_size_um * 2 ** (self.downsample_level)
+        return float(self.dataset.data.voxel_size_um * 2 ** (self.downsample_level))
 
     @property
     def upper_corner(self) -> ArrayCoordinate:
