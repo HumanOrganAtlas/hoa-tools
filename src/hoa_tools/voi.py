@@ -106,7 +106,8 @@ class VOI(BaseModel):
         """
         Get data array for this VOI resampled to the grid of another VOI.
 
-        This uses the transform between two datasets in the registration inventory.
+        If the transform isn't given, uses the transform between two datasets in the
+        egistration inventory.
 
         Parameters
         ----------
