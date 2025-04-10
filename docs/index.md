@@ -16,9 +16,3 @@ Suggestions and bug reports are very welcome, and encouraged! Please [open an is
 ## Contributing
 
 Contributions are very welcome, and encouraged! Please open a pull request with your suggested change on our [GitHub repository](https://github.com/HumanOrganAtlas/hoa-tools).
-
-## Changelog
-
-# 0.1
-
-First release of `hoa-tools` 🎉
