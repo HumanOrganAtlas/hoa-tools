@@ -37,7 +37,7 @@ class Dataset(HOAMetadata):
         return super().__repr__()
 
     def __str__(self) -> str:
-        return f"Dataset({self.name=})"
+        return f"Dataset(name={self.name})"
 
     def _organ_str(self) -> str:
         """

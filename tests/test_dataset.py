@@ -16,6 +16,9 @@ def test_dataset_properties() -> None:
 
     assert dataset.name == name
     assert dataset.is_full_organ
+    assert (
+        str(dataset) == "Dataset(name=LADAF-2020-27_spleen_complete-organ_25.08um_bm05)"
+    )
 
 
 def test_child_datasets() -> None:
