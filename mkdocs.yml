@@ -80,6 +80,7 @@ nav:
       - metadata: api/metadata.md
       - types: api/types.md
       - voi: api/voi.md
+  - Release notes: release-notes.md
   - Development: development.md
 
 watch:
