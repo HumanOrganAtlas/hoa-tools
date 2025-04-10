@@ -10,7 +10,7 @@ where 0 is the centre of the first voxel, 1 is the centre of the second voxel et
 
 import itertools
 from math import ceil, floor
-from typing import Any, Literal
+from typing import Any
 
 import SimpleITK as sitk
 import xarray as xr
@@ -28,7 +28,7 @@ class VOI(BaseModel):
 
     dataset: Dataset
     """Dataset that this VOI is in."""
-    downsample_level: Literal[0, 1, 2, 3, 4]
+    downsample_level: int
     """Downsampling level of the dataset that this VOI is defined in."""
     lower_corner: ArrayCoordinate
     """Index of lower corner in array coordinates."""
@@ -40,7 +40,7 @@ class VOI(BaseModel):
         """
         Voxel size in micrometers.
         """
-        return self.dataset.data.voxel_size_um * 2 ** (self.downsample_level)
+        return float(self.dataset.data.voxel_size_um * 2 ** (self.downsample_level))
 
     @property
     def upper_corner(self) -> ArrayCoordinate:
@@ -106,7 +106,8 @@ class VOI(BaseModel):
         """
         Get data array for this VOI resampled to the grid of another VOI.
 
-        This uses the transform between two datasets in the registration inventory.
+        If the transform isn't given, uses the transform between two datasets in the
+        registration inventory.
 
         Parameters
         ----------
@@ -137,9 +138,7 @@ class VOI(BaseModel):
         new_array.values = sitk.GetArrayFromImage(new_image).T
         return new_array
 
-    def change_downsample_level(
-        self, *, new_downsample_level: Literal[0, 1, 2, 3, 4]
-    ) -> "VOI":
+    def change_downsample_level(self, *, new_downsample_level: int) -> "VOI":
         """
         Return a new VOI at a different downsample level.
         """
@@ -161,23 +160,39 @@ class VOI(BaseModel):
             size=new_size,
         )
 
-    def transform_to(self, dataset: Dataset) -> "VOI":
+    def transform_to(
+        self,
+        dataset: Dataset,
+        *,
+        transform: sitk.Transform | None = None,
+    ) -> "VOI":
         """
         Transform this VOI to another dataset.
 
         The new VOI will completely contain the transformed original VOI.
+
+        Parameters
+        ----------
+        dataset :
+            Dataset to transform to.
+        transform :
+            If given, transform used to map this VOI on to the target VOI.
+            If not given, transform is taken from the registration inventory.
+
         """
-        if (self.dataset, dataset) not in RegInventory:
-            msg = (
-                f"Transform between {self.dataset.name} and {dataset.name} not found "
-                "in registration inventory."
+        if transform is None:
+            if (self.dataset, dataset) not in RegInventory:
+                msg = (
+                    f"Transform between {self.dataset.name} and {dataset.name} "
+                    "not found in registration inventory."
+                )
+                raise RuntimeError(msg)
+
+            transform = RegInventory.get_registration(
+                source_dataset=self.dataset, target_dataset=dataset
             )
-            raise RuntimeError(msg)
 
         old_voi = self.change_downsample_level(new_downsample_level=0)
-        transform = RegInventory.get_registration(
-            source_dataset=self.dataset, target_dataset=dataset
-        )
 
         # Convert to physical space
         physical_corners = [
