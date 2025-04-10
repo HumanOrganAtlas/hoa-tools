@@ -33,6 +33,12 @@ class Dataset(HOAMetadata):
     An individual Human Organ Atlas dataset.
     """
 
+    def __repr__(self) -> str:
+        return super().__repr__()
+
+    def __str__(self) -> str:
+        return f"Dataset({self.name=})"
+
     def _organ_str(self) -> str:
         """
         Get name of organ, with organ context appended if present.
