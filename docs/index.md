@@ -7,6 +7,7 @@ This package contains tools for working with data from the [Human Organ Atlas](h
 A few useful places to start:
 
 - The [tutorial](tutorial/index.md) contains a step by step guide to using `hoa-tools`
+- [How do I...?](how_to.md) lists how to do common tasks with `hoa-tools`
 - The [API reference](api/index.md) contains a listing of classes and functions in `hoa-tools`
 
 ## Feedback
