@@ -72,6 +72,7 @@ nav:
       - Getting data: tutorial/fetching_data.py
       - Sub-volumes: tutorial/vois.py
       - Registration: tutorial/registration.py
+  - How do I...?: how_to.md
   - API reference:
       - api/index.md
       - dataset: api/dataset.md

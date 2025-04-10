@@ -212,7 +212,7 @@ def get_dataset(name: str) -> Dataset:
     return _DATASETS[name]
 
 
-def update_metadata_directory(data_dir: Path) -> None:
+def change_metadata_directory(data_dir: Path) -> None:
     """
     Update available datasets from another directory of metadata files.
 

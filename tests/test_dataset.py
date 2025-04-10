@@ -2,7 +2,7 @@ import re
 
 import pytest
 
-from hoa_tools.dataset import _META_DIR, Dataset, get_dataset, update_metadata_directory
+from hoa_tools.dataset import _META_DIR, Dataset, change_metadata_directory, get_dataset
 
 
 @pytest.fixture
@@ -63,4 +63,4 @@ def test_invalid_level(dataset: Dataset) -> None:
 def test_update_datasets() -> None:
     # Not the best test - this updates the directory to the same previous one
     # But it's at least a smoke test...
-    update_metadata_directory(_META_DIR)
+    change_metadata_directory(_META_DIR)
