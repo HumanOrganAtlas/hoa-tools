@@ -81,7 +81,13 @@ addopts = [
   "--cov-report=xml",
   "--verbose",
   "--doctest-rst",
+  "-ra",
+  "--strict-config",
+  "--strict-markers",
 ]
+log_cli_level = "INFO"
+xfail_strict = true
+filterwarnings = ["error"]
 
 [tool.coverage]
 report = { sort = "cover" }
