@@ -25,6 +25,7 @@ import zarr.storage
 
 from hoa_tools._n5 import N5FSStore
 from hoa_tools.metadata import HOAMetadata
+from hoa_tools.types import PhysicalCoordinate
 
 __all__ = ["Dataset", "get_dataset"]
 
@@ -225,7 +226,7 @@ def change_metadata_directory(data_dir: Path) -> None:
 
 
 def _populate_registrations_from_metadata(datasets: dict[str, Dataset]) -> None:
-    from hoa_tools.registration import Inventory, PhysicalCoordinate, build_transform
+    from hoa_tools.registration import Inventory, build_transform
 
     Inventory._clear()  # noqa: SLF001
     for dataset_name in datasets:
