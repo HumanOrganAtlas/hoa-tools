@@ -87,7 +87,7 @@ def test_registered() -> None:
     # Test getting transform between two datasets that aren't directly registered
     d = hoa_tools.dataset.get_dataset("S-20-29_brain_VOI-04_6.5um_bm05")
     registered = d.get_registered()
-    assert [d.name for d in registered] == {
+    assert {d.name for d in registered} == {
         "S-20-29_brain_complete-organ_25.33um_bm05",
         "S-20-29_brain_VOI-04_2.5um_bm05",
         "S-20-29_brain_VOI-03_6.5um_bm05",
