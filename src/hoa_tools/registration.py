@@ -59,6 +59,9 @@ class RegistrationInventory:
         transforms = [
             self._graph[p1][p2]["transform"] for p1, p2 in itertools.pairwise(path)
         ]
+        if len(transforms) == 1:
+            return transforms[0]
+
         ndim = 3
         t = sitk.CompositeTransform(ndim)
         for transform in transforms:
