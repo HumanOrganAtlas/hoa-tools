@@ -1,2 +1,1 @@
 include src/hoa_tools/data/metadata/metadata/*.json
-prune src/hoa_tools/tests
