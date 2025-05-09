@@ -1,4 +1,5 @@
 import re
+from pathlib import Path
 
 import pytest
 
@@ -67,3 +68,10 @@ def test_update_datasets() -> None:
     # Not the best test - this updates the directory to the same previous one
     # But it's at least a smoke test...
     change_metadata_directory(_META_DIR)
+
+
+def test_update_datasets_error(tmp_path: Path) -> None:
+    with pytest.raises(
+        FileNotFoundError, match="Did not find any dataset metadata files at"
+    ):
+        change_metadata_directory(tmp_path)

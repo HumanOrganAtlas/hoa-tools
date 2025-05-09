@@ -1,5 +1,10 @@
 # Release notes
 
+## 1.0.2
+
+- When a private copy of the metadata inventory is loaded, the registration
+  inventory is now also updated correctly.
+
 ## 1.0.1
 
 - Updated the metadata database to version 1.0. This has no major differences
