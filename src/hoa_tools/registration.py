@@ -31,7 +31,7 @@ class RegistrationInventory:
         """
         Create registration inventory.
         """
-        self._graph = nx.MultiDiGraph()
+        self._graph: nx.MultiDiGraph = nx.MultiDiGraph()
 
     def __contains__(self, item: tuple[Dataset, Dataset]) -> bool:
         """
