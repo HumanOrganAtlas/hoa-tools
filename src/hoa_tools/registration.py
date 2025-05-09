@@ -8,11 +8,13 @@ in units of micro-meters (μm).
 Transforms are defined using the `SimpleITK` library.
 """
 
+import networkx as nx
 import numpy as np
 import SimpleITK as sitk
 
 from hoa_tools.dataset import Dataset
 from hoa_tools.types import PhysicalCoordinate
+import itertools
 
 
 class RegistrationInventory:
@@ -28,13 +30,13 @@ class RegistrationInventory:
         """
         Create registration inventory.
         """
-        self._registrations: dict[tuple[str, str], sitk.Transform] = {}
+        self._graph = nx.MultiDiGraph()
 
     def __contains__(self, item: tuple[Dataset, Dataset]) -> bool:
         """
         Check for existence of registration between two datasets.
         """
-        return (item[0].name, item[1].name) in self._registrations
+        return (item[0].name, item[1].name) in self._graph.edges
 
     def get_registration(
         self, *, source_dataset: Dataset, target_dataset: Dataset
@@ -42,7 +44,25 @@ class RegistrationInventory:
         """
         Get a registration.
         """
-        return self._registrations[(source_dataset.name, target_dataset.name)]
+        try:
+            path = nx.shortest_path(
+                self._graph, source_dataset.name, target_dataset.name
+            )
+        except nx.exception.NetworkXNoPath:
+            msg = (
+                f"No registration path between {source_dataset.name} and "
+                f"{target_dataset.name}"
+            )
+            raise ValueError(msg) from None
+
+        transforms = [
+            self._graph[p1][p2]["transform"] for p1, p2 in itertools.pairwise(path)
+        ]
+        ndim = 3
+        t = sitk.CompositeTransform(ndim)
+        for transform in transforms:
+            t.AddTransform(transform)
+        return t
 
     def add_registration(
         self,
@@ -59,16 +79,18 @@ class RegistrationInventory:
         This will override any already defined transforms for these two datasets.
 
         """
-        self._registrations[(source_dataset.name, target_dataset.name)] = transform
-        self._registrations[(target_dataset.name, source_dataset.name)] = (
-            transform.GetInverse()  # type: ignore[no-untyped-call]
+        self._graph.add_edge(
+            source_dataset.name, target_dataset.name, transform=transform
+        )
+        self._graph.add_edge(
+            target_dataset.name, source_dataset.name, transform=transform.GetInverse()
         )
 
     def _clear(self) -> None:
         """
         Remove all registrations.
         """
-        self._registrations = {}
+        self._graph = nx.DiGraph()
 
 
 def build_transform(

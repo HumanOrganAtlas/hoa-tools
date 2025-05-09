@@ -1,3 +1,4 @@
+import pytest
 import hoa_tools.dataset
 import hoa_tools.registration
 import hoa_tools.voi
@@ -22,3 +23,51 @@ def test_transform_voi() -> None:
     assert overview_voi.downsample_level == 0
     assert overview_voi.lower_corner == ArrayCoordinate(x=2975, y=1689, z=4316)
     assert overview_voi.size == ArrayCoordinate(x=69, y=69, z=33)
+
+
+def test_inverse_registration() -> None:
+    overview = hoa_tools.dataset.get_dataset(
+        "S-20-29_brain_complete-organ_25.33um_bm05"
+    )
+    zoom = hoa_tools.dataset.get_dataset("S-20-29_brain_VOI-04_6.5um_bm05")
+
+    transform = hoa_tools.registration.Inventory.get_registration(
+        source_dataset=zoom, target_dataset=overview
+    )
+    transform_inv = hoa_tools.registration.Inventory.get_registration(
+        source_dataset=overview, target_dataset=zoom
+    )
+
+    assert (
+        transform_inv.GetInverse().GetFixedParameters()
+        == transform.GetFixedParameters()
+    )
+
+
+def test_transform_path() -> None:
+    # Test getting transform between two datasets that aren't directly registered
+    zoom1 = hoa_tools.dataset.get_dataset("S-20-29_brain_VOI-04_6.5um_bm05")
+    zoom2 = hoa_tools.dataset.get_dataset("S-20-29_brain_VOI-05_6.5um_bm05")
+
+    hoa_tools.registration.Inventory.get_registration(
+        source_dataset=zoom1, target_dataset=zoom2
+    )
+
+
+def test_no_transform_path() -> None:
+    # Test getting transform between two datasets that aren't directly registered
+    d1 = hoa_tools.dataset.get_dataset("S-20-29_brain_VOI-04_6.5um_bm05")
+    d2 = hoa_tools.dataset.get_dataset(
+        "LADAF-2020-27_spleen_complete-organ_25.08um_bm05"
+    )
+
+    with pytest.raises(
+        ValueError,
+        match=(
+            "No registration path between S-20-29_brain_VOI-04_6.5um_bm05 and "
+            "LADAF-2020-27_spleen_complete-organ_25.08um_bm05"
+        ),
+    ):
+        hoa_tools.registration.Inventory.get_registration(
+            source_dataset=d1, target_dataset=d2
+        )

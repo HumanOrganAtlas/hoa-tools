@@ -26,6 +26,7 @@ classifiers = [
 dependencies = [
   "dask[array]",
   "gcsfs>2023",
+  "networkx>=3",
   "pandas>=2",
   "pydantic>=2",
   "simpleitk",
