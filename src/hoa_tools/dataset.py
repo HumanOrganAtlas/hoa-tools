@@ -28,6 +28,9 @@ from hoa_tools.metadata import HOAMetadata
 __all__ = ["Dataset", "get_dataset"]
 
 
+_DATASETS: dict[str, "Dataset"] = {}
+
+
 class Dataset(HOAMetadata):
     """
     An individual Human Organ Atlas dataset.
@@ -185,7 +188,7 @@ class Dataset(HOAMetadata):
         )
 
 
-def _get_datasets(data_dir: Path) -> dict[str, Dataset]:
+def _load_datasets_from_files(data_dir: Path) -> dict[str, Dataset]:
     """
     Load dataset metadtata files.
     """
@@ -193,17 +196,6 @@ def _get_datasets(data_dir: Path) -> dict[str, Dataset]:
         f.stem: Dataset.model_validate_json(f.read_text())
         for f in (data_dir).glob("*.json")
     }
-
-
-_META_DIR = Path(__file__).parent / "data" / "metadata" / "metadata"
-_DATASETS = _get_datasets(_META_DIR)
-if len(_DATASETS) == 0:
-    raise ImportError(
-        "Did not find any dataset metadata files. "
-        "This means there is something wrong with the hoa-tools installation. "
-        "If you are installing from source, you might need to "
-        "initialise and fetch git submodules. "
-    )
 
 
 def get_dataset(name: str) -> Dataset:
@@ -222,8 +214,49 @@ def change_metadata_directory(data_dir: Path) -> None:
     Designed for internal project members to load metadata files that aren't yet public.
     """
     global _DATASETS  # noqa: PLW0603
-    _DATASETS = _get_datasets(data_dir)
+    _DATASETS = _load_datasets_from_files(data_dir)
     if len(_DATASETS) == 0:
         raise FileNotFoundError(
             f"Did not find any dataset metadata files at {data_dir}"  # noqa: EM102
         )
+    _populate_registrations_from_metadata(_DATASETS)
+
+
+def _populate_registrations_from_metadata(datasets: dict[str, Dataset]) -> None:
+    from hoa_tools.registration import Inventory, PhysicalCoordinate, build_transform
+
+    Inventory._clear()  # noqa: SLF001
+    for dataset_name in datasets:
+        dataset = _DATASETS[dataset_name]
+        if (registration := dataset.registration) is not None:
+            source_dataset = _DATASETS[registration.source_dataset]
+            target_dataset = _DATASETS[registration.target_dataset]
+            transform = build_transform(
+                translation=PhysicalCoordinate(
+                    x=registration.translation[0] * target_dataset.data.voxel_size_um,
+                    y=registration.translation[1] * target_dataset.data.voxel_size_um,
+                    z=registration.translation[2] * target_dataset.data.voxel_size_um,
+                ),
+                rotation_deg=registration.rotation,
+                scale=registration.scale
+                * target_dataset.data.voxel_size_um
+                / source_dataset.data.voxel_size_um,
+            )
+            Inventory.add_registration(
+                source_dataset=_DATASETS[registration.source_dataset],
+                target_dataset=_DATASETS[registration.target_dataset],
+                transform=transform,
+            )
+
+
+_META_DIR = Path(__file__).parent / "data" / "metadata" / "metadata"
+try:
+    change_metadata_directory(_META_DIR)
+except FileNotFoundError as e:
+    raise ImportError(
+        "Did not find any dataset metadata files. "
+        "This means there is something wrong with the hoa-tools installation.\n"
+        "Please report this at https://github.com/HumanOrganAtlas/hoa-tools\n"
+        "If you are installing from source, you might need to "
+        "initialise and fetch git submodules. "
+    ) from e
