@@ -29,7 +29,7 @@ from hoa_tools.metadata import HOAMetadata
 __all__ = ["Dataset", "get_dataset"]
 
 
-_DATASETS: dict[str, "Dataset"] = {}
+_DATASETS: dict[str, "Dataset"]
 
 
 class Dataset(HOAMetadata):
@@ -193,10 +193,15 @@ def _load_datasets_from_files(data_dir: Path) -> dict[str, Dataset]:
     """
     Load dataset metadtata files.
     """
-    return {
+    datasets = {
         f.stem: Dataset.model_validate_json(f.read_text())
         for f in (data_dir).glob("*.json")
     }
+    if len(datasets) == 0:
+        raise FileNotFoundError(
+            f"Did not find any dataset metadata files at {data_dir}"  # noqa: EM102
+        )
+    return datasets
 
 
 def get_dataset(name: str) -> Dataset:
@@ -216,10 +221,6 @@ def change_metadata_directory(data_dir: Path) -> None:
     """
     global _DATASETS  # noqa: PLW0603
     _DATASETS = _load_datasets_from_files(data_dir)
-    if len(_DATASETS) == 0:
-        raise FileNotFoundError(
-            f"Did not find any dataset metadata files at {data_dir}"  # noqa: EM102
-        )
     _populate_registrations_from_metadata(_DATASETS)
 
 
