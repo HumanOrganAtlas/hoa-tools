@@ -31,7 +31,7 @@ class RegistrationInventory:
         """
         Create registration inventory.
         """
-        self._graph: nx.MultiDiGraph = nx.MultiDiGraph()
+        self._graph: nx.MultiDiGraph[str] = nx.MultiDiGraph()
 
     def __contains__(self, item: tuple[Dataset, Dataset]) -> bool:
         """
@@ -56,16 +56,16 @@ class RegistrationInventory:
             )
             raise ValueError(msg) from None
 
-        transforms = [
+        transforms: list[sitk.Transform] = [
             self._graph[p1][p2]["transform"] for p1, p2 in itertools.pairwise(path)
         ]
         if len(transforms) == 1:
             return transforms[0]
 
         ndim = 3
-        t = sitk.CompositeTransform(ndim)
+        t = sitk.CompositeTransform(ndim)  # type: ignore[no-untyped-call]
         for transform in transforms:
-            t.AddTransform(transform)
+            t.AddTransform(transform)  # type: ignore[no-untyped-call]
         return t
 
     def add_registration(
@@ -87,14 +87,16 @@ class RegistrationInventory:
             source_dataset.name, target_dataset.name, transform=transform
         )
         self._graph.add_edge(
-            target_dataset.name, source_dataset.name, transform=transform.GetInverse()
+            target_dataset.name,
+            source_dataset.name,
+            transform=transform.GetInverse(),  # type: ignore[no-untyped-call]
         )
 
     def _clear(self) -> None:
         """
         Remove all registrations.
         """
-        self._graph = nx.DiGraph()
+        self._graph = nx.MultiDiGraph()
 
 
 def build_transform(
