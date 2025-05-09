@@ -10,6 +10,7 @@ To get a [`Dataset`][hoa_tools.dataset.Dataset], use the
 [`get_dataset`][hoa_tools.dataset.get_dataset] function in this module.
 """
 
+import warnings
 from functools import cached_property
 from pathlib import Path
 from typing import Literal
@@ -230,6 +231,14 @@ def _populate_registrations_from_metadata(datasets: dict[str, Dataset]) -> None:
         dataset = _DATASETS[dataset_name]
         if (registration := dataset.registration) is not None:
             source_dataset = _DATASETS[registration.source_dataset]
+            if registration.target_dataset not in _DATASETS:
+                warnings.warn(
+                    f"Did not find target dataset {registration.target_dataset} "
+                    f"in dataset inventory. Not adding {registration.source_dataset} "
+                    "to registration inventory.",
+                    stacklevel=1,
+                )
+                continue
             target_dataset = _DATASETS[registration.target_dataset]
             transform = build_transform(
                 translation=PhysicalCoordinate(
