@@ -2,6 +2,7 @@
 
 ## 1.0.2
 
+- Fixed the inclusion of the metadata inventory in the distribution on PyPI.
 - When a private copy of the metadata inventory is loaded, the registration
   inventory is now also updated correctly.
 
