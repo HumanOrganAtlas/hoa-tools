@@ -26,6 +26,7 @@ classifiers = [
 dependencies = [
   "dask[array]",
   "gcsfs>2023",
+  "networkx>=3",
   "pandas>=2",
   "pydantic>=2",
   "simpleitk",
@@ -43,6 +44,7 @@ optional-dependencies = { dev = [
   "ruff",
   "jupyterlab",
   "jupytext",
+  "types-networkx",
   "pandas-stubs",
   "datamodel-code-generator",
 ], docs = [
@@ -81,6 +83,7 @@ addopts = [
   "--cov-report=xml",
   "--verbose",
   "--doctest-rst",
+  "-vv",
 ]
 
 [tool.coverage]
