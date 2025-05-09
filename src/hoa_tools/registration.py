@@ -8,13 +8,14 @@ in units of micro-meters (μm).
 Transforms are defined using the `SimpleITK` library.
 """
 
+import itertools
+
 import networkx as nx
 import numpy as np
 import SimpleITK as sitk
 
 from hoa_tools.dataset import Dataset
 from hoa_tools.types import PhysicalCoordinate
-import itertools
 
 
 class RegistrationInventory:

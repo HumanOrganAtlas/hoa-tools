@@ -1,4 +1,5 @@
 import pytest
+
 import hoa_tools.dataset
 import hoa_tools.registration
 import hoa_tools.voi
@@ -38,10 +39,19 @@ def test_inverse_registration() -> None:
         source_dataset=overview, target_dataset=zoom
     )
 
-    assert (
-        transform_inv.GetInverse().GetFixedParameters()
-        == transform.GetFixedParameters()
+    assert transform.GetParameters() == (
+        0.020069870800809003,
+        0.0,
+        0.0,
+        92062.68586067778,
+        30372.305582420606,
+        52529.27516774854,
+        1.0000012996591003,
     )
+
+    # Check transform roundtrip
+    point = (0, 0, 0)
+    assert transform_inv.TransformPoint(transform.TransformPoint(point)) == point
 
 
 def test_transform_path() -> None:
