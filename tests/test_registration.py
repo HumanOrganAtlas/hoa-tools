@@ -81,3 +81,23 @@ def test_no_transform_path() -> None:
         hoa_tools.registration.Inventory.get_registration(
             source_dataset=d1, target_dataset=d2
         )
+
+
+def test_registered() -> None:
+    # Test getting transform between two datasets that aren't directly registered
+    d = hoa_tools.dataset.get_dataset("S-20-29_brain_VOI-04_6.5um_bm05")
+    registered = d.get_registered()
+    assert [d.name for d in registered] == {
+        "S-20-29_brain_complete-organ_25.33um_bm05",
+        "S-20-29_brain_VOI-04_2.5um_bm05",
+        "S-20-29_brain_VOI-03_6.5um_bm05",
+        "S-20-29_brain_VOI-01_2.5um_bm05",
+        "S-20-29_brain_VOI-03_2.5um_bm05",
+        "S-20-29_brain_VOI-01b_6.5um_bm05",
+        "S-20-29_brain_VOI-02_2.5um_bm05",
+        "S-20-29_brain_VOI-01_6.5um_bm05",
+        "S-20-29_brain_VOI-02_6.5um_bm05",
+        "S-20-29_brain_VOI-05_2.5um_bm05",
+        "S-20-29_brain_VOI-04_6.5um_bm05",
+        "S-20-29_brain_VOI-05_6.5um_bm05",
+    }

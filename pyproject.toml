@@ -82,6 +82,7 @@ addopts = [
   "--cov-report=xml",
   "--verbose",
   "--doctest-rst",
+  "-vv",
 ]
 
 [tool.coverage]
