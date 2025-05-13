@@ -12,11 +12,15 @@ import hoa_tools.voi
 
 # -
 
-# Lets start by getting an overview dataset, a zoom dataset, and defining a VOI in the zoom dataset.
+# Lets start by getting an overview dataset, and seeing what datasets are registered to it.
 
 overview_dataset = hoa_tools.dataset.get_dataset(
     "S-20-29_brain_complete-organ_25.33um_bm05"
 )
+sorted([d.name for d in overview_dataset.get_registered()])
+
+# From these we'll take a zoom dataset, and define a VOI in the zoom dataset.
+
 zoom_dataset = hoa_tools.dataset.get_dataset("S-20-29_brain_VOI-04_6.5um_bm05")
 zoom_voi = hoa_tools.voi.VOI(
     dataset=zoom_dataset,

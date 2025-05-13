@@ -17,6 +17,7 @@ from typing import Literal
 
 import dask.array.core
 import gcsfs
+import networkx as nx
 import numpy as np
 import xarray as xr
 import zarr.core
@@ -40,6 +41,9 @@ class Dataset(HOAMetadata):
 
     def __str__(self) -> str:
         return f"Dataset(name={self.name})"
+
+    def __hash__(self) -> int:
+        return hash(self.name)
 
     def _organ_str(self) -> str:
         """
@@ -113,6 +117,18 @@ class Dataset(HOAMetadata):
             )
         ]
         return sorted(parents, key=lambda c: c.name)
+
+    def get_registered(self) -> set["Dataset"]:
+        """
+        Get a set of all datasets that are registered (even indirectly) to this dataset.
+        """
+        import hoa_tools.registration
+
+        dataset_names = nx.node_connected_component(
+            hoa_tools.registration.Inventory._graph.to_undirected(),  # noqa: SLF001
+            self.name,
+        )
+        return {get_dataset(name) for name in dataset_names}
 
     @property
     def _remote_fmt(self) -> Literal["n5", "zarr"]:
