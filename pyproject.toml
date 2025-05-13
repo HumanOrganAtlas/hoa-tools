@@ -78,12 +78,22 @@ skip = 'schemas/*'
 minversion = "6.0"
 testpaths = ["tests"]
 addopts = [
+  "-ra",
   "--color=yes",
   "--cov=hoa_tools",
   "--cov-report=xml",
   "--verbose",
   "--doctest-rst",
   "-vv",
+  "--strict-config",
+  "--strict-markers"
+]
+xfail_strict = true
+log_cli_level = "INFO"
+filterwarnings = [
+    "error",
+    # coming from simpleITK
+    "ignore:builtin type Swig.* has no __module__ attribute:DeprecationWarning"
 ]
 
 [tool.coverage]
