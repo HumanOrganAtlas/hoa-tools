@@ -9,6 +9,7 @@ Transforms are defined using the `SimpleITK` library.
 """
 
 import itertools
+from typing import Any
 
 import networkx as nx
 import numpy as np
@@ -31,7 +32,7 @@ class RegistrationInventory:
         """
         Create registration inventory.
         """
-        self._graph: nx.MultiDiGraph[str] = nx.MultiDiGraph()
+        self._graph: nx.DiGraph[Any] = nx.DiGraph()
 
     def __contains__(self, item: tuple[Dataset, Dataset]) -> bool:
         """
@@ -96,7 +97,7 @@ class RegistrationInventory:
         """
         Remove all registrations.
         """
-        self._graph = nx.MultiDiGraph()
+        self._graph = nx.DiGraph()
 
 
 def build_transform(
