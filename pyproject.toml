@@ -86,14 +86,14 @@ addopts = [
   "--doctest-rst",
   "-vv",
   "--strict-config",
-  "--strict-markers"
+  "--strict-markers",
 ]
 xfail_strict = true
 log_cli_level = "INFO"
 filterwarnings = [
-    "error",
-    # coming from simpleITK
-    "ignore:builtin type Swig.* has no __module__ attribute:DeprecationWarning"
+  "error",
+  # coming from simpleITK
+  "ignore:builtin type Swig.* has no __module__ attribute:DeprecationWarning",
 ]
 
 [tool.coverage]
