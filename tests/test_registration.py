@@ -71,6 +71,8 @@ def test_no_transform_path() -> None:
         "LADAF-2020-27_spleen_complete-organ_25.08um_bm05"
     )
 
+    assert (d1, d2) not in hoa_tools.registration.Inventory
+
     with pytest.raises(
         ValueError,
         match=(
