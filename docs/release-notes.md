@@ -1,5 +1,10 @@
 # Release notes
 
+## 1.0.4
+
+- Fixed a bug that prevented transforming VOIs between two datasets that
+  are indirectly registered.
+
 ## 1.0.3
 
 - Added the ability to transform between datasets that are indirectly registered,
