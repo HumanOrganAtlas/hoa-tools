@@ -38,7 +38,12 @@ class RegistrationInventory:
         """
         Check for existence of registration between two datasets.
         """
-        return (item[0].name, item[1].name) in self._graph.edges
+        try:
+            nx.shortest_path(self._graph, item[0].name, item[1].name)
+        except nx.exception.NetworkXNoPath:
+            return False
+        else:
+            return True
 
     def get_registration(
         self, *, source_dataset: Dataset, target_dataset: Dataset

@@ -101,3 +101,17 @@ def test_registered() -> None:
         "S-20-29_brain_VOI-04_6.5um_bm05",
         "S-20-29_brain_VOI-05_6.5um_bm05",
     }
+
+
+def test_transform_zoom_to_zoom() -> None:
+    zoom1 = hoa_tools.dataset.get_dataset("LADAF-2021-64_heart_VOI-07_6.51um_bm18")
+    zoom2 = hoa_tools.dataset.get_dataset("LADAF-2021-64_heart_VOI-7.1_2.26um_bm18")
+
+    voi = hoa_tools.voi.VOI(
+        dataset=zoom1,
+        downsample_level=0,
+        lower_corner={"x": 3434, "y": 2060, "z": 2656},
+        size={"x": 256, "y": 256, "z": 128},
+    )
+
+    voi.transform_to(zoom2)
