@@ -122,7 +122,7 @@ class Dataset(HOAMetadata):
         """
         Get a set of all datasets that are registered (even indirectly) to this dataset.
         """
-        import hoa_tools.registration
+        import hoa_tools.registration  # noqa: PLC0415
 
         dataset_names = nx.node_connected_component(
             hoa_tools.registration.Inventory._graph.to_undirected(),  # noqa: SLF001
@@ -242,7 +242,7 @@ def change_metadata_directory(data_dir: Path) -> None:
 
 
 def _populate_registrations_from_metadata(datasets: dict[str, Dataset]) -> None:
-    from hoa_tools.registration import Inventory, build_transform
+    from hoa_tools.registration import Inventory, build_transform  # noqa: PLC0415
 
     Inventory._clear()  # noqa: SLF001
     for dataset_name in datasets:
