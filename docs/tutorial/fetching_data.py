@@ -32,7 +32,7 @@ data_array
 # As an example, lets fetch and show a slice in the x-y plane::
 
 
-middle_slice = data_array.isel(z=437)
+middle_slice = data_array.isel(z=337)
 im = middle_slice.plot(cmap="Grays_r")
 im.axes.set_aspect("equal")
 
