@@ -250,11 +250,15 @@ def _populate_registrations_from_metadata(datasets: dict[str, Dataset]) -> None:
         if (registration := dataset.registration) is not None:
             source_dataset = _DATASETS[registration.source_dataset]
             if registration.target_dataset not in _DATASETS:
-                if registration.source_dataset not in ["A129_lung_VOI-02_2.0um_bm18"]:
+                # Some datasets don't have their parent datasets release yet - only warn
+                # if we're expecting a parent dataset
+                if registration.source_dataset not in [
+                    "A129_lung_VOI-02_2.0um_bm18"
+                ] and not registration.source_dataset.startswith("LADAF-2021-17_brain"):
                     warnings.warn(
                         f"Did not find target dataset {registration.target_dataset} "
                         f"in dataset inventory. "
-                        "Not adding {registration.source_dataset} "
+                        f"Not adding {registration.source_dataset} "
                         "to registration inventory.",
                         stacklevel=1,
                     )
