@@ -1,10 +1,12 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+title: hoa-tools
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
 type: software
 authors:
-  - family-names: "Stansby"
-    given-names: "David"
-    email: "d.stansby@ucl.ac.uk"
-repository-code: "https://github.com/HumanOrganAtlas/hoa-tools"
-title: "HOA Tools: Tools for working with the Human Organ Atlas"
-license: "BSD-3"
+  - given-names: David
+    family-names: Stansby
+    orcid: "https://orcid.org/0000-0002-1365-1908"
+url: "https://github.com/HumanOrganAtlas/hoa-tools"
+license: BSD-3-Clause
