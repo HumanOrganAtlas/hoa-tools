@@ -1,5 +1,26 @@
 # Release notes
 
+## 1.0.9
+
+- Fixed a bug in 1.0.8 where the internal data model was not updated to agree with the new metadata schema.
+- Updated these release notes for previous releases.
+
+## 1.0.8
+
+- Updated to the latest bundled metadata.
+
+## 1.0.7
+
+- Updated the citation file
+
+## 1.0.6
+
+- Updated to the latest bundled metadata.
+
+## 1.0.6
+
+- Updated to the latest bundled metadata.
+
 ## 1.0.4
 
 - Fixed a bug that prevented transforming VOIs between two datasets that
