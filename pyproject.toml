@@ -31,7 +31,7 @@ dependencies = [
   "pydantic>=2",
   "simpleitk",
   "xarray",
-  "zarr<3,>2.16",
+  "zarr>=3",
 ]
 description = "Tools for working with the Human Organ Atlas"
 dynamic = ["version"]
