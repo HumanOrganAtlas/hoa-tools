@@ -328,16 +328,14 @@ class N5ChunkWrapper(Codec):  # type: ignore[misc]
             self.dtype.byteorder == "=" and sys.byteorder == "little"
         )
 
-        if compressor:
+        if compressor is not None:
             if compressor_config is not None:
                 raise ValueError(
                     "Only one of compressor_config or compressor should be given."
                 )
             compressor_config = compressor.get_config()
 
-        if (compressor_config is None and compressor is None) or compressor_config[
-            "id"
-        ] == "raw":
+        if compressor_config is None or compressor_config["id"] == "raw":
             self.compressor_config = None
             self._compressor = None
         else:
