@@ -71,39 +71,9 @@ class N5FSStore(FsspecStore):
         prototype: BufferPrototype,
         key_ranges: Iterable[tuple[str, ByteRequest | None]],
     ) -> list[Buffer | None]:
-        """
-        Retrieve possibly partial values from given key_ranges.
-
-        Parameters
-        ----------
-        prototype : BufferPrototype
-            The prototype of the output buffer. Stores may support a default buffer
-            prototype.
-        key_ranges : Iterable[tuple[str, tuple[int | None, int | None]]]
-            Ordered set of key, range pairs, a key may occur multiple times with
-            different ranges
-
-        Returns
-        -------
-        list of values, in the order of the key_ranges, may contain null/none for
-        missing keys
-
-        """
         raise NotImplementedError
 
     async def exists(self, key: str) -> bool:
-        """
-        Check if a key exists in the store.
-
-        Parameters
-        ----------
-        key : str
-
-        Returns
-        -------
-        bool
-
-        """
         if key.endswith(zarr_group_meta_key):
             key_new = key.replace(zarr_group_meta_key, n5_attrs_key)
             if not await super().exists(key_new):
@@ -125,7 +95,7 @@ class N5FSStore(FsspecStore):
         return await super().exists(key_new)
 
     @property
-    def supports_writes(self) -> bool:
+    def supports_writes(self) -> bool:  # type: ignore[override]
         return False
 
     async def set(self, key: str, value: Buffer) -> None:
@@ -141,76 +111,27 @@ class N5FSStore(FsspecStore):
         raise NotImplementedError
 
     @property
-    def supports_deletes(self) -> bool:
+    def supports_deletes(self) -> bool:  # type: ignore[override]
         return False
 
     async def delete(self, key: str) -> None:
-        """
-        Remove a key from the store.
-
-        Parameters
-        ----------
-        key : str
-
-        """
         raise NotImplementedError
 
     @property
-    def supports_listing(self) -> bool:
+    def supports_listing(self) -> bool:  # type: ignore[override]
         return False
 
     def list(self) -> AsyncIterator[str]:
-        """
-        Retrieve all keys in the store.
-
-        Returns
-        -------
-        AsyncIterator[str]
-
-        """
-        # This method should be async, like overridden methods in child classes.
-        # However, that's not straightforward:
-        # https://stackoverflow.com/questions/68905848
+        raise NotImplementedError
 
     def list_prefix(self, prefix: str) -> AsyncIterator[str]:
-        """
-        Retrieve all keys in the store that begin with a given prefix.
-
-        Keys are returned relative
-        to the root of the store.
-
-        Parameters
-        ----------
-        prefix : str
-
-        Returns
-        -------
-        AsyncIterator[str]
-
-        """
-        # This method should be async, like overridden methods in child classes.
-        # However, that's not straightforward:
-        # https://stackoverflow.com/questions/68905848
+        raise NotImplementedError
 
     def list_dir(self, prefix: str) -> AsyncIterator[str]:
-        """
-        Retrieve all keys and prefixes with a given prefix.
-
-        and which do not contain the character
-        “/” after the given prefix.
-
-        Parameters
-        ----------
-        prefix : str
-
-        Returns
-        -------
-        AsyncIterator[str]
-
-        """
         # This method should be async, like overridden methods in child classes.
         # However, that's not straightforward:
         # https://stackoverflow.com/questions/68905848
+        raise NotImplementedError
 
     async def _load_n5_attrs(
         self, path: str, prototype: BufferPrototype
