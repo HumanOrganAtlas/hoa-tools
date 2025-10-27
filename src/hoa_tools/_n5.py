@@ -427,7 +427,7 @@ class N5ChunkWrapper(Codec):  # type: ignore[misc]
         # assumes data is byte array in big endian
 
         if not self._little_endian:
-            return data
+            return data  # type:ignore[return-value]
 
         a = np.frombuffer(data, self.dtype.newbyteorder(">"))
         return a.astype(self.dtype)
