@@ -4,7 +4,7 @@ import numbers
 import re
 import struct
 import sys
-from collections.abc import AsyncIterator, Iterable
+from collections.abc import AsyncIterator, Iterable, Sequence
 from typing import Any
 
 import numpy as np
@@ -96,16 +96,12 @@ class N5FSStore(FsspecStore):
     def supports_writes(self) -> bool:  # type: ignore[override]
         return False
 
-    async def set(self, key: str, value: Buffer) -> None:
-        """
-        Store a (key, value) pair.
-
-        Parameters
-        ----------
-        key : str
-        value : Buffer
-
-        """
+    async def set(
+        self,
+        key: str,
+        value: Buffer,
+        byte_range: tuple[int, int] | None = None,
+    ) -> None:
         raise NotImplementedError
 
     @property
@@ -235,7 +231,7 @@ def attrs_to_zarr(attrs: dict[str, Any]) -> dict[str, Any]:
 
 def json_loads(s: bytes | str) -> dict[str, Any]:
     """Read JSON in a consistent way."""
-    return json.loads(ensure_text(s, "utf-8"))
+    return json.loads(ensure_text(s, "utf-8"))  # type: ignore[no-any-return]
 
 
 def json_dumps(o: Any) -> bytes:
@@ -251,14 +247,14 @@ def json_dumps(o: Any) -> bytes:
 
 
 class NumberEncoder(json.JSONEncoder):
-    def default(self, o: float) -> float:
+    def default(self, o: Any) -> float:
         # See json.JSONEncoder.default docstring for explanation
         # This is necessary to encode numpy dtype
         if isinstance(o, numbers.Integral):
             return int(o)
         if isinstance(o, numbers.Real):
             return float(o)
-        return json.JSONEncoder.default(self, o)
+        return json.JSONEncoder.default(self, o)  # type: ignore[no-any-return]
 
 
 def ensure_text(s: bytes | str, encoding: str = "utf-8") -> str:
@@ -313,12 +309,18 @@ def compressor_config_to_zarr(
     return zarr_config
 
 
-class N5ChunkWrapper(Codec):
+class N5ChunkWrapper(Codec):  # type: ignore[misc]
     codec_id = "n5_wrapper"
     chunk_shape: tuple[int, ...]
     dtype: np.dtype
 
-    def __init__(self, dtype, chunk_shape, compressor_config=None, compressor=None):
+    def __init__(
+        self,
+        dtype: npt.DTypeLike,
+        chunk_shape: Sequence[int],
+        compressor_config: dict[str, Any] | None = None,
+        compressor: Codec | None = None,
+    ):
         self.dtype = np.dtype(dtype)
         self.chunk_shape = tuple(chunk_shape)
         # is the dtype a little endian format?
@@ -352,10 +354,12 @@ class N5ChunkWrapper(Codec):
         chunk = self._to_big_endian(chunk)
 
         if self._compressor:
-            return header + self._compressor.encode(chunk)
+            return header + self._compressor.encode(chunk)  # type: ignore[no-any-return]
         return header + chunk.tobytes(order="A")
 
-    def decode(self, chunk, out: npt.NDArray | None = None) -> bytes:
+    def decode(
+        self, chunk: bytes, out: npt.NDArray[Any] | None = None
+    ) -> npt.NDArray[Any]:
         len_header, chunk_shape = self._read_header(chunk)
         chunk = chunk[len_header:]
 
@@ -381,18 +385,18 @@ class N5ChunkWrapper(Codec):
             chunk = self._compressor.decode(chunk)
 
         # more expensive byteswap
-        chunk = self._from_big_endian(chunk)
+        chunk = self._from_big_endian(chunk)  # type: ignore[assignment]
 
         # read partial chunk
         if chunk_shape != self.chunk_shape:
-            chunk = np.frombuffer(chunk, dtype=self.dtype)
-            chunk = chunk.reshape(chunk_shape)
+            chunk = np.frombuffer(chunk, dtype=self.dtype)  # type: ignore[assignment]
+            chunk = chunk.reshape(chunk_shape)  # type: ignore[attr-defined]
             complete_chunk = np.zeros(self.chunk_shape, dtype=self.dtype)
             target_slices = tuple(slice(0, s) for s in chunk_shape)
             complete_chunk[target_slices] = chunk
-            chunk = complete_chunk
+            chunk = complete_chunk  # type: ignore[assignment]
 
-        return chunk
+        return chunk  # type: ignore[return-value]
 
     @staticmethod
     def _create_header(chunk: npt.NDArray[Any]) -> bytes:
