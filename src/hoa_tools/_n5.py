@@ -12,7 +12,7 @@ import numpy.typing as npt
 from numcodecs.abc import Codec
 from numcodecs.registry import get_codec, register_codec
 from zarr.abc.store import ByteRequest
-from zarr.core.buffer import Buffer, BufferPrototype
+from zarr.core.buffer import Buffer, BufferPrototype, default_buffer_prototype
 from zarr.storage import FsspecStore
 
 zarr_group_meta_key = ".zgroup"
@@ -40,9 +40,7 @@ class N5FSStore(FsspecStore):
     ) -> Buffer | None:
         if key.endswith(zarr_group_meta_key):
             key_new = key.replace(zarr_group_meta_key, n5_attrs_key)
-            value = group_metadata_to_zarr(
-                await self._load_n5_attrs(key_new, prototype)
-            )
+            value = group_metadata_to_zarr(await self._load_n5_attrs(key_new))
 
             return prototype.buffer.from_bytes(json_dumps(value))
 
@@ -50,13 +48,13 @@ class N5FSStore(FsspecStore):
             key_new = key.replace(zarr_array_meta_key, n5_attrs_key)
             top_level = key == zarr_array_meta_key
             value = array_metadata_to_zarr(
-                await self._load_n5_attrs(key_new, prototype), top_level=top_level
+                await self._load_n5_attrs(key_new), top_level=top_level
             )
             return prototype.buffer.from_bytes(json_dumps(value))
 
         if key.endswith(zarr_attrs_key):
             key_new = key.replace(zarr_attrs_key, n5_attrs_key)
-            value = attrs_to_zarr(await self._load_n5_attrs(key_new, prototype))
+            value = attrs_to_zarr(await self._load_n5_attrs(key_new))
 
             if len(value) == 0:
                 raise KeyError(key_new)
@@ -79,16 +77,16 @@ class N5FSStore(FsspecStore):
             if not await super().exists(key_new):
                 return False
             # group if not a dataset (attributes do not contain 'dimensions')
-            return "dimensions" not in self._load_n5_attrs(key_new)
+            return "dimensions" not in await self._load_n5_attrs(key_new)
 
         if key.endswith(zarr_array_meta_key):
             key_new = key.replace(zarr_array_meta_key, n5_attrs_key)
             # array if attributes contain 'dimensions'
-            return "dimensions" in self._load_n5_attrs(key_new)
+            return "dimensions" in await self._load_n5_attrs(key_new)
 
         if key.endswith(zarr_attrs_key):
             key_new = key.replace(zarr_attrs_key, n5_attrs_key)
-            return self._contains_attrs(key_new)
+            return await self._contains_attrs(key_new)
 
         key_new = invert_chunk_coords(key) if is_chunk_key(key) else key
 
@@ -133,16 +131,16 @@ class N5FSStore(FsspecStore):
         # https://stackoverflow.com/questions/68905848
         raise NotImplementedError
 
-    async def _load_n5_attrs(
-        self, path: str, prototype: BufferPrototype
-    ) -> dict[str, Any]:
+    async def _load_n5_attrs(self, path: str) -> dict[str, Any]:
         try:
-            s = await super().get(path, prototype=prototype)
+            s = await super().get(path, prototype=default_buffer_prototype())
+            if s is None:
+                raise RuntimeError(f"No N5 attributes at path {path}")
             return json_loads(s.to_bytes())
         except KeyError:
             return {}
 
-    def _contains_attrs(self, path: str | None) -> bool:
+    async def _contains_attrs(self, path: str | None) -> bool:
         if path is None:
             attrs_key = n5_attrs_key
         elif not path.endswith(n5_attrs_key):
@@ -150,7 +148,7 @@ class N5FSStore(FsspecStore):
         else:
             attrs_key = path
 
-        attrs = attrs_to_zarr(self._load_n5_attrs(attrs_key))
+        attrs = attrs_to_zarr(await self._load_n5_attrs(attrs_key))
         return len(attrs) > 0
 
 
