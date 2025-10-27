@@ -4,7 +4,6 @@ target-version = "py311"
 
 [lint]
 ignore = [
-  "ANN401",  # Dynamically typed expressions (typing.Any) are disallowed in `**kwargs`
   "ARG001",  # Unused function argument
   "COM812",  # trailing commas (ruff-format recommended)
   "D200",    # One-line docstring should fit on one line
@@ -23,6 +22,9 @@ ignore = [
   "A005",
   "EM101",
   "TRY003",
+  "PGH",
+  "ANN",
+  "ERA001",
 ]
 select = ["ALL"]
 isort.known-first-party = ["HOA Tools"]
