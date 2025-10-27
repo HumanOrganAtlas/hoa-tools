@@ -20,6 +20,7 @@ import gcsfs
 import networkx as nx
 import numpy as np
 import xarray as xr
+import zarr.abc.store
 import zarr.storage
 
 from hoa_tools._n5 import N5FSStore
@@ -152,6 +153,7 @@ class Dataset(HOAMetadata):
             access="read_only",
             asynchronous=True,
         )
+        store: zarr.abc.store.Store
         if self._remote_fmt == "n5":
             store = N5FSStore(fs=fs, path=f"/{bucket}", read_only=True)
         elif self._remote_fmt == "zarr":
@@ -171,7 +173,7 @@ class Dataset(HOAMetadata):
             key = f"s{downsample_level}"
         else:
             key = f"{downsample_level}"
-        return self._remote_store[key]
+        return self._remote_store[key]  # type: ignore[return-value]
 
     def data_array(self, *, downsample_level: int) -> xr.DataArray:
         """
@@ -219,7 +221,7 @@ def _load_datasets_from_files(data_dir: Path) -> dict[str, Dataset]:
     }
     if len(datasets) == 0:
         raise FileNotFoundError(
-            f"Did not find any dataset metadata files at {data_dir}"  # noqa: EM102
+            f"Did not find any dataset metadata files at {data_dir}"
         )
     return datasets
 

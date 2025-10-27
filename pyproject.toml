@@ -111,3 +111,12 @@ enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 [[tool.mypy.overrides]]
 module = "hoa_tools.metadata"
 disallow_any_generics = false # See https://github.com/koxudaxi/datamodel-code-generator/issues/1546
+
+
+[[tool.mypy.overrides]]
+module = "gcsfs.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "numcodecs.*"
+ignore_missing_imports = true

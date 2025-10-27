@@ -25,6 +25,7 @@ ignore = [
   "PGH",
   "ANN",
   "ERA001",
+  "EM102",
 ]
 select = ["ALL"]
 isort.known-first-party = ["HOA Tools"]
