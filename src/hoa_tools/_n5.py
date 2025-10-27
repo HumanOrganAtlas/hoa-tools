@@ -342,10 +342,10 @@ class N5ChunkWrapper(Codec):
             self._compressor = get_codec(compressor_config)
             self.compressor_config = self._compressor.get_config()
 
-    def get_config(self):
+    def get_config(self) -> dict[str, Any]:
         return {"id": self.codec_id, "compressor_config": self.compressor_config}
 
-    def encode(self, chunk):
+    def encode(self, chunk: npt.NDArray[Any]) -> bytes:
         assert chunk.flags.c_contiguous, "Chunk is not C contiguous"  # noqa: S101
 
         header = self._create_header(chunk)
@@ -395,7 +395,7 @@ class N5ChunkWrapper(Codec):
         return chunk
 
     @staticmethod
-    def _create_header(chunk) -> bytes:
+    def _create_header(chunk: npt.NDArray[Any]) -> bytes:
         mode = struct.pack(">H", 0)
         num_dims = struct.pack(">H", len(chunk.shape))
         shape = b"".join(struct.pack(">I", d) for d in chunk.shape[::-1])
@@ -403,7 +403,7 @@ class N5ChunkWrapper(Codec):
         return mode + num_dims + shape
 
     @staticmethod
-    def _read_header(chunk) -> tuple[int, tuple[int, ...]]:  # type: ignore
+    def _read_header(chunk: bytes) -> tuple[int, tuple[int, ...]]:
         num_dims = struct.unpack(">H", chunk[2:4])[0]
         shape = tuple(
             struct.unpack(">I", chunk[i : i + 4])[0]
@@ -414,14 +414,14 @@ class N5ChunkWrapper(Codec):
 
         return len_header, shape
 
-    def _to_big_endian(self, data: npt.NDArray) -> npt.NDArray:
+    def _to_big_endian(self, data: npt.NDArray[Any]) -> npt.NDArray[Any]:
         # assumes data is ndarray
 
         if self._little_endian:
             return data.byteswap()
         return data
 
-    def _from_big_endian(self, data: npt.NDArray) -> npt.NDArray:
+    def _from_big_endian(self, data: bytes) -> npt.NDArray[Any]:
         # assumes data is byte array in big endian
 
         if not self._little_endian:
