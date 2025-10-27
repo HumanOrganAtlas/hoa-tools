@@ -63,7 +63,7 @@ class Dataset(HOAMetadata):
         """
         Whether this dataset contains the whole organ or not.
         """
-        return self.voi.startswith("complete")
+        return self.voi.startswith("complete") or self.voi.startswith("overview")
 
     @property
     def is_zoom(self) -> bool:
