@@ -20,8 +20,7 @@ import gcsfs
 import networkx as nx
 import numpy as np
 import xarray as xr
-import zarr.core
-import zarr.n5
+import zarr.abc.store
 import zarr.storage
 
 from hoa_tools._n5 import N5FSStore
@@ -148,15 +147,21 @@ class Dataset(HOAMetadata):
 
         # n5://gs://ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/S-20-29/heart/2.5um_VOI-01_bm05/
         bucket, path = gcs_path.split("/", maxsplit=1)
-        fs = gcsfs.GCSFileSystem(project=bucket, token="anon", access="read_only")  # noqa: S106
+        fs = gcsfs.GCSFileSystem(
+            project="ucl-hip-ct",
+            token="anon",  # noqa: S106
+            access="read_only",
+            asynchronous=True,
+        )
+        store: zarr.abc.store.Store
         if self._remote_fmt == "n5":
-            store = N5FSStore(url=bucket, fs=fs, mode="r")
+            store = N5FSStore(fs=fs, path=f"/{bucket}", read_only=True)
         elif self._remote_fmt == "zarr":
-            store = zarr.storage.FSStore(url=bucket, fs=fs, mode="r")
+            store = zarr.storage.FsspecStore(fs=fs, path=f"/{bucket}", read_only=True)
 
-        return zarr.open_group(store, mode="r", path=path)
+        return zarr.open_group(store, mode="r", path=path, zarr_format=2)
 
-    def _remote_array(self, *, downsample_level: int) -> zarr.core.Array:
+    def _remote_array(self, *, downsample_level: int) -> zarr.Array:
         """
         Get an object representing the data array in the remote Google Cloud Store.
         """
@@ -168,7 +173,7 @@ class Dataset(HOAMetadata):
             key = f"s{downsample_level}"
         else:
             key = f"{downsample_level}"
-        return self._remote_store[key]
+        return self._remote_store[key]  # type: ignore[return-value]
 
     def data_array(self, *, downsample_level: int) -> xr.DataArray:
         """
@@ -216,7 +221,7 @@ def _load_datasets_from_files(data_dir: Path) -> dict[str, Dataset]:
     }
     if len(datasets) == 0:
         raise FileNotFoundError(
-            f"Did not find any dataset metadata files at {data_dir}"  # noqa: EM102
+            f"Did not find any dataset metadata files at {data_dir}"
         )
     return datasets
 

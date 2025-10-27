@@ -457,4 +457,706 @@ interactions:
       status:
         code: 200
         message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zmetadata?alt=media
+    response:
+      body:
+        string: "No such object: ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/.zmetadata"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0
+        Content-Length:
+          - "124"
+        Content-Type:
+          - text/html; charset=UTF-8
+        Date:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Expires:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOHrL-40KQeZs5rNdtz9-Fxa7GOTZXZ9JfCwrbtXsX0H1mgq8wzx0UgP6Zl8U1LTaGit
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zgroup?alt=media
+    response:
+      body:
+        string: "{\n    \"zarr_format\": 2\n}"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Language:
+          - en
+        Content-Length:
+          - "24"
+        Content-Type:
+          - application/octet-stream
+        Date:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Etag:
+          - CKPYmu2ctIoDEAE=
+        Expires:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Last-Modified:
+          - Thu, 19 Dec 2024 16:12:57 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOG8VhG0ywydqLpt5BuQ5heVEK4bhpVRkxTYsYSnFnGDS1I_qlTcCSGFGINe5tX-B8S1
+        X-Goog-Generation:
+          - "1734624776989731"
+        X-Goog-Hash:
+          - crc32c=REp3Bw==,md5=4gKXk15z3QFUEE1OpTBAqw==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "24"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zattrs?alt=media
+    response:
+      body:
+        string:
+          "{\n    \"multiscales\": [\n        {\n            \"axes\": [\n                {\n
+          \                   \"name\": \"x\",\n                    \"type\": \"space\",\n
+          \                   \"unit\": \"micrometer\"\n                },\n                {\n
+          \                   \"name\": \"y\",\n                    \"type\": \"space\",\n
+          \                   \"unit\": \"micrometer\"\n                },\n                {\n
+          \                   \"name\": \"z\",\n                    \"type\": \"space\",\n
+          \                   \"unit\": \"micrometer\"\n                }\n            ],\n
+          \           \"datasets\": [\n                {\n                    \"coordinateTransformations\":
+          [\n                        {\n                            \"translation\":
+          [\n                                0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                24.132,\n                                24.132,\n
+          \                               24.132\n                            ],\n                            \"type\":
+          \"scale\"\n                        }\n                    ],\n                    \"path\":
+          \"0\"\n                },\n                {\n                    \"coordinateTransformations\":
+          [\n                        {\n                            \"translation\":
+          [\n                                0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                48.264,\n                                48.264,\n
+          \                               48.264\n                            ],\n                            \"type\":
+          \"scale\"\n                        }\n                    ],\n                    \"path\":
+          \"1\"\n                },\n                {\n                    \"coordinateTransformations\":
+          [\n                        {\n                            \"translation\":
+          [\n                                0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                96.528,\n                                96.528,\n
+          \                               96.528\n                            ],\n                            \"type\":
+          \"scale\"\n                        }\n                    ],\n                    \"path\":
+          \"2\"\n                },\n                {\n                    \"coordinateTransformations\":
+          [\n                        {\n                            \"translation\":
+          [\n                                0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                193.056,\n                                193.056,\n
+          \                               193.056\n                            ],\n
+          \                           \"type\": \"scale\"\n                        }\n
+          \                   ],\n                    \"path\": \"3\"\n                },\n
+          \               {\n                    \"coordinateTransformations\": [\n
+          \                       {\n                            \"translation\": [\n
+          \                               0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                386.112,\n                                386.112,\n
+          \                               386.112\n                            ],\n
+          \                           \"type\": \"scale\"\n                        }\n
+          \                   ],\n                    \"path\": \"4\"\n                },\n
+          \               {\n                    \"coordinateTransformations\": [\n
+          \                       {\n                            \"translation\": [\n
+          \                               0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                772.224,\n                                772.224,\n
+          \                               772.224\n                            ],\n
+          \                           \"type\": \"scale\"\n                        }\n
+          \                   ],\n                    \"path\": \"5\"\n                },\n
+          \               {\n                    \"coordinateTransformations\": [\n
+          \                       {\n                            \"translation\": [\n
+          \                               0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                1544.448,\n                                1544.448,\n
+          \                               1544.448\n                            ],\n
+          \                           \"type\": \"scale\"\n                        }\n
+          \                   ],\n                    \"path\": \"6\"\n                },\n
+          \               {\n                    \"coordinateTransformations\": [\n
+          \                       {\n                            \"translation\": [\n
+          \                               0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                3088.896,\n                                3088.896,\n
+          \                               3088.896\n                            ],\n
+          \                           \"type\": \"scale\"\n                        }\n
+          \                   ],\n                    \"path\": \"7\"\n                }\n
+          \           ],\n            \"metadata\": {\n                \"description\":
+          \"Downscaled using local mean in 2x2x2 blocks.\",\n                \"kwargs\":
+          {\n                    \"block_size\": 2,\n                    \"func\": \"np.mean\"\n
+          \               },\n                \"method\": \"skimage.measure.block_reduce\",\n
+          \               \"version\": \"0.24.0\"\n            },\n            \"name\":
+          \"A186_lung_right_complete-organ_24.132um_bm18\",\n            \"type\": \"local
+          mean\",\n            \"version\": \"0.4\"\n        }\n    ]\n}"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Language:
+          - en
+        Content-Length:
+          - "6794"
+        Content-Type:
+          - application/octet-stream
+        Date:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Etag:
+          - CPDWmu2ctIoDEAE=
+        Expires:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Last-Modified:
+          - Thu, 19 Dec 2024 16:12:57 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOEzOIiVWSXyYk2WSGx3CldM-O-7D1PERnVnNxC7vqZPnwogRT2dZygbn9CszBzznN4g8DrBZas
+        X-Goog-Generation:
+          - "1734624776989552"
+        X-Goog-Hash:
+          - crc32c=ElN8TQ==,md5=zCBjmluTemTFfpSuH7OnkA==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "6794"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F2%2F.zgroup?alt=media
+    response:
+      body:
+        string: "No such object: ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/2/.zgroup"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0
+        Content-Length:
+          - "123"
+        Content-Type:
+          - text/html; charset=UTF-8
+        Date:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Expires:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOH92dSnGLcCwg3ydudMJJaPOP_cFGAWRdJd2NUmdN0YTHdr-zcZrSuN2rMFvUrMX7vNc8Yfnp0
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F2%2F.zattrs?alt=media
+    response:
+      body:
+        string: "No such object: ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/2/.zattrs"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0
+        Content-Length:
+          - "123"
+        Content-Type:
+          - text/html; charset=UTF-8
+        Date:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Expires:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOHsByumtfpiyuIuRWq5jur8atmQSboW93X9Q98aY8et25XjAn8iITxq0oWyY3S8O1dK6SaWVCtGBonEYw
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F2%2F.zarray?alt=media
+    response:
+      body:
+        string:
+          "{\n    \"chunks\": [\n        128,\n        128,\n        128\n    ],\n
+          \   \"compressor\": {\n        \"blocksize\": 0,\n        \"clevel\": 8,\n
+          \       \"cname\": \"zstd\",\n        \"id\": \"blosc\",\n        \"shuffle\":
+          1\n    },\n    \"dimension_separator\": \"/\",\n    \"dtype\": \"<u2\",\n
+          \   \"fill_value\": 0,\n    \"filters\": null,\n    \"order\": \"C\",\n    \"shape\":
+          [\n        2077,\n        2077,\n        2391\n    ],\n    \"zarr_format\":
+          2\n}"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Language:
+          - en
+        Content-Length:
+          - "401"
+        Content-Type:
+          - application/octet-stream
+        Date:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Etag:
+          - CKLXmJHStIoDEAE=
+        Expires:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Last-Modified:
+          - Thu, 19 Dec 2024 20:11:19 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOFmbFvTHuYI1-t63q3Nz3fc_c6GDP2nYElbI1HnO5xLvvABH62ryRR9utJOG5YPIfT9
+        X-Goog-Generation:
+          - "1734639079533474"
+        X-Goog-Hash:
+          - crc32c=eSH96g==,md5=PWnvW3BYZiXG0BRskhNQrg==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "401"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zgroup?alt=media
+    response:
+      body:
+        string: "{\n    \"zarr_format\": 2\n}"
+      headers:
+        Age:
+          - "47"
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Language:
+          - en
+        Content-Length:
+          - "24"
+        Content-Type:
+          - application/octet-stream
+        Date:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Etag:
+          - CKPYmu2ctIoDEAE=
+        Expires:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Last-Modified:
+          - Thu, 19 Dec 2024 16:12:57 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources,Origin,X-Origin
+        X-GUploader-UploadID:
+          - AOCedOG8VhG0ywydqLpt5BuQ5heVEK4bhpVRkxTYsYSnFnGDS1I_qlTcCSGFGINe5tX-B8S1
+        X-Goog-Generation:
+          - "1734624776989731"
+        X-Goog-Hash:
+          - crc32c=REp3Bw==,md5=4gKXk15z3QFUEE1OpTBAqw==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "24"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zattrs?alt=media
+    response:
+      body:
+        string:
+          "{\n    \"multiscales\": [\n        {\n            \"axes\": [\n                {\n
+          \                   \"name\": \"x\",\n                    \"type\": \"space\",\n
+          \                   \"unit\": \"micrometer\"\n                },\n                {\n
+          \                   \"name\": \"y\",\n                    \"type\": \"space\",\n
+          \                   \"unit\": \"micrometer\"\n                },\n                {\n
+          \                   \"name\": \"z\",\n                    \"type\": \"space\",\n
+          \                   \"unit\": \"micrometer\"\n                }\n            ],\n
+          \           \"datasets\": [\n                {\n                    \"coordinateTransformations\":
+          [\n                        {\n                            \"translation\":
+          [\n                                0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                24.132,\n                                24.132,\n
+          \                               24.132\n                            ],\n                            \"type\":
+          \"scale\"\n                        }\n                    ],\n                    \"path\":
+          \"0\"\n                },\n                {\n                    \"coordinateTransformations\":
+          [\n                        {\n                            \"translation\":
+          [\n                                0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                48.264,\n                                48.264,\n
+          \                               48.264\n                            ],\n                            \"type\":
+          \"scale\"\n                        }\n                    ],\n                    \"path\":
+          \"1\"\n                },\n                {\n                    \"coordinateTransformations\":
+          [\n                        {\n                            \"translation\":
+          [\n                                0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                96.528,\n                                96.528,\n
+          \                               96.528\n                            ],\n                            \"type\":
+          \"scale\"\n                        }\n                    ],\n                    \"path\":
+          \"2\"\n                },\n                {\n                    \"coordinateTransformations\":
+          [\n                        {\n                            \"translation\":
+          [\n                                0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                193.056,\n                                193.056,\n
+          \                               193.056\n                            ],\n
+          \                           \"type\": \"scale\"\n                        }\n
+          \                   ],\n                    \"path\": \"3\"\n                },\n
+          \               {\n                    \"coordinateTransformations\": [\n
+          \                       {\n                            \"translation\": [\n
+          \                               0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                386.112,\n                                386.112,\n
+          \                               386.112\n                            ],\n
+          \                           \"type\": \"scale\"\n                        }\n
+          \                   ],\n                    \"path\": \"4\"\n                },\n
+          \               {\n                    \"coordinateTransformations\": [\n
+          \                       {\n                            \"translation\": [\n
+          \                               0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                772.224,\n                                772.224,\n
+          \                               772.224\n                            ],\n
+          \                           \"type\": \"scale\"\n                        }\n
+          \                   ],\n                    \"path\": \"5\"\n                },\n
+          \               {\n                    \"coordinateTransformations\": [\n
+          \                       {\n                            \"translation\": [\n
+          \                               0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                1544.448,\n                                1544.448,\n
+          \                               1544.448\n                            ],\n
+          \                           \"type\": \"scale\"\n                        }\n
+          \                   ],\n                    \"path\": \"6\"\n                },\n
+          \               {\n                    \"coordinateTransformations\": [\n
+          \                       {\n                            \"translation\": [\n
+          \                               0.5,\n                                0.5,\n
+          \                               0.5\n                            ],\n                            \"type\":
+          \"translation\"\n                        },\n                        {\n                            \"scale\":
+          [\n                                3088.896,\n                                3088.896,\n
+          \                               3088.896\n                            ],\n
+          \                           \"type\": \"scale\"\n                        }\n
+          \                   ],\n                    \"path\": \"7\"\n                }\n
+          \           ],\n            \"metadata\": {\n                \"description\":
+          \"Downscaled using local mean in 2x2x2 blocks.\",\n                \"kwargs\":
+          {\n                    \"block_size\": 2,\n                    \"func\": \"np.mean\"\n
+          \               },\n                \"method\": \"skimage.measure.block_reduce\",\n
+          \               \"version\": \"0.24.0\"\n            },\n            \"name\":
+          \"A186_lung_right_complete-organ_24.132um_bm18\",\n            \"type\": \"local
+          mean\",\n            \"version\": \"0.4\"\n        }\n    ]\n}"
+      headers:
+        Age:
+          - "47"
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Language:
+          - en
+        Content-Length:
+          - "6794"
+        Content-Type:
+          - application/octet-stream
+        Date:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Etag:
+          - CPDWmu2ctIoDEAE=
+        Expires:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Last-Modified:
+          - Thu, 19 Dec 2024 16:12:57 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources,Origin,X-Origin
+        X-GUploader-UploadID:
+          - AOCedOEzOIiVWSXyYk2WSGx3CldM-O-7D1PERnVnNxC7vqZPnwogRT2dZygbn9CszBzznN4g8DrBZas
+        X-Goog-Generation:
+          - "1734624776989552"
+        X-Goog-Hash:
+          - crc32c=ElN8TQ==,md5=zCBjmluTemTFfpSuH7OnkA==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "6794"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F.zmetadata?alt=media
+    response:
+      body:
+        string: "No such object: ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/.zmetadata"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0
+        Content-Length:
+          - "124"
+        Content-Type:
+          - text/html; charset=UTF-8
+        Date:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Expires:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOHK5Q-9ga3ueavcuFvH5dqhFgIOTGqHlSuoee48DbBFgM56KkHHV8m7nqg21RzlyHdZ
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F2%2F.zgroup?alt=media
+    response:
+      body:
+        string: "No such object: ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/2/.zgroup"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0
+        Content-Length:
+          - "123"
+        Content-Type:
+          - text/html; charset=UTF-8
+        Date:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Expires:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOEC6Io1vXczqhkg-qaHhKhSp2anzb-Sq7bEgP_50IsKNvnOfk_ScUD5WOuy0Q57RbD-XZ8ODAw
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F2%2F.zarray?alt=media
+    response:
+      body:
+        string:
+          "{\n    \"chunks\": [\n        128,\n        128,\n        128\n    ],\n
+          \   \"compressor\": {\n        \"blocksize\": 0,\n        \"clevel\": 8,\n
+          \       \"cname\": \"zstd\",\n        \"id\": \"blosc\",\n        \"shuffle\":
+          1\n    },\n    \"dimension_separator\": \"/\",\n    \"dtype\": \"<u2\",\n
+          \   \"fill_value\": 0,\n    \"filters\": null,\n    \"order\": \"C\",\n    \"shape\":
+          [\n        2077,\n        2077,\n        2391\n    ],\n    \"zarr_format\":
+          2\n}"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Language:
+          - en
+        Content-Length:
+          - "401"
+        Content-Type:
+          - application/octet-stream
+        Date:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Etag:
+          - CKLXmJHStIoDEAE=
+        Expires:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Last-Modified:
+          - Thu, 19 Dec 2024 20:11:19 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOFOha303U1apjVOjXf01LPJ-xNoa1GZE_iEaHUPP-J3y62EO98sAxeiFcsoysUgq8AzZU9tNOA
+        X-Goog-Generation:
+          - "1734639079533474"
+        X-Goog-Hash:
+          - crc32c=eSH96g==,md5=PWnvW3BYZiXG0BRskhNQrg==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "401"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/A186%2Flung-right%2F24.132um_complete-organ_bm18.ome.zarr%2F2%2F.zattrs?alt=media
+    response:
+      body:
+        string: "No such object: ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/A186/lung-right/24.132um_complete-organ_bm18.ome.zarr/2/.zattrs"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0
+        Content-Length:
+          - "123"
+        Content-Type:
+          - text/html; charset=UTF-8
+        Date:
+          - Mon, 27 Oct 2025 12:24:08 GMT
+        Expires:
+          - Mon, 27 Oct 2025 12:24:08 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOH3Ha9V_ewz4qeVw0M783DHPhbz3xGIwRvtBRVnsTHIzlOxTuHd_9T0DBehqGhromES
+      status:
+        code: 404
+        message: Not Found
 version: 1

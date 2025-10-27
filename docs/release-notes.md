@@ -1,5 +1,9 @@
 # Release notes
 
+## 2.0.0
+
+- Updated the `zarr-python` dependency from v2 to v3.
+
 ## 1.0.9
 
 - Fixed a bug in 1.0.8 where the internal data model was not updated to agree with the new metadata schema.

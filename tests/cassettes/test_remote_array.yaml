@@ -349,4 +349,396 @@ interactions:
       status:
         code: 200
         message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/LADAF-2020-27/o/spleen%2F25.08um_complete-organ_bm05%2F.zmetadata?alt=media
+    response:
+      body:
+        string: "Invalid bucket name: &#39;LADAF-2020-27&#39;"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0
+        Content-Length:
+          - "44"
+        Content-Type:
+          - text/html; charset=UTF-8
+        Date:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Expires:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOFVxn6Ljcf1IZecizFUfjrPgovPLjdslttMyG1NxWsdNc2gUxZiXol8e7IGs7ZNhfSI
+      status:
+        code: 400
+        message: Bad Request
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/LADAF-2020-27/o/spleen%2F25.08um_complete-organ_bm05%2Fattributes.json?alt=media
+    response:
+      body:
+        string: "Invalid bucket name: &#39;LADAF-2020-27&#39;"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0
+        Content-Length:
+          - "44"
+        Content-Type:
+          - text/html; charset=UTF-8
+        Date:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Expires:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOGNDCgDz-YPsyyyUCL92ceE1TqLwrtajfl2HuoBuLtkk1fpENghH8bR6cJFRJO53vfLW8h5cIM
+      status:
+        code: 400
+        message: Bad Request
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/LADAF-2020-27/o/spleen%2F25.08um_complete-organ_bm05%2Fattributes.json?alt=media
+    response:
+      body:
+        string: "Invalid bucket name: &#39;LADAF-2020-27&#39;"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0
+        Content-Length:
+          - "44"
+        Content-Type:
+          - text/html; charset=UTF-8
+        Date:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Expires:
+          - Mon, 27 Oct 2025 12:23:20 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOE16_Vs1JCZK23nq6V-p6je_oO07RowWlsMHkuBFZXhwUFjHedUb8dE1_ZDrqUGiBmh
+      status:
+        code: 400
+        message: Bad Request
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/LADAF-2020-27%2Fspleen%2F25.08um_complete-organ_bm05%2Fattributes.json?alt=media
+    response:
+      body:
+        string: '{"axes":["x","y","z"],"downsamplingFactors":[[1,1,1],[2,2,2],[4,4,4],[8,8,8],[16,16,16]],"multiScale":true,"resolution":[25.08,25.08,25.08],"units":["um","um","um"]}'
+      headers:
+        Age:
+          - "2746"
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Length:
+          - "165"
+        Content-Type:
+          - application/json
+        Date:
+          - Mon, 27 Oct 2025 11:38:20 GMT
+        Etag:
+          - CI/N2eSAuIIDEAE=
+        Expires:
+          - Mon, 27 Oct 2025 11:38:20 GMT
+        Last-Modified:
+          - Thu, 09 Nov 2023 22:51:49 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources,Origin,X-Origin
+        X-GUploader-UploadID:
+          - AOCedOEf0V_5GLBQc9B_cbKBPgAhXLMolqaiUV35uVvdPIU0gFsX0BoO3Gqe7SjF-k1j3HZetaEHOTU
+        X-Goog-Generation:
+          - "1699570309817999"
+        X-Goog-Hash:
+          - crc32c=RCInSA==,md5=j2FYdh93jFvZIdfPrAICIg==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "165"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/LADAF-2020-27%2Fspleen%2F25.08um_complete-organ_bm05%2Fattributes.json?alt=media
+    response:
+      body:
+        string: '{"axes":["x","y","z"],"downsamplingFactors":[[1,1,1],[2,2,2],[4,4,4],[8,8,8],[16,16,16]],"multiScale":true,"resolution":[25.08,25.08,25.08],"units":["um","um","um"]}'
+      headers:
+        Age:
+          - "2620"
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Length:
+          - "165"
+        Content-Type:
+          - application/json
+        Date:
+          - Mon, 27 Oct 2025 11:40:26 GMT
+        Etag:
+          - CI/N2eSAuIIDEAE=
+        Expires:
+          - Mon, 27 Oct 2025 11:40:26 GMT
+        Last-Modified:
+          - Thu, 09 Nov 2023 22:51:49 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources,Origin,X-Origin
+        X-GUploader-UploadID:
+          - AOCedOGosm6o1VsqKnQoKWpCLbMoN6_J0BlihHV-Njjza52u2AWt9rELLL8sOiAxtJJcn7cZnurfsbVJhffNbQ
+        X-Goog-Generation:
+          - "1699570309817999"
+        X-Goog-Hash:
+          - crc32c=RCInSA==,md5=j2FYdh93jFvZIdfPrAICIg==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "165"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/LADAF-2020-27%2Fspleen%2F25.08um_complete-organ_bm05%2F.zmetadata?alt=media
+    response:
+      body:
+        string: "No such object: ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/LADAF-2020-27/spleen/25.08um_complete-organ_bm05/.zmetadata"
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - private, max-age=0
+        Content-Length:
+          - "119"
+        Content-Type:
+          - text/html; charset=UTF-8
+        Date:
+          - Mon, 27 Oct 2025 12:24:06 GMT
+        Expires:
+          - Mon, 27 Oct 2025 12:24:06 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOEt2EEn3lw7Ah0J4sHLsR0-EfvEioHwzPWXUVuIRlppuRLqDVw_DtVDspuOO7Y7uFgR
+      status:
+        code: 404
+        message: Not Found
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/LADAF-2020-27%2Fspleen%2F25.08um_complete-organ_bm05%2Fs2%2Fattributes.json?alt=media
+    response:
+      body:
+        string: '{"axes":["x","y","z"],"blockSize":[128,128,128],"compression":{"blocksize":0,"clevel":9,"cname":"zstd","shuffle":2,"type":"blosc"},"dataType":"uint16","dimensions":[538,730,475]}'
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Length:
+          - "178"
+        Content-Type:
+          - application/json
+        Date:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Etag:
+          - CMzWkuSAuIIDEAE=
+        Expires:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Last-Modified:
+          - Thu, 09 Nov 2023 22:51:48 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOHWhJgxMsgZTGPDiMR94Bgoy3PGpnAtwWhC3Jt_XK-AQ6EYPVPtvmvUL_r8UwS28R1t
+        X-Goog-Generation:
+          - "1699570308655948"
+        X-Goog-Hash:
+          - crc32c=GnWdJA==,md5=JdqibFrFbGNHph3BSSexNw==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "178"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/LADAF-2020-27%2Fspleen%2F25.08um_complete-organ_bm05%2Fs2%2Fattributes.json?alt=media
+    response:
+      body:
+        string: '{"axes":["x","y","z"],"blockSize":[128,128,128],"compression":{"blocksize":0,"clevel":9,"cname":"zstd","shuffle":2,"type":"blosc"},"dataType":"uint16","dimensions":[538,730,475]}'
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Length:
+          - "178"
+        Content-Type:
+          - application/json
+        Date:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Etag:
+          - CMzWkuSAuIIDEAE=
+        Expires:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Last-Modified:
+          - Thu, 09 Nov 2023 22:51:48 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOFPJR0bnqVCjrZp8zpJINxTX5vJJRDO2n8IUQLu5JnZhjaQViieqdn1NyWAbMxoTO4nmb4Wpvg
+        X-Goog-Generation:
+          - "1699570308655948"
+        X-Goog-Hash:
+          - crc32c=GnWdJA==,md5=JdqibFrFbGNHph3BSSexNw==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "178"
+      status:
+        code: 200
+        message: OK
+  - request:
+      body: null
+      headers:
+        User-Agent:
+          - python-gcsfs/2025.5.1
+      method: GET
+      uri: https://storage.googleapis.com/download/storage/v1/b/ucl-hip-ct-35a68e99feaae8932b1d44da0358940b/o/LADAF-2020-27%2Fspleen%2F25.08um_complete-organ_bm05%2Fs2%2Fattributes.json?alt=media
+    response:
+      body:
+        string: '{"axes":["x","y","z"],"blockSize":[128,128,128],"compression":{"blocksize":0,"clevel":9,"cname":"zstd","shuffle":2,"type":"blosc"},"dataType":"uint16","dimensions":[538,730,475]}'
+      headers:
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+        Cache-Control:
+          - public, max-age=3600, must-revalidate
+        Content-Disposition:
+          - attachment
+        Content-Length:
+          - "178"
+        Content-Type:
+          - application/json
+        Date:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Etag:
+          - CMzWkuSAuIIDEAE=
+        Expires:
+          - Mon, 27 Oct 2025 12:24:07 GMT
+        Last-Modified:
+          - Thu, 09 Nov 2023 22:51:48 GMT
+        Server:
+          - UploadServer
+        Vary:
+          - X-Goog-Allowed-Resources
+          - Origin
+          - X-Origin
+        X-GUploader-UploadID:
+          - AOCedOGwAs0cm9lM0vSRa5D0KJLSeNSdYKVBITus09vc7CcnyXGQI-3otae-iJycLSuJRbwu
+        X-Goog-Generation:
+          - "1699570308655948"
+        X-Goog-Hash:
+          - crc32c=GnWdJA==,md5=JdqibFrFbGNHph3BSSexNw==
+        X-Goog-Metageneration:
+          - "1"
+        X-Goog-Storage-Class:
+          - STANDARD
+        X-Goog-Stored-Content-Encoding:
+          - identity
+        X-Goog-Stored-Content-Length:
+          - "178"
+      status:
+        code: 200
+        message: OK
 version: 1

@@ -31,7 +31,7 @@ dependencies = [
   "pydantic>=2",
   "simpleitk",
   "xarray",
-  "zarr<3,>2.16",
+  "zarr>=3",
 ]
 description = "Tools for working with the Human Organ Atlas"
 dynamic = ["version"]
@@ -112,18 +112,11 @@ enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 module = "hoa_tools.metadata"
 disallow_any_generics = false # See https://github.com/koxudaxi/datamodel-code-generator/issues/1546
 
-[[tool.mypy.overrides]]
-module = "zarr.*"
-ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "gcsfs.*"
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
-module = "SimpleITK.*"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "matplotlib.*"
+module = "numcodecs.*"
 ignore_missing_imports = true
