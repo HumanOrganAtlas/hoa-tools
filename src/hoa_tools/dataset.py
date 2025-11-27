@@ -249,14 +249,21 @@ def get_dataset(name: str) -> Dataset:
     return _DATASETS[name]
 
 
-def change_metadata_directory(data_dir: Path) -> None:
+def change_metadata_directory(data_dir: Path, *, skip_invalid_meta: bool=False) -> None:
     """
     Update available datasets from another directory of metadata files.
 
     Designed for internal project members to load metadata files that aren't yet public.
+
+    Parameters
+    ----------
+    data_dir : Path
+        Path to directory of metadata files.
+    skip_invalid_meta : bool
+        If True, skip metadata files that fail validation.
     """
     global _DATASETS  # noqa: PLW0603
-    _DATASETS = _load_datasets_from_files(data_dir, skip_invalid_meta=True)
+    _DATASETS = _load_datasets_from_files(data_dir, skip_invalid_meta=skip_invalid_meta)
     _populate_registrations_from_metadata(_DATASETS)
 
 
@@ -303,7 +310,7 @@ def _populate_registrations_from_metadata(datasets: dict[str, Dataset]) -> None:
 
 _META_DIR = Path(__file__).parent / "data" / "metadata" / "metadata"
 try:
-    change_metadata_directory(_META_DIR)
+    change_metadata_directory(_META_DIR, skip_invalid_meta=False)
 except FileNotFoundError as e:
     raise ImportError(
         "Did not find any dataset metadata files. "
