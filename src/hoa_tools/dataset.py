@@ -23,6 +23,7 @@ import xarray as xr
 import zarr.core
 import zarr.n5
 import zarr.storage
+from pydantic import ValidationError
 
 from hoa_tools._n5 import N5FSStore
 from hoa_tools.metadata import HOAMetadata
@@ -206,14 +207,32 @@ class Dataset(HOAMetadata):
         )
 
 
-def _load_datasets_from_files(data_dir: Path) -> dict[str, Dataset]:
+def _load_datasets_from_files(
+    data_dir: Path, *, skip_invalid_meta: bool = False
+) -> dict[str, Dataset]:
     """
     Load dataset metadtata files.
+
+    Parameters
+    ----------
+    data_dir : Path
+        Path to metadata files.
+    skip_invalid_meta : bool
+        If True, skip metadata files that fail validation.
+
     """
-    datasets = {
-        f.stem: Dataset.model_validate_json(f.read_text())
-        for f in (data_dir).glob("*.json")
-    }
+    datasets = {}
+    for f in data_dir.glob("*.json"):
+        try:
+            datasets[f.stem] = Dataset.model_validate_json(f.read_text())
+        except ValidationError:
+            if skip_invalid_meta:
+                warnings.warn(
+                    f"Could not validate metadata file at {f}, continuing", stacklevel=1
+                )
+                continue
+            raise
+
     if len(datasets) == 0:
         raise FileNotFoundError(
             f"Did not find any dataset metadata files at {data_dir}"  # noqa: EM102
@@ -237,7 +256,7 @@ def change_metadata_directory(data_dir: Path) -> None:
     Designed for internal project members to load metadata files that aren't yet public.
     """
     global _DATASETS  # noqa: PLW0603
-    _DATASETS = _load_datasets_from_files(data_dir)
+    _DATASETS = _load_datasets_from_files(data_dir, skip_invalid_meta=True)
     _populate_registrations_from_metadata(_DATASETS)
 
 
