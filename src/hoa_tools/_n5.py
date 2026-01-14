@@ -55,9 +55,6 @@ class N5FSStore(FsspecStore):
         if key.endswith(zarr_attrs_key):
             key_new = key.replace(zarr_attrs_key, n5_attrs_key)
             value = attrs_to_zarr(await self._load_n5_attrs(key_new))
-
-            if len(value) == 0:
-                raise KeyError(key_new)
             return prototype.buffer.from_bytes(json_dumps(value))
 
         key_new = invert_chunk_coords(key) if is_chunk_key(key) else key
