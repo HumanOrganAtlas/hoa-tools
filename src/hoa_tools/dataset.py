@@ -254,7 +254,9 @@ def get_dataset(name: str) -> Dataset:
     return _DATASETS[name]
 
 
-def change_metadata_directory(data_dir: Path, *, skip_invalid_meta: bool=False) -> None:
+def change_metadata_directory(
+    data_dir: Path, *, skip_invalid_meta: bool = False
+) -> None:
     """
     Update available datasets from another directory of metadata files.
 
@@ -266,6 +268,7 @@ def change_metadata_directory(data_dir: Path, *, skip_invalid_meta: bool=False) 
         Path to directory of metadata files.
     skip_invalid_meta : bool
         If True, skip metadata files that fail validation.
+
     """
     global _DATASETS  # noqa: PLW0603
     _DATASETS = _load_datasets_from_files(data_dir, skip_invalid_meta=skip_invalid_meta)
