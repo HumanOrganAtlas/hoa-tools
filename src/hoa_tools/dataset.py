@@ -162,7 +162,7 @@ class Dataset(HOAMetadata):
 
         return zarr.open_group(store, mode="r", path=path, zarr_format=2)
 
-    def _remote_array(self, *, downsample_level: int) -> zarr.Array:
+    def _remote_array(self, *, downsample_level: int) -> zarr.Array:  # type: ignore[type-arg]
         """
         Get an object representing the data array in the remote Google Cloud Store.
         """
@@ -254,7 +254,9 @@ def get_dataset(name: str) -> Dataset:
     return _DATASETS[name]
 
 
-def change_metadata_directory(data_dir: Path, *, skip_invalid_meta: bool=False) -> None:
+def change_metadata_directory(
+    data_dir: Path, *, skip_invalid_meta: bool = False
+) -> None:
     """
     Update available datasets from another directory of metadata files.
 
@@ -266,6 +268,7 @@ def change_metadata_directory(data_dir: Path, *, skip_invalid_meta: bool=False) 
         Path to directory of metadata files.
     skip_invalid_meta : bool
         If True, skip metadata files that fail validation.
+
     """
     global _DATASETS  # noqa: PLW0603
     _DATASETS = _load_datasets_from_files(data_dir, skip_invalid_meta=skip_invalid_meta)
@@ -283,9 +286,13 @@ def _populate_registrations_from_metadata(datasets: dict[str, Dataset]) -> None:
             if registration.target_dataset not in _DATASETS:
                 # Some datasets don't have their parent datasets release yet - only warn
                 # if we're expecting a parent dataset
-                if registration.source_dataset not in [
-                    "A129_lung_VOI-02_2.0um_bm18"
-                ] and not registration.source_dataset.startswith("LADAF-2021-17_brain"):
+                if registration.source_dataset in [
+                    "A129_lung_VOI-02_2.0um_bm18",
+                    "A210_lung_right_VOI-2_4.257um_bm18",
+                    "A304_lung_VOI-3_4.614um_bm18",
+                ] or registration.source_dataset.startswith("LADAF-2021-17_brain"):
+                    pass
+                else:
                     warnings.warn(
                         f"Did not find target dataset {registration.target_dataset} "
                         f"in dataset inventory. "

@@ -102,7 +102,7 @@ run = { branch = true, parallel = true, source = ["hoa_tools"] }
 paths.source = ["src/hoa_tools"]
 
 [tool.mypy]
-exclude = ['docs/_build.*']
+exclude = ['docs/_build.*', "build/*"]
 plugins = ["pydantic.mypy"]
 strict = true
 warn_unreachable = true
