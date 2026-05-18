@@ -288,6 +288,7 @@ def _populate_registrations_from_metadata(datasets: dict[str, Dataset]) -> None:
                 # if we're expecting a parent dataset
                 if registration.source_dataset not in [
                     "A129_lung_VOI-02_2.0um_bm18"
+                    "A304_lung_overview_16.547um_bm18"
                 ] and not registration.source_dataset.startswith("LADAF-2021-17_brain"):
                     warnings.warn(
                         f"Did not find target dataset {registration.target_dataset} "
