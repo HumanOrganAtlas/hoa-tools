@@ -286,10 +286,13 @@ def _populate_registrations_from_metadata(datasets: dict[str, Dataset]) -> None:
             if registration.target_dataset not in _DATASETS:
                 # Some datasets don't have their parent datasets release yet - only warn
                 # if we're expecting a parent dataset
-                if registration.source_dataset not in [
-                    "A129_lung_VOI-02_2.0um_bm18"
-                    "A304_lung_overview_16.547um_bm18"
-                ] and not registration.source_dataset.startswith("LADAF-2021-17_brain"):
+                if registration.source_dataset in [
+                    "A129_lung_VOI-02_2.0um_bm18",
+                    "A210_lung_right_VOI-2_4.257um_bm18",
+                    "A304_lung_VOI-3_4.614um_bm18"
+                ] or registration.source_dataset.startswith("LADAF-2021-17_brain"):
+                    pass
+                else:
                     warnings.warn(
                         f"Did not find target dataset {registration.target_dataset} "
                         f"in dataset inventory. "
