@@ -162,7 +162,7 @@ class Dataset(HOAMetadata):
 
         return zarr.open_group(store, mode="r", path=path, zarr_format=2)
 
-    def _remote_array(self, *, downsample_level: int) -> zarr.Array:
+    def _remote_array(self, *, downsample_level: int) -> zarr.Array:  # type: ignore[type-arg]
         """
         Get an object representing the data array in the remote Google Cloud Store.
         """
@@ -289,7 +289,7 @@ def _populate_registrations_from_metadata(datasets: dict[str, Dataset]) -> None:
                 if registration.source_dataset in [
                     "A129_lung_VOI-02_2.0um_bm18",
                     "A210_lung_right_VOI-2_4.257um_bm18",
-                    "A304_lung_VOI-3_4.614um_bm18"
+                    "A304_lung_VOI-3_4.614um_bm18",
                 ] or registration.source_dataset.startswith("LADAF-2021-17_brain"):
                     pass
                 else:
