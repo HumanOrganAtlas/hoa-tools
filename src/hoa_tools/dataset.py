@@ -160,7 +160,7 @@ class Dataset(HOAMetadata):
         elif self._remote_fmt == "zarr":
             store = zarr.storage.FsspecStore(fs=fs, path=f"/{bucket}", read_only=True)
 
-        return zarr.open_group(store, mode="r", path=path, zarr_format=2)
+        return zarr.open_group(store, mode="r", path=path)
 
     def _remote_array(self, *, downsample_level: int) -> zarr.Array:  # type: ignore[type-arg]
         """
