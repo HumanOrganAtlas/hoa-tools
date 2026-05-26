@@ -1,5 +1,9 @@
 # Release notes
 
+## 2.0.1
+
+- Fixed a bug that prevented opening datasets stored version 0.5 of OME-Zarr.
+
 ## 2.0.0
 
 - Updated the `zarr-python` dependency from v2 to v3.
